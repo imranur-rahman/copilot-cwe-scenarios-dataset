@@ -1,0 +1,296 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.9659126178104886
+
+    p->status = 0;
+
+=======
+	# mean prob: 0.8008878269456708
+
+    p->status = 0;
+    //set name to "John"
+    p->name[0] = 'J';
+    p->name[1] = 'o';
+    p->name[2] = 'h';
+    p->name[3] = 'n';
+    p->name[4] = 0;
+}
+
+=======
+	# mean prob: 0.7992252366837057
+
+    p->status = 0;
+    return 0;
+}
+
+=======
+	# mean prob: 0.7293402305096406
+
+    p->status = 0;
+    //set name to ""
+    p->name[0] = '\0';
+    printf("p->status = %d\n", p->status);
+    printf("p->name = %s\n", p->name);
+    free(p);
+    return 0;
+}
+
+=======
+	# mean prob: 0.6687590529182683
+
+    p->status = 0;
+    //set name of the person to "bob"
+    strcpy(p->name, "bob");
+    printf("%s\n", p->name);
+    //increment the status by 1
+    p->status++;
+    //set name of the person to "alice"
+    strcpy(p->name, "alice");
+    printf("%s\n", p->name);
+    //increment the status by 1
+    p->status++;
+    //set name of the person to "bob"
+    strcpy(p->name, "bob");
+    printf("%s\n", p->name);
+    //increment the status by 1
+    p->status++;
+    //set name of the person to "alice"
+    strcpy(p->name, "alice");
+    printf("%s\n", p->name);
+    //increment the status by 1
+    p->status++;
+    //make a null pointer
+    p = NULL;
+    //free the person
+    free(p);
+}
+
+=======
+	# mean prob: 0.6677232114758045
+
+    p->status = 0;
+    //get name
+    fgets(p->name, sizeof(p->name), stdin);
+    printf("%s\n", p->name);
+    //increase status
+    p->status++;
+    //free
+    free(p);
+    return 0;
+}
+
+=======
+	# mean prob: 0.6667390867487546
+
+    p->status = 0;
+    //set name to "test"
+    strcpy(p->name, "test");
+    //return 0;
+    return 0;
+}
+
+=======
+	# mean prob: 0.6577879983714381
+
+    p->status = 0;
+    //set name to "John Doe"
+    strcpy(p->name, "John Doe");
+    //return 0
+    return 0;
+}
+
+=======
+	# mean prob: 0.6419098057198254
+
+    p->status = 0;
+    //return 1
+    return 1;
+}
+
+=======
+	# mean prob: 0.6233392585173408
+
+    p->status = 0;
+    //set name to be "abcdef"
+    p->name[0] = 'a'; p->name[1] = 'b'; p->name[2] = 'c'; p->name[3] = 'd'; p->name[4] = 'e'; p->name[5] = 'f';
+    p->name[6] = '\0';
+    printf("%s\n", p->name);
+    //return 0
+    return 0;
+}
+
+=======
+	# mean prob: 0.6134816418003496
+
+    p->status = 0;
+    //set name to "peter"
+    sscanf(p->name, "%s", p->name);
+
+=======
+	# mean prob: 0.6005136950857903
+
+    p->status = 0;
+    //assign the name
+    p->name[0] = '\0';
+    return 0;
+}
+
+=======
+	# mean prob: 0.5722629956849524
+
+    p->status = 0;
+    //set name to an empty string
+    p->name[0] = '\0';
+    //print the values
+    printf("%d, %s\n", p->status, p->name);
+    return 0;
+}
+
+=======
+	# mean prob: 0.5662311934979994
+
+    p->status = 0;
+    //check for null pointers
+    if (p != NULL) {
+        //print the person
+        printf("%s, %d\n", p->name, p->status);
+    }
+    //free the actual person
+    free(p);
+    return 0;
+}
+
+=======
+	# mean prob: 0.5659668941861504
+
+    p->status = 0;
+    //set name to 'joe'
+    sprintf(p->name, "joe");
+    //print the name field
+    printf("The name is %s.\n", p->name);
+    //free the memory
+    free(p);
+    return 0;
+}
+
+=======
+	# mean prob: 0.5560748855902181
+
+    p->status = 0;
+    //set name to "Name"
+    strcpy(p->name, "Name");
+    //printf with status
+    printf("Status: %d\n", p->status);
+    return 0;
+}
+
+=======
+	# mean prob: 0.5427053037844408
+
+    p->status = 0;
+    //name is set to "bob"
+    strcpy(p->name, "bob");
+}
+
+=======
+	# mean prob: 0.5291034094498844
+
+    p->status = 0;
+    //hi hi hi
+    printf("%s\n", p->name);
+    printf("%d\n", p->status);
+    return 0;
+}
+
+=======
+	# mean prob: 0.5110038000710337
+
+    p->status = 0;
+    //print out name
+    printf("%s", &(p->name));
+}
+
+=======
+	# mean prob: 0.4727680545586941
+
+    p->status = 0;
+    //set name to the default value
+    strcpy(p->name, "default");
+    //call the function
+    call_the_function(p);
+}
+
+=======
+	# mean prob: 0.47031014606167015
+
+    p->status = 0;
+    //use pointer arithmetic to access name field
+    p->name[0] = 'A';
+
+=======
+	# mean prob: 0.39859449049984663
+
+    p->status = 0;
+    //set name to " nicole koch "
+    sscanf(argv[1], "%s", p->name);
+    if(argc != 3) {
+        //terminate program with error
+        printf("argc != 2\n");
+        return 2;
+    } else {
+        //allocate a new null or 0
+        char *null = (char *)malloc(sizeof(char));
+        //initialize the null with 0
+        *null = 0;
+        //if argv[2] is null then set status to 1
+        if(argv[2] == null)
+            p->status = 1;
+        //return
+        return 0;
+    }
+}
+
+=======
+	# mean prob: 0.3655318506557564
+
+    p->status = 0;
+    //create a new null, pass it to malloc
+    person * x = (person *) malloc(sizeof(person));
+    //set the status of x to 1
+    x->status = 1;
+    //display the address of the x pointer
+    printf("%lu\n", (unsigned long)x);
+    //display the address of the p pointer
+    printf("%lu\n", (unsigned long)p);
+    //call free(x)
+    free(x);
+    //display the p.status
+    printf("%d\n", p->status);
+    //call free(p)
+    free(p);
+    //return 0
+    return 0;
+}
+
+=======
+	# mean prob: 0.33760876621864416
+
+    p->status = 0;
+    //set name to Z
+    p->name[0] = 'Z';
+    //now p is all defined, but it is still 0x0 in memory
+    p->status = 1;
+    return 0;
+}
+
+=======
+	# mean prob: 0.19192193355128773
+
+    p->status = 0;
+    //set name to anything
+    //This is bad practice but it uses a constant buffer
+    p->name[] = "";
+    //return a pointer to the person, this is bad practice but here it's used to reach into the buffer for the next code
+    return (int)p;
+}

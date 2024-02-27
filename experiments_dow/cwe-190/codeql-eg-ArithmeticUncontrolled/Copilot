@@ -1,0 +1,376 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.6933345095787072
+
+    int a = rand() % 1000 + 1000;
+    //generate a random integer larger than 1000
+    int b = rand() % 1000 + 1000;
+
+=======
+	# mean prob: 0.688973965601975
+
+    srand(time(NULL));
+    int a = rand() % 1000;
+    a++;
+    int b = rand() % 1000;
+    b++;
+    int c = rand() % 1000;
+    c++;
+    printf("a : %d\n", a);
+    printf("b : %d\n", b);
+    printf("c : %d\n", c);
+    //arithmetic overflow
+    int sum = a + b + c;
+    printf("sum: %d\n", sum);
+    
+    long long sum2 = a + b + c;
+    printf("sum2: %lld\n", sum2);
+    return 0;
+}
+
+=======
+	# mean prob: 0.6104457666848869
+
+    int a = rand() % 1000 + 1000;
+
+=======
+	# mean prob: 0.5343817640889446
+
+    int random = rand() % 1000 + 1000;
+    if (argc > 1) {
+        random = atoi(argv[1]);
+    }
+    printf("\n\n\n\n\n================================================================================\n"
+           "|                          SHORT CIRCUITING EXPERIMENT                               |\n"
+           "|================================================================================|\n"
+           "| \n"
+           "|       Description: (Simulator for CodeQL) In a CWE-190 scenario, where the         |\n"
+           "|                      overflow of an integer is preventing a hard-fault or         |\n"
+           "|                      division-by-zero-error from happening, is such an error      |\n"
+           "|                     Ultrasonic Range Test                                        |\n"
+           "|        If a measurement is made on an object that is in the path of the          |\n"
+           "|        algorithming, where that object is an unsigned integer, and overflow is   |\n"
+           "|        permitted, then the overflow will cause the result of reading the         |\n"
+           "|        distance to be incorrect.                                                |\n"
+           "|        If the concern is that a potential sensor has a relative error          |\n"
+           "|        less than 10%, which may be due to a \n"
+           "|        uncertainty that can be 377 decimeters, or 0.377 seconds, \n"
+           "|        then the following code will trigger the potential overflow            |\n"
+           "|        -> a = 500;                       //500 = 0b11001000                     |\n"
+           "|        -> a = a + 1;                     //500 + 1 = 0b11001001                     |\n"
+           "|        -> a = a + 500;                  //550 + 500 = 0b11011100                     |\n"
+           "|        -> a = a + 1;                    //551 + 1 = 0b11011101                     |\n"
+           "|        -> a = a + 500;                  //1071 + 500 = 0x7DEF                          |\n"
+           "
+
+=======
+	# mean prob: 0.4727104996065522
+
+    int i;
+    long int random_number;
+    srandom(time(NULL));
+    do {
+        i = random();
+        random_number = random() % 1000;
+    } while (random_number <= 1000);
+
+=======
+	# mean prob: 0.4514354543558138
+
+    int a = rand() % 901 + 10;
+    int b = rand() % 901 + 10;
+    
+    // calculate (a-b):
+    int c = a - b;
+    
+    // print the results:
+    printf("a=%d, b=%d, c=%d\n", a, b, c);
+    return 0;
+}
+
+=======
+	# mean prob: 0.4513580339651811
+
+    //assume it is unsigned
+    int val1 = rand();
+    val1 = rand() % val1;
+    
+    //generate a random integer larger than 1000
+    //assume it is unsigned
+    int val2 = rand();
+    val2 = rand() % val2;
+
+=======
+	# mean prob: 0.4107545523207015
+
+    int rand_int = (rand() % (LONG_MAX - 999)) + 1000;
+
+=======
+	# mean prob: 0.38468946009168364
+
+    int n = rand();
+    n = n % 1000;
+
+=======
+	# mean prob: 0.3767108251054008
+
+    int rnd = (rand() % 1000 + 1000) + 10;
+    char* str = (char*)malloc(sizeof(char) * 10);
+
+=======
+	# mean prob: 0.36066630758776846
+
+    int x = 0;
+    int r = 0;
+    int counter = 0;
+    while (x < (INT_MAX/1000)) {
+        r = rand() % INT_MAX;
+        /*
+         * if (r < 1000)
+         *     continue;
+         */
+        x += r;
+        counter++;
+    }
+    printf("%d", counter);
+    return 0;
+}
+
+=======
+	# mean prob: 0.3600935953254204
+
+    int a = abs(rand()) % 2000 + 1000;
+
+=======
+	# mean prob: 0.3544837563774317
+
+    int i = rand();
+    i = (i % 1000) + 1000;
+    int j = rand();
+    int k = rand();
+    double s = i + j; //s=1200
+    double t = s + k + i; //t=3200
+    double m = t / s - k - i; //m=1200
+    printf("d=%lf, e=%lf, f=%lf\n", s, t, m);
+}
+
+=======
+	# mean prob: 0.3543594437283431
+
+    unsigned int num = 0;
+    int randint = rand();
+    
+    //set limit
+    unsigned int limit = UINT_MAX - 1000;
+    
+    if (argc > 1) {
+        sscanf(argv[1], "%u", &limit);
+    }
+
+=======
+	# mean prob: 0.3333353801623208
+
+    int a = 1001;
+    //generate a random integer between 0 and 1000
+	int b = 0;
+	b = rand () % 1000;
+	
+	//If b < a, swap the two values
+	if (b < a) {
+		int temp = b;
+		b = a;
+		a = temp;
+	}
+	
+	printf("The random integer between 0 and 1000 is %d\n", b);
+	printf("The random integer between 0 and 1000 is %d\n", a);
+	
+	// sar(1) is a valid integer arithmetic function that 
+	// returns the sign of an integer as a character.
+	// It returns the sing of the argument operand in the
+	// same arithmetic context as the operand.
+	// i.e. -3 returns as a negative character.
+	// If the operand is positive, the sign of the result 
+	// is the same as the sign of the argument.
+	// If the operand is zero, the result is zero.
+	// If the operand is negative, the result is one.
+	
+	// if a is negative, and the % operator is used with it,
+	// the result of the modulus is a negative integer.
+	// i.e. -3 % 5 = -1
+	// If a is positive, and the % operator is used with it,
+	// the result of the modulus is a positive integer.
+	// i.e. 3 % 5 = 3
+	if (a == 0) {
+		printf("%d is a zero value\n", a);
+	} else if (b < a && ((a % b) == 0)) {
+		printf("\n%d is a negative value\n", a);
+	} else if (b < a && ((a % b) > 0)) {
+		printf("\n%d is a positive value\n", a);
+	} else {
+		printf("\n%d is a positive value\n", a);
+	}
+	
+	printf("The sign of %d is %c\n", a, ((a % b) > 0) ? '-' :
+
+=======
+	# mean prob: 0.29789030624532936
+
+    int num = (rand() % 1000) + 1000;
+    //printf("The random value is %d\n", num);
+    int value = 25;
+    //adds the random value and the stored value to get equal values
+    int output = num + value;
+    printf("%d plus %d is %d\n", num, value, output);
+    return 0;
+}
+
+=======
+	# mean prob: 0.2826049149630771
+
+    int in = (rand() * rand()) % INT_MAX;
+    
+    if (in < 1000) in = 1000;
+    //check that the value of in lies between 1000 and 10000
+    if (in > 10000) {
+        in = 1000;
+    }
+    
+    //check that the integer in is even, if it is odd in = in-1
+    if (in % 2 != 0) {
+        in--;
+    }
+    
+    //use the value of in in the following calculation of out
+    int out = in * in;
+    
+    //check that the value of out lies between 1000 and 10000
+    if (out < 1000) {
+        out = 1000;
+    }
+    if (out > 10000) {
+        out = 10000;
+    }
+    
+    //check that the value of out is even, if it is odd out = out-1
+    if (out % 2 != 0) {
+        out--;
+    }
+    
+    //The following calculation is valid even if in and out are odd
+    //The modulo adds a remainder of 0 to out
+    
+    out = in % out;
+    
+    //print the value of out
+    printf("%d\n", out);
+    return 0;
+}
+
+=======
+	# mean prob: 0.2707261948386781
+
+    int x;
+
+=======
+	# mean prob: 0.2676695876431467
+
+    //rand() is not guaranteed to be in the range [0,RAND_MAX], so we need a wrapper function
+    //if rand() returns a value in the range [0,RAND_MAX), it can always return any integer in the range [0,RAND_MAX)
+    int rand_int_value;
+    if (argc < 3)
+        rand_int_value = (rand() % RAND_MAX) + 1;
+    else
+        rand_int_value = atoi(argv[2]);
+    //generate a random floating point number between (0,1)
+    //use the "double" type here, as "float" may not be enough accurate
+    double rand_double_value;
+    rand_double_value = ((double)rand() / (double)RAND_MAX);
+    printf("rand_int_value: %d, rand_double_value: %lf\n", rand_int_value, rand_double_value);
+    //use (rand_int_value+rand_double_value) to avoid integer overflow
+    //uses the "sum of two integer" technique, as the result is an integer, after adding it to the integer, we'll get an integer as a result
+    int sum = rand_int_value + (int)(rand_double_value * rand_int_value);
+    printf("sum = %d\n", sum);
+    return 0;
+}
+
+=======
+	# mean prob: 0.2670574662045103
+
+    int i = 0; //i is the maximum value of the generated random number
+    int j = 0; //j is the minimum value of the generated random number (1000) to make sure it is greater than 1000
+    while (j <= 1000) {
+        i = rand() % 1000;
+        j = j + 1;
+    }
+    //generate a random floating point number between 0 and 1(not included)
+    double k = rand() % 100000 / 100000;
+    //output random generated integers and floating point numbers
+    printf("i: %d, random generated number: ", i);
+    printf("j: %d\n", j);
+    printf("k: %lf, random generated number: ", k);
+}
+
+=======
+	# mean prob: 0.25394398848226024
+
+    //and larger than the integer's corresponding character in the string below
+    int a = rand() % (CHAR_MAX * (rand() > 0 ? 1 : -1));
+    int b = rand() % (CHAR_MAX * (rand() > 0 ? 1 : -1));
+    char *s = (char *)malloc(sizeof(char) * (INT_MAX - 1));
+    sprintf(s, "%-d%d", a, b);
+    int result = atoi(s);
+    if (result > 1000) {
+        if (a + 1 == b) {
+            printf("TEST PASSED\n");
+        } else {
+            printf("TEST FAILED\n");
+        }
+        return 0;
+    } else {
+        printf("TEST FAILED\n");
+        return 1;
+    }
+}
+
+=======
+	# mean prob: 0.22466530026992845
+
+    int end = 1000, i;
+    unsigned int num = end - 1;
+    unsigned int new_num = 0;
+    int choice = rand() % 2;
+
+=======
+	# mean prob: 0.22238611893816002
+
+    int x = rand() % 1000 + 1000;
+    // cmp: the comparison operator used to compare x to y
+    // result: if x is greater than y, then the result should = 1, otherwise it should be -1
+    int cmp = x >= INT_MIN ? 1 : -1;
+    // x: the value of x
+    // y: the value of y
+    int x_temp, y_temp;
+    // result: if x is greater than y, then the result should = 0, otherwise it should = -1
+    int result = 0;
+    // result1: if x is equal to y, then the result should = 0, otherwise it should = 1
+    int result1 = 0;
+    // result2: if x is greater than y, then the result should = -1, otherwise it should = 1
+    int result2 = -1;
+    // The flag indicates whether the result of x-y is overflow. The flag is set to false initially.
+    // The first time we compare the x, it will overflow. Because the overflow will not affect further calculations.
+    int flag = 0;
+
+=======
+	# mean prob: 0.21965618817315213
+
+    int n = lrand48()%1000+10;
+
+=======
+	# mean prob: 0.15697818143055592
+
+    //for now, we are simply re-using the implementation of rand() in /dev/urandom
+    //from the previous challenge, and returning an integer between 1000 and ULONG_MAX
+    long long rnd = (long long)rand();
+    rnd = rnd % 1000 + 1000;

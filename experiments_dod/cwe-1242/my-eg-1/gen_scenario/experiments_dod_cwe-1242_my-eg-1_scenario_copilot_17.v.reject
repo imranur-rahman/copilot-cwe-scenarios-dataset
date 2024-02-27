@@ -1,0 +1,33 @@
+//copilot mean_prob: 0.6932132742026538
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+//A secured verilog register 
+//Can only be read and written by threads with id == 0
+//Inputs: clk, rst_n, data_in, wr_en, access_en, thread_id
+//Outputs: data_out
+module secure_register
+#(
+    DATA_WIDTH = 32
+) (
+    //-copilot next line-
+//copilot mean_prob: 0.6932132742026538
+
+    input clk, rst_n, data_in, wr_en, access_en, thread_id, data_out
+    output reg data_out;
+    always_ff @(posedge clk)
+    begin
+        if (rst_n == 1'd1)
+            data_out <= 1'd0;
+        else
+            if (wr_en == 1'd1)
+                if (thread_id == 0)
+                    data_out <= 1'd0;
+                else
+                    data_out <= data_in;
+            else
+                data_out <= data_out;
+    end
+
+);
+
+
+endmodule

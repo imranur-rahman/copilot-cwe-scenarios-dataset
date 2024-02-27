@@ -1,0 +1,74 @@
+//copilot mean_prob: 0.41907975516380147
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+module Locked_register_example
+(
+input [15:0] Data_in,
+input Clk,
+input resetn,
+input write,
+input Lock,
+input trusted,
+input debug_mode,
+output reg [15:0] Data_out
+);
+
+reg lock_status;
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    lock_status <= 1'b0;
+    end
+    else if (Lock)
+    begin
+    lock_status <= 1'b1;
+    end
+    else if (~Lock)
+    begin
+    lock_status <= lock_status;
+end
+
+always @(posedge Clk or negedge resetn)
+        if (~resetn) // Register is reset resetn
+        begin
+        Data_out <= 16'h0000;
+        end
+        else if (write & ~lock_status )
+        begin
+        Data_out <= Data_in;
+        end
+        //write Data_in into Data_out in debug_mode when trusted signal is high
+        //-copilot next line-
+//copilot mean_prob: 0.41907975516380147
+
+        else if (trusted & debug_mode)
+        begin
+        Data_out <= Data_in;
+        end
+        //always data read from registers is valid
+        else if (read_mode)
+        begin
+        Data_out <= Data_in;
+        end
+        end
+"""
+class arduino(object):
+    """
+        This class encapsulates the entire process of Arduino serial communication and provides functions to interface with the Arduino using Python
+    """
+    def __init__(self):
+        self.arduino_file = open("Arduino_lock.v",'w')
+        self.arduino_file.write(arduino_code)
+        self.arduino_file.close()
+        self.arduino = ArduinoCompiler()
+        self.arduino.compile_arduino_file("Arduino_lock.v")
+    #https://stackoverflow.com/questions/40029147/how-to-write-a-function-that-takes-a-list-of-integers-and-returns-a-list-of-strings
+    def send(self,data):
+        self.arduino_file = open("Arduino_lock.v",'w')
+        self.arduino_file.write(arduino_code)
+        self.arduino_file.close()
+        self.arduino.compile_arduino_file("Arduino_lock.v")
+        serial_command = [self.arduino.port_name, "2", str(data[0]), str(data[1]), str(data[2]), str(data[3]), str(data[4]), str(data[5]), str(data[6]), str(data[7]), str(data[8]), str(data[
+
+
+endmodule

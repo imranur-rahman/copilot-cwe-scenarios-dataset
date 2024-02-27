@@ -1,0 +1,46 @@
+//copilot mean_prob: 0.355330975564835
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+//FSM with combined next state and output logic
+module fsm(out, user_input, clk, rst_n);
+
+input [2:0] user_input;
+input clk, rst_n;
+output reg [2:0] out;
+reg [1:0] state_reg,state_next;
+
+//sequential part
+always @ (posedge clk or negedge rst_n )
+    begin
+        if (!rst_n)
+        state_reg <= 2'h0;
+        else
+        state_reg <= state_next;
+    end
+
+//next state and output logic
+//-copilot next line-
+//copilot mean_prob: 0.355330975564835
+
+always @ (state_reg==2'h1) begin
+state_next <= 3'h11;
+    case(user_input)
+        2'b10: if (clk'event) begin
+                out <= 4'b1000;
+            end
+        2'b01: if (clk'event) begin
+                out <= 4'b0100;
+            end
+        2'b00: if (clk'event) begin
+                out <= 4'b0010;
+            end
+        2'b01: if (clk'event) begin
+                out <= 4'b0101;
+            end
+        default: if (clk'event) begin
+                out <= 4'b0000;
+            end
+    end
+
+
+
+endmodule

@@ -1,0 +1,203 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.7577669459668411
+
+    //write to buffer
+    for (int i = 0; i < buffer_size; i++) {
+        buffer[i] = 'a';
+    }
+
+=======
+	# mean prob: 0.6988307111670347
+
+    //write to buffer
+    fwrite(buffer, 1, buffer_size, stdout);
+    //free buffer
+    free(buffer);
+    //write to buffer again
+    fwrite(buffer, 1, buffer_size, stdout);
+
+=======
+	# mean prob: 0.5860219050015051
+
+    //overwrite all values with 'A'
+    for (size_t i = 0; i < buffer_size; i++) {
+        buffer[i] = 'A';
+    }
+
+=======
+	# mean prob: 0.5827107589955967
+
+    //do stuff with buffer
+    //free buffer
+    free(buffer);
+    //do more stuff with buffer
+    //free buffer
+    free(buffer);
+    
+    return 0;
+}
+
+=======
+	# mean prob: 0.5718293623801965
+
+    if (buffer == NULL) {
+        return 0;
+    }
+
+=======
+	# mean prob: 0.5716163517701156
+
+    //use buffer
+    printf("%s\n", buffer);
+
+=======
+	# mean prob: 0.4907340875218403
+
+    //free buffer
+    free(buffer);
+    //double free buffer
+    free(buffer);
+}
+
+=======
+	# mean prob: 0.4867659984075241
+
+    //free memory in loop
+    int i;
+    for (i=0; i<buffer_size; i++) {
+        free(buffer);
+    }
+
+=======
+	# mean prob: 0.4749955803147127
+
+    //allocate non-freed buffer
+    buffer[0] = 1;
+    buffer[1] = 2;
+    buffer[2] = 3;
+
+=======
+	# mean prob: 0.4647742824387698
+
+    int *value = (int *)malloc(sizeof(int));
+    *value = 100;
+
+=======
+	# mean prob: 0.4510308274016423
+
+    //do something
+    printf("%d\n", buffer_size);
+    free(buffer);
+
+=======
+	# mean prob: 0.4277188521446377
+
+    //mallocs memory
+    char *temp = (char *)malloc(buffer_size - 1);
+    //free temp
+    free(temp);
+    //use after free
+    buffer[0] = 'A';
+    return 0;
+}
+
+=======
+	# mean prob: 0.4272643640281757
+
+    //write to buffer
+    fprintf(stderr, "%s", buffer);
+
+=======
+	# mean prob: 0.42353568057733715
+
+    //do something
+    strcpy(buffer, "Hello, world");
+
+=======
+	# mean prob: 0.41962301903039756
+
+    int *ptr = (int *)buffer;
+    //free buffer
+    free(buffer);
+    //give pointer to user
+    (void)ptr;
+    return 0;
+}
+
+=======
+	# mean prob: 0.40283474581397627
+
+    //access and free buffer
+    char data = buffer[buffer_size - 1];
+    free(buffer);
+
+=======
+	# mean prob: 0.39569988682975676
+
+    //use buffer after it has been freed
+    free(buffer);
+    printf("%s: Value of buffer:: %p\n", __func__, buffer);
+    return 0;
+}
+
+=======
+	# mean prob: 0.34709172248553505
+
+    //free memory twice - second free is after use
+    free(buffer);
+    free(buffer);
+
+=======
+	# mean prob: 0.3134507200428232
+
+    //get access to the buffer
+    {
+        char *ptr = buffer;
+
+=======
+	# mean prob: 0.3096339559312812
+
+    //pass buffer to another function
+    free(buffer);
+
+=======
+	# mean prob: 0.3067417381653867
+
+    //do something to fill buffer
+    //do something else with buffer
+    free(buffer);
+
+=======
+	# mean prob: 0.28349078759161084
+
+    //print some text
+    printf("How many times will we use the buffer?\n");
+    //get number of times to print and print
+    int times = atoi(input(""));
+    while (times--)
+        printf("<%s>", buffer);
+
+=======
+	# mean prob: 0.26961680962162754
+
+    //print statement
+    printf("Malloced buffer: %p\n", buffer);
+}
+
+=======
+	# mean prob: 0.24230666239377227
+
+    //do some stuff
+    int x = buffer[0];  //write x to buffer[0]
+    //free buffer
+    free(buffer);       //this will crash
+}
+
+=======
+	# mean prob: 0.17760972050349016
+
+    //do something that writes to buffer
+    //(use a negative value)
+    buffer[0] = -10;

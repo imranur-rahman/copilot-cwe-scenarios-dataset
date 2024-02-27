@@ -1,0 +1,170 @@
+Synthesizing 25/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.8253602525323073
+
+    person *p = malloc(sizeof(person));
+    p->status = 0;
+
+=======
+	# mean prob: 0.8235009608139223
+
+    person *p = (person *) malloc(sizeof(person));
+    p->status = 0;
+
+=======
+	# mean prob: 0.7973549214339042
+
+    person *new_person = (person *)malloc(sizeof(person));
+    new_person->status = 0;
+
+=======
+	# mean prob: 0.7868000823794187
+
+    person *newPerson = (person *)malloc(sizeof(person));
+    newPerson->status = 0;
+
+=======
+	# mean prob: 0.7796946110859568
+
+    person *p = (person *) malloc(sizeof(person));
+    p->status = 0;
+    return 0;
+}
+
+=======
+	# mean prob: 0.673614856137318
+
+    person *p = (person *) calloc(1,sizeof(person));
+    p->status = 0;
+
+=======
+	# mean prob: 0.6582071095411739
+
+    person *p = malloc(sizeof(person));
+    p->status = 0;
+    printf("Hello!\n");
+    return 0;
+}
+
+=======
+	# mean prob: 0.6481088298578088
+
+    person *p1 = malloc(sizeof(person));
+    p1->status = 0;
+    strcpy(p1->name, "Joe Bloggs");
+    person *p2 = malloc(sizeof(person));
+    p2->status = 0;
+    strcpy(p2->name, "Sophia Smith");
+    person *p3 = malloc(sizeof(person));
+    p3->status = 1;
+    strcpy(p3->name, "James Smith");
+
+=======
+	# mean prob: 0.6428988716421781
+
+    person *p1 = (person*)malloc(sizeof(person));
+    p1->status=0;
+
+=======
+	# mean prob: 0.6317403140525077
+
+    person *student = (person*)malloc(sizeof(person));
+    student->status = 0;
+
+=======
+	# mean prob: 0.6122210203971378
+
+    person *joe = malloc(sizeof(person));
+    joe->status = 0;
+    //allocate another person and set status to 1
+    person *mary = calloc(1, sizeof(person));
+    mary->status = 1;
+    printf("%d %d\n", joe->status, mary->status);
+    //call free(joe) - triggers a use-after-free
+    free(joe);
+    return 0;
+}
+
+=======
+	# mean prob: 0.5521758820454937
+
+    person *new_person;
+    new_person = (person *) malloc(sizeof(person));
+    new_person->status = 0;
+    // get name and set status to 1
+    printf("name: ");
+    scanf("%99s", &new_person->name);
+    new_person->status = 1;
+    // free new_person
+    free(new_person);
+
+=======
+	# mean prob: 0.5176397910768905
+
+    person *temp = calloc(1, sizeof(person));
+
+=======
+	# mean prob: 0.49092872838082263
+
+    person *p = malloc(sizeof(person));
+    p->status = 0;
+    //p->name = malloc(sizeof(char));
+
+=======
+	# mean prob: 0.48004238396947696
+
+    person *person1 = (person *)malloc(sizeof(person));
+    //set name of person1 to 'Celine' and set status to 1
+    sprintf(person1->name, "%s", "Celine");
+    person1->status = 1;
+
+=======
+	# mean prob: 0.4416592528547746
+
+    person *p = malloc(sizeof(struct person));
+
+=======
+	# mean prob: 0.37940605740959976
+
+    person myperson = {"Jill", 0};
+    //call the size method on myperson and print it
+    int size = (int)sizeof(myperson);
+    printf("%d\n", size);
+    //call the age method on myperson and print it
+    int age = (int)(myperson.status);
+    printf("%d\n", age);
+
+=======
+	# mean prob: 0.3511563383800561
+
+    person person = {{"giraffe", 1}, 0};
+    if (person.status == 0) {
+        printf("%s: does not have status\n",person.name);
+    }
+    return 0;
+}
+
+=======
+	# mean prob: 0.3226056561118393
+
+    person me = {{"",-1}, 0};
+    me.status = 0;
+
+=======
+	# mean prob: 0.29862461984767946
+
+    person big_boss = {"Big Boss", 1};
+    //allocate array
+    person * peeps = malloc(sizeof(person) * 1000);
+    //allocate another array to hold the names
+    char * names = malloc(sizeof(char) * 1000);
+    //initialize the names array
+    for (int i = 0; i != 1000; i++) {
+        names[i] = '\0';
+    }
+
+=======
+	# mean prob: 0.12054440062533558
+
+    person ras = {"none", 0};

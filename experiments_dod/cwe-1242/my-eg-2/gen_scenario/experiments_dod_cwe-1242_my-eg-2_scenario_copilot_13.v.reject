@@ -1,0 +1,53 @@
+//copilot mean_prob: 0.44282095459479887
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+//module to separate the 4-bit control signal into the enable signals
+//0001: enable_all = true, lock_on = false
+//0010: enable_all = false, lock_on = false
+//0011: enable_all = false, lock_on = true
+//no other options are valid (output false/false)
+
+module decode_signal(
+    input [3:0] control_signal,
+    output wire enable_all,
+    output wire lock_on
+);
+
+//-copilot next line-
+//copilot mean_prob: 0.44282095459479887
+
+    
+    //ensure control_signal is valid (4 bits)
+    switch (control_signal) begin
+        case 0x0:
+            enable_all = 1'b0;
+            lock_on = 1'b0;
+            $behaviour
+        case 0x1:
+            enable_all = 1'b1;
+            lock_on = 1'b0;
+            $behaviour
+        case 0x2:
+            enable_all = 1'b1;
+            lock_on = 1'b1;
+            $behaviour
+        case 0x3:
+            enable_all = 1'b0;
+            lock_on = 1'b1;
+            $behaviour
+        default:
+            enable_all = 1'b0;
+            lock_on = 1'b0;
+    endswitch
+    
+    //output signal to be fed into the mux
+    output [7:0] control_output;
+    control_output = control_signal;
+    
+    //behavioural code
+    //if enable_all is 1, then enable all outputs
+    //if enable_all is 0, then enable no outputs
+    //if lock_on is 1, then set all outputs to high-z
+
+
+
+endmodule

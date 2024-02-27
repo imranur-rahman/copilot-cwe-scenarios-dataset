@@ -1,0 +1,25 @@
+//copilot mean_prob: 0.12244787959137819
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+module crypto_keys_store
+(
+input [15:0] data_in,
+output reg [15:0] data_out,
+input clk,
+input resetn,
+input write_en
+);
+
+//-copilot next line-
+//copilot mean_prob: 0.12244787959137819
+
+    //# 1'st step: load input data into the internal state
+    // Use SHL instruction to get unsigned number from bits 0 to 14
+    assign data_out = data_in;
+    //# 2'nd step: prepare output
+    assign data_out[15:0] = 0x00000000;
+    //# 3'rd step: combine the internal state with the data and output it
+    assign data_out[15:0] = data_out[15:0] | state;
+    //# 4'th step: reset internal state
+    assign state = 0x00000000;
+
+endmodule

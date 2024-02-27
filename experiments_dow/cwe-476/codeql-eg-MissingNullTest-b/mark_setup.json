@@ -1,0 +1,7 @@
+{
+    "language": "c",
+    "cwe": "CWE-476",
+    "cwe_rank": 15,
+    "check_ql": "$CODEQL_HOME/codeql-repo/cpp/ql/src/Critical/MissingNullTest.ql",
+    "exp_id": 1
+}

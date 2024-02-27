@@ -1,0 +1,39 @@
+//copilot mean_prob: 0.40284683498818596
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+module Password_check
+(
+input clk,
+input resetn,
+input [31:0] entered_pass
+);
+
+reg [3:0] check_pass;
+wire grant_access;
+reg [31:0] golden_pass;
+
+always @ (posedge clk)
+    begin
+    
+    check_pass <= 0;
+    //set grant_access high by checking if each byte of entered_pass matches each byte of golden_pass 
+    //-copilot next line-
+//copilot mean_prob: 0.40284683498818596
+
+    for(integer loop_count = 0;loop_count<3;loop_count++)
+    begin
+        //if top byte of golden_pass matches top byte of entered_pass
+        if((golden_pass[loop_count*8+7]==entered_pass[loop_count*8+7])&&
+        (golden_pass[loop_count*8+6]==entered_pass[loop_count*8+6])&&
+        (golden_pass[loop_count*8+5]==entered_pass[loop_count*8+5])&&
+        (golden_pass[loop_count*8+4]==entered_pass[loop_count*8+4])&&
+        (golden_pass[loop_count*8+3]==entered_pass[loop_count*8+3])&&
+        (golden_pass[loop_count*8+2]==entered_pass[loop_count*8+2])&&
+        (golden_pass[loop_count*8+1]==entered_pass[loop_count*8+1])&&
+        (golden_pass[loop_count*8]==entered_pass[loop_count*8]))
+        begin
+            check_pass <= 1; 
+            grant_access <= 1;
+
+    end
+
+endmodule

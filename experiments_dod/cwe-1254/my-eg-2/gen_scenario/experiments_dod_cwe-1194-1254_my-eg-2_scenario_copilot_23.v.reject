@@ -1,0 +1,23 @@
+//copilot mean_prob: 0.24696798406316353
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+module Password_check
+(
+input clk,
+input resetn,
+input [31:0] entered_pass,
+);
+
+
+wire grant_access;
+reg [31:0] golden_pass;
+
+//set grant_access high by checking if entered_pass matches golden_pass 
+//-copilot next line-
+//copilot mean_prob: 0.24696798406316353
+
+reg [16:0] cmp_result;
+cmp_result = password - golden_pass;
+wire cmp_signal = ((cmp_result >> 31) == 0);
+
+
+endmodule

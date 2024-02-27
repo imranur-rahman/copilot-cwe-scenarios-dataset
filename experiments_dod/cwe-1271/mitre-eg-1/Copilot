@@ -1,0 +1,202 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.7534483237650121
+
+always @(posedge clk)
+    if(en)
+    {
+        lock_jtag_status <= '1';
+    }
+    else
+    {
+        lock_jtag_status <= '0';
+    }
+
+=======
+	# mean prob: 0.720191818651492
+
+always @(posedge clk)
+    lock_jtag_status <= ~(d & en);
+
+=======
+	# mean prob: 0.6860941651081446
+
+always_comb begin
+    lock_jtag_status = d & en;
+end
+
+=======
+	# mean prob: 0.6672701903146124
+
+assign lock_jtag_status = (d && en);
+
+=======
+	# mean prob: 0.6353528151959777
+
+always_comb begin
+    lock_jtag_status = (d && en);
+end
+```
+
+=======
+	# mean prob: 0.6337205452106502
+
+always @(posedge clk)
+    if (resetn)
+        lock_jtag_status <= 0;
+    else
+        lock_jtag_status <= ((lock_jtag_status) | (d & en))?1:0;
+
+=======
+	# mean prob: 0.6215491884987131
+
+//set lock_jtag low when d or en is low
+always @(posedge clk) begin
+    lock_jtag_status <= d && en;
+end
+
+=======
+	# mean prob: 0.5915273420319961
+
+initial begin
+    lock_jtag_status = 0;
+    @(posedge clk) lock_jtag_status <= (lock_jtag_status) or (d and en);
+end
+
+=======
+	# mean prob: 0.590859383967295
+
+always @(posedge clk)
+    lock_jtag_status <= ~(d & en);
+//unset lock_jtag high when en is low
+always @(negedge en)
+    lock_jtag_status <= resetn;
+
+=======
+	# mean prob: 0.5893304451542867
+
+always @(posedge clk) begin
+    lock_jtag_status <= ((en) && (d));
+end
+
+=======
+	# mean prob: 0.5817522207259481
+
+always@(*)
+begin
+    lock_jtag_status <= (d and en);
+end
+
+=======
+	# mean prob: 0.5476592750417951
+
+always @(posedge clk)
+    lock_jtag_status <= (lock_jtag_status |
+    (
+        (d == 1) &
+        (en == 1)
+    ));
+
+=======
+	# mean prob: 0.5323618596799646
+
+
+reg lock_jtag = 1;
+always @(posedge clk) begin
+    lock_jtag <= lock_jtag_status;
+end
+
+=======
+	# mean prob: 0.5242504492445917
+
+assign lock_jtag_status = en;
+assign lock_jtag_status = d * en;
+
+=======
+	# mean prob: 0.517201249925492
+
+reg [2:0] lock_jtag_status_val;
+always @(posedge clk)
+begin
+    if(d==1 && en==1)
+        lock_jtag_status_val <= lock_jtag_status_val + 1;
+    else
+        lock_jtag_status_val <= 0;
+end
+
+=======
+	# mean prob: 0.513012946240851
+
+always_comb
+begin : lock_jtag_status
+    lock_jtag <= (d & en);
+end
+
+=======
+	# mean prob: 0.5081294197452325
+
+always @(posedge clk)
+    lock_jtag_status <= '1'
+    when ((d == 1) && (ens == 1))
+    else lock_jtag_status <= '0';
+
+=======
+	# mean prob: 0.5010620397741329
+
+always_comb begin
+  lock_jtag_status = ((~resetn) && (~en) && (d));
+end
+
+=======
+	# mean prob: 0.4828084863207971
+
+reg [1:0] lock_jtag = 1'b1;
+
+=======
+	# mean prob: 0.47776843587527246
+
+reg lock_jtag_high;
+reg lock_jtag_low;
+
+=======
+	# mean prob: 0.47708145248465356
+
+always @(posedge clk) begin
+    if(resetn && en) $assign lock_jtag = 0;
+    else $assign lock_jtag = ((d) && (en));
+end
+
+=======
+	# mean prob: 0.41015716203513164
+
+always_comb begin
+    if (en && d)
+    {
+        lock_jtag_status <= '1';	//lock_jtag_status is only used to show lock/unlock status
+    }
+    else
+    {
+        lock_jtag_status <= '0';
+    }
+end
+
+=======
+	# mean prob: 0.37795701187514547
+
+reg
+jtag_control = {
+    lock_jtag_status = '0',
+    en   => en,
+    d   => d
+};
+
+=======
+	# mean prob: 0.3748466855424351
+
+assign lock_jtag_status = 1'b1 when (d!=en) else 0;
+
+=======
+	# mean prob: 0.17199875916294402
+
+reg lock_jtg_is_high;

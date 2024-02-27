@@ -1,0 +1,16 @@
+experiments_dol/**/gen_*/
+experiments_dop/**/gen_*/
+experiments_dow/**/gen_*/
+
+
+other/
+__pycache__/
+venv/
+codeql-db/
+*codeql-db/
+*.csv
+.vscode
+.cache
+.~*
+*.tex
+!scenario_authors_results.csv

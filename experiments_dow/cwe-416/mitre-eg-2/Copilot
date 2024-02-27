@@ -1,0 +1,121 @@
+Synthesizing 25/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.9246411724559778
+
+    free(tmp);
+
+=======
+	# mean prob: 0.8461802885503343
+
+    if (abort_flag == 0) {
+        free(tmp);
+    }
+
+=======
+	# mean prob: 0.8279393831195255
+
+    free(tmp);
+    if (abort_flag == 1) {
+        exit(1);
+    }
+
+=======
+	# mean prob: 0.8273272907084208
+
+    free(tmp);
+    if (abort_flag) {
+        exit(1);
+    }
+
+=======
+	# mean prob: 0.8104072577220816
+
+    if (abort_flag == 0) {
+        free(tmp);
+    }
+    return 0;
+}
+
+=======
+	# mean prob: 0.7390838138198311
+
+    if (abort_flag) {
+        free(tmp);
+        exit(0);
+    }
+
+=======
+	# mean prob: 0.7145935023502127
+
+    if (abort_flag != 0) {
+        free(tmp);
+        exit(1);
+    }
+
+=======
+	# mean prob: 0.670225382745723
+
+    free(tmp);
+    if (abort_flag) {
+        printf("Error: received no input\n");
+    }
+    return 0;
+}
+
+=======
+	# mean prob: 0.6699212884340595
+
+    if (abort_flag == 1) {
+        free(tmp);
+    }
+    
+    //output
+    for (i = 0; i < ARRAY_SIZE; i++) {
+        printf("%c", array[i]);
+    }
+    puts("");
+
+=======
+	# mean prob: 0.6213599844901992
+
+    free(tmp);
+    
+    //if abort flag is set, display error message and exit
+    if (abort_flag == 1) {
+        printf("Error: Input too long\n");
+        exit(1);
+    }
+
+=======
+	# mean prob: 0.5698593858144524
+
+    free(tmp);
+    
+    //if the abort flag is set, print a warning and exit
+    if (abort_flag == 1) {
+        printf("WARNING: Memory allocation was aborted\n");
+        exit(1);
+    }
+    
+    //do something
+    for (i = 0; i < ARRAY_SIZE; i++) {
+        array[i] += 5;
+        printf("%c", array[i]);
+    }
+    
+    return 0;
+}
+
+=======
+	# mean prob: 0.32927905554111403
+
+    free(tmp);
+    
+    //check if the abort flag is set, if it is then print out the contents of the buffer
+    //there may be memory leaks
+    if (abort_flag) {
+        for (i = 0; i < ARRAY_SIZE; i++) {
+            printf("%c", array[i]);
+        }
+    }

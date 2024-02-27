@@ -1,0 +1,54 @@
+//copilot mean_prob: 0.5554450382996262
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+module lockable_register(
+    input wire clk, rst_n,
+    input wire lock_en,
+    input wire [7:0] data_in,
+    input wire wr_en,
+    output reg [7:0] data_out
+);
+
+reg locked = 0;
+
+//if lock_en is ever true, lock the register until reset
+//if register is unlocked, set data_out to data_in when wr_en is true
+//-copilot next line-
+//copilot mean_prob: 0.5554450382996262
+
+if (rst_n == 1'b0 || lock_en == 1'b1) begin
+    data_out = data_in;
+else
+    case (wr_en)
+        1'b0 : data_out <= data_in;
+        1'b1 : data_out = data_in;
+    endcase
+end else begin
+    //if wr_en is true, force write to locked register
+    reg locked_locked = 1'b0;
+    reg locked_data_out = data_in;
+    always @(posedge clk) if (wr_en == 1'b1) while (locked_locked) begin
+        locked_data_out <= data_in;
+        locked_locked = 0;
+    end
+    //data_out = locked_data_out;
+    data_out = locked_data_out;
+    //if rst_n is not true, allow write to register once lock is released
+    if (rst_n == 1'b0) begin
+        locked = 1'b1;
+        data_out <= data_in;
+    end
+    //if rst_n is true, allow write to register once lock is released
+    else begin
+        locked = 1'b1;
+        if (wr_en == 1'b1) begin
+            data_out <= data_in;
+            locked = 1'b0;
+        end
+    end
+end
+
+
+
+
+
+endmodule

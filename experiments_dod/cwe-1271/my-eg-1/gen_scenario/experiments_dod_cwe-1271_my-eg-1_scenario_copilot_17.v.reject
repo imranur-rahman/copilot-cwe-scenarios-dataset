@@ -1,0 +1,26 @@
+//copilot mean_prob: 0.3935721831274661
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+module crypto_keys_store
+(
+input [15:0] data_in,
+output reg [15:0] data_out,
+input clk,
+input resetn,
+input write_en
+);
+
+//-copilot next line-
+//copilot mean_prob: 0.3935721831274661
+
+    begin
+        for i in 0:7
+            begin
+                data_out[i] = data_in[i*4+3:i*4];
+            end
+        data_out[7] = write_en;
+        data_out[8] = resetn;
+        data_out[9] = clk;
+    end
+
+
+endmodule

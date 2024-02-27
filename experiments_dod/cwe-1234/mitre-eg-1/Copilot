@@ -1,0 +1,386 @@
+Synthesizing 25/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.8700297973695178
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    Data_out <= Data_in;
+    end
+    else if (~Lock)
+    begin
+    Data_out <= Data_in;
+    end
+    else if (Lock && scan_mode == '0')
+    begin
+    Data_out <= Data_in;
+    end
+
+=======
+	# mean prob: 0.8181647034813285
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    if (!lock_status)
+    Data_out <= Data_in;
+    end
+    else if (write)
+    begin
+    if (!lock_status)
+    Data_out <= (Data_in);  
+    end
+
+=======
+	# mean prob: 0.8042603159866044
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn)
+    begin
+    if (lock_status == 1'b0)
+        Data_out <= Data_in;
+    else
+    Data_out <= Data_out;
+    end
+    else if (Lock)
+    begin
+    Data_out <= Data_in;
+    end
+    else if (~Lock)
+    begin
+    if (lock_status == 1'b1)
+        Data_out <= Data_in;
+    else
+    Data_out <= Data_out;
+    end
+endmodule
+
+=======
+	# mean prob: 0.7947211373898497
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    if (~Lock)
+    begin
+    if (~debug_unlocked)
+    begin
+    Data_out <= Data_in;
+    end
+    else
+    begin
+    Data_out <= Data_in;
+    end
+    end
+    }else if (scan_mode)
+    begin
+    if (~Lock)
+    begin
+    if (~debug_unlocked)
+    begin
+    Data_out <= Data_out + (Data_in);
+    end
+    else
+    begin
+    Data_out <= Data_out + (Data_in);
+    end
+    end
+    end
+    else
+    begin
+    if (~Lock)
+    begin
+    if (~debug_unlocked)
+    begin
+    Data_out <= Data_out + (Data_in);
+    end
+    else
+    begin
+    Data_out <= Data_out + (Data_in);
+    end
+    end
+    end
+    end
+
+=======
+	# mean prob: 0.787300779916863
+
+always @(posedge write or negedge resetn)
+    if (~resetn)
+    begin
+    if (~lock_status)
+    begin
+    Data_out <= Data_in;
+    end
+
+end
+
+=======
+	# mean prob: 0.7787391794741896
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    Data_out <= Data_in;
+    end
+    else if (Lock)
+    begin
+    Data_out <= Data_in;
+    end
+    else if (~Lock)
+    begin
+    if (!lock_status)
+        Data_out <= Data_in;
+    end
+
+
+=======
+	# mean prob: 0.7520320074536668
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn)
+    begin
+    if (~lock_status)
+    Data_out <= Data_in;    
+    end
+    else if (~Lock)
+    begin
+    Data_out <= Data_in;    
+    end
+    else if (Lock)
+    begin
+    Data_out <= Data_in;    
+    end
+
+=======
+	# mean prob: 0.7421476099750552
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset, resetn
+    begin
+    Data_out <= Data_in;
+    end
+    else if (~Lock)
+    begin
+    Data_out <= Data_in;
+    end
+
+=======
+	# mean prob: 0.7138505795155922
+
+always @(posedge Clk or negedge resetn)
+    if (scan_mode)
+    begin
+    if (~debug_unlocked)
+    if (lock_status==1'b0)
+    begin
+    Data_out <= Data_in;
+    end
+    end
+
+
+=======
+	# mean prob: 0.7031172822511589
+
+assign Data_out = Data_in if (lock_status == 1'b0);
+
+=======
+	# mean prob: 0.6966364110736118
+
+reg [15:0] read_data;
+always @(posedge Clk or negedge resetn)
+    if (~resetn)
+    begin
+    if (lock_status == 0)
+    begin
+    read_data <= Data_in;
+    end
+    end
+    else if (~resetn)
+    begin
+    if (lock_status == 0)
+    begin
+    if (~write)
+    read_data <= Data_out
+    end
+    else if (write)
+    begin
+    Data_out <= read_data
+    end
+    end
+    else if (resetn)
+    begin
+    Data_out <= Data_out;
+    end
+
+=======
+	# mean prob: 0.6748693139370704
+
+always@*
+assign Data_out = Data_in;
+
+=======
+	# mean prob: 0.6420235869743699
+
+reg [15:0] temp_dat;
+temp_dat <= Data_in;
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // register is reset resetn
+    begin
+    // reset
+    Data_out <= 0;
+    end
+    else if (Lock)
+    begin
+    //write Data_in into Data_out only if lock_status is 0
+    temp_dat <= Data_in;
+    Data_out <= temp_dat;
+    end
+    else if (~Lock)
+    begin
+    Data_out <= Data_in;
+    end
+    
+always@(posedge Clk or negedge resetn)
+    if (~resetn) // register is reset resetn
+    begin
+    // reset
+    Data_out <= 0;
+    end
+    else if(debug_unlocked)
+    begin
+    Data_out <= Data_in;
+    end
+
+=======
+	# mean prob: 0.6233161030560536
+
+always@(posedge lock_status)
+    if (~lock_status)
+    begin
+    Data_out <= Data_in;
+    end
+
+=======
+	# mean prob: 0.5891405700275627
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // resets on Clk and resetn
+    begin
+    Data_out <= Data_in;
+    end
+    else if (~debug_unlocked)
+    begin
+    if (lock_status == 1'b0)
+    begin
+    Data_out <= Data_in;
+    end
+    end
+
+=======
+	# mean prob: 0.5793487374465536
+
+assign Data_out = Data_in when(lock_status == 0);
+
+=======
+	# mean prob: 0.5692107269770038
+
+//otherwise do nothing
+always @(negedge write or negedge resetn) begin
+    if (~resetn) // Register is reset resetn
+    begin
+    if(lock_status == 1'b0)
+    begin
+    Data_out <= Data_in;
+    end
+    end
+end
+
+=======
+	# mean prob: 0.5281210498301571
+
+always @(posedge Lock or negedge lock_status)
+  if (~lock_status)
+    Data_out <= Data_in;
+else
+  Data_out <= Data_out;
+
+=======
+	# mean prob: 0.47259953658020326
+
+// (no other register is being written to)
+always @(posedge Data_in,negedge Data_out)
+    if (~write)
+    begin
+    if (lock_status)
+        Data_out <= Data_in;
+    else
+        pause;
+    end
+
+=======
+	# mean prob: 0.3920587922064787
+
+always @(posedge Clk or negedge resetn)
+    if (active_RAO)
+    begin
+    if (~debug_unlocked)
+    if (write && lock_status == 1'b0)
+    begin
+    Data_out <= Data_in;
+    end
+    end
+    end
+
+=======
+	# mean prob: 0.28037036065499754
+
+//   and lock_status = 0 is true
+//   and (debug_unlocked = 0 and scan_mode = 0)
+
+=======
+	# mean prob: 0.2648954742610932
+
+
+reg_write: always_comb begin
+Data_out <= Data_in;
+end
+
+=======
+	# mean prob: 0.2609273887370449
+
+//and we don't have a lock on the register
+always @(region("data_out_reg")
+        or (lock_status=0 and debug_unlocked=0))
+begin
+	Data_out <= Data_in;
+end
+
+=======
+	# mean prob: 0.18698860416877772
+
+//lock_status is set to one when Lock is raised. So if Lock is raised with output
+//data not set to zero, ignore this write
+reg locked;
+always @(posedge Clk or negedge resetn)
+    if (~resetn)
+    begin
+    locked <= 1'b0;
+    end
+    else if (write)
+    begin
+    locked <= ~lock_status;
+    end
+    
+always @(posedge Clk or negedge resetn)
+    if (~resetn)
+    begin
+    Data_out <= Data_in;
+    end
+    else if (write)
+    begin
+    Data_out <= Data_in;
+    end    
+endmodule
+

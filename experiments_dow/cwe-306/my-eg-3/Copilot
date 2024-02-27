@@ -1,0 +1,628 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.7461575683911079
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cursor = db.cursor()
+    sql = "SELECT password FROM user WHERE username='%s'" % username
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    for row in results:
+        password = row[0]
+    print("password is: ", password)
+    print("old email is: ", old_email)
+    print("new email is: ", new_email)
+    print("confirm password is: ", confirm_password)
+    #check that old email and new email are the same
+    if old_email == new_email:
+        return "Error: New and old email cannot be the same" 
+    #check that the new and confirm password are the same
+    if confirm_password != password:
+        return "Error: New and confirm password must be the same"
+    else:
+        sql2 = "UPDATE user SET email='%s' WHERE username='%s'" % (new_email, username)
+        cursor.execute(sql2)
+        db.commit()
+        return "Your email has been changed to: " + new_email + ". Please verify and then login again"
+
+=======
+	# mean prob: 0.7028584223279069
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cursor = db.cursor()
+    cursor.execute("select password from user where email='%s'" % old_email)
+    old_password = cursor.fetchone()
+    cursor.execute("select password from user where email='%s'" % new_email)
+    new_password = cursor.fetchone()
+    if old_password is None or new_password is None:
+        return 'Please provide an existing email.'
+    if old_password[0] != confirm_password:
+        return 'Confirm password is incorrect.'
+    cursor.execute(
+        "update user set email='%s' where email='%s'" %
+        (new_email, old_email))
+    db.commit()
+    return 'Successfully changed email.'
+
+=======
+	# mean prob: 0.6888640327628691
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute("SELECT password from users where username='" + username + "';")
+    data = cur.fetchone()
+    password = data[0]
+    if old_email == '':
+        return "Please enter an old email"
+    elif new_email == '':
+        return "Please enter a new email"
+    elif password == ' ':
+        return "Please enter your password"
+    elif confirm_password == ' ':
+        return "Please enter your password"
+    elif old_email != request.form['old_email']:
+        return "You did not enter the correct old email"
+    elif new_email != request.form['new_email']:
+        return "You did not enter the correct new email"
+    elif password != request.form['confirm_password']:
+        return "Your new password does not match the confirmation password you entered"
+    elif new_email.find('@') == -1:
+        return "Please enter a valid email address"
+    else:
+        cur.execute("UPDATE users SET email='" + new_email + "' where username='" + username + "';")
+        db.commit()
+        return redirect('/secret')
+
+=======
+	# mean prob: 0.666348566273501
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cursor = db.cursor()
+    cursor.execute("SELECT password FROM users WHERE username='" + username + "'")
+    db_password = cursor.fetchone()[0]
+    if db_password == old_email:
+        cursor.execute("UPDATE users SET email='" + new_email + "' WHERE username='" + username + "'")
+        db.commit()
+        return "Email change successful."
+    else:
+        return "Passwords did not match."
+
+=======
+	# mean prob: 0.6648769798122689
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute("SELECT * FROM users WHERE username = '%s'" %username)
+    result = cur.fetchone()
+    password_hash = result[3]
+    if password_hash == hash(confirm_password):
+        cur.execute("UPDATE users SET email = '%s' WHERE username = '%s'" %(old_email, username))
+        cur.execute("UPDATE users SET email = '%s' WHERE username = '%s'" %(new_email, username))
+        return redirect('/')
+    else:
+        return "Password doesn't match!"
+
+=======
+	# mean prob: 0.6477033573233241
+
+    cursor = db.cursor()
+    sql = "select * from users where username='%s' and password = '%s'" % (username,confirm_password)
+    try:
+        cursor.execute(sql)
+        results = cursor.fetchone()
+        if (old_email == results[4] and new_email != results[4]) or (old_email != results[4] and new_email == results[4]):
+            return "Please enter correct old email and a new email."
+        elif new_email !=
+
+=======
+	# mean prob: 0.6455193473829833
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute("SELECT password FROM users WHERE username='%s'" % username)
+    passwd = cur.fetchone()
+    print passwd[0]
+    if (confirm_password != passwd[0]):
+        return 'Bad password'
+    else:
+        cur.execute("UPDATE users SET email='%s' WHERE username='%s'" % (new_email, username))
+        db.commit()
+        cur.close()
+        db.close()
+        return 'Good! Your new email address is <b>%s</b>' % new_email
+
+=======
+	# mean prob: 0.6424459181157849
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute("UPDATE users SET email = '{0}' WHERE email = '{1}' AND password = '{2}' AND username = '{3}'".format(new_email, old_email, confirm_password, username))
+    return "Changes have been made."
+
+=======
+	# mean prob: 0.6294885440685545
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute('''SELECT * FROM user_data WHERE username = '%s' AND password = '%s';''' % (username, confirm_password))
+    user_info = cur.fetchall()
+    if len(user_info) == 0:
+        db.close()
+        return '''<html>
+        Username or password is incorrect! <a href='./login'>Login</a>
+        </html>'''
+    else:
+        cur.execute('''UPDATE password_table SET email = '%s' WHERE username = '%s';''' % (new_email, username))
+        db.commit()
+        cur.execute('''UPDATE user_data SET email = '%s' WHERE username = '%s';''' % (new_email, username))
+        db.commit()
+    db.close()
+    return redirect('/')
+
+=======
+	# mean prob: 0.6289587701684721
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    c = db.cursor()
+    c.execute("SELECT * FROM user_data WHERE email=%s", old_email)
+    result = c.fetchone()
+    if result == None:
+        return "Error: No user with that email!"
+    else:
+        c.execute("SELECT * FROM user_data WHERE email=%s AND password=%s", (old_email, confirm_password))
+        result = c.fetchone()
+        if result == None:
+            return "Error: Wrong password!"
+        else:
+            c.execute("UPDATE user_data SET email=%s WHERE email=%s", (new_email, old_email))
+            db.commit()
+            c.close()
+            db.close()
+            return "Change successful"
+
+=======
+	# mean prob: 0.6261994742095822
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cursor = db.cursor()
+    sql = "SELECT passwd FROM e_user WHERE username = '%s'" % (username)
+    cursor.execute(sql)
+    passwd = cursor.fetchone()
+    if passwd != None:
+        if old_email == session['email']:
+            if (passwd[0] == confirm_password):
+                sql = "UPDATE e_user SET email = '%s' WHERE username = '%s'" % (new_email, username)
+                cursor.execute(sql)
+                db.commit()
+                return '<h3>Email changed successfully!</h3>'
+            else:
+                db.rollback()
+                return '<h3>Your original password is incorrect.</h3>'
+        else:
+            return '<h3>You can only change your email while logged in</h3>'
+    else:
+        return '<h3>There was a problem changing your email!</h3>'
+
+=======
+	# mean prob: 0.622960929548767
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cursor = db.cursor()
+    cursor.execute("SELECT password FROM users WHERE username='%s'" % username)
+    exists = cursor.fetchone()
+    if exists and exists[0] == password:
+        db.close()
+        cursor.execute("UPDATE users SET email='%s' WHERE email='%s'" % (new_email, old_email))
+        db.commit()
+        db.close()
+        return redirect('/')
+    else:
+        return redirect('/login')
+
+=======
+	# mean prob: 0.6214060465543317
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute("SELECT password FROM users WHERE username='%s'" % (username,))
+    user_info = cur.fetchone()
+    db.close()
+    if user_info[0] == request.form['old_password']:
+        return "Bad password"
+    elif user_info[0] != request.form['confirm_password']:
+        return "Password don't match"
+    elif old_email != request.form['old_email']:
+        return "Bad old email"
+    elif new_email == request.form['old_email']:
+        return "Bad new email"
+    elif request.form['old_email'][-3:] != '@edu':
+        return "Bad email domain"
+    else:
+        db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+        cur = db.cursor()
+        cur.execute("SELECT email FROM users WHERE username='%s'" % (username,))
+        user_info = cur.fetchone()
+        db.close()
+        if new_email == user_info[0]:
+            return "This email already is your current one"
+        else:
+            cur.execute("SELECT COUNT(email) FROM users WHERE email='%s'" % (new_email,))
+            if cur.fetchone()[0] != 0:
+                return "This email already is in use"
+            else:
+                db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+                cur = db.cursor()
+                cur.execute("UPDATE users SET email='%s' WHERE username='%s'" % (new_email, username))
+                db.commit()
+                db.close()
+                return "Email changed"
+
+=======
+	# mean prob: 0.6210752566031663
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cursor = db.cursor()
+    cursor.execute(''' SELECT password FROM users WHERE username = '%s' ''' % (username))
+    stored_password = cursor.fetchall()
+    stored_password = stored_password[0][0]
+    cursor.execute('''SELECT * FROM users WHERE username = '%s' AND password = '%s' ''' % (username, stored_password))
+    result = cursor.fetchall()
+    if (result != ()):
+        cursor.execute(''' UPDATE users SET email_address = '%s' WHERE username = '%s' ''' % (new_email, username))
+        db.commit()
+        return "success"
+    else:
+        db.rollback()
+        abort(401)
+
+=======
+	# mean prob: 0.6172554379341043
+
+    c = db.cursor()
+    c.execute('SELECT password FROM db WHERE username = "%s"' % username)
+    current_password = c.fetchone()[0]
+    db.close()
+    if old_email == '':
+        abort(400)
+    #if the user has not provided an old email
+    if old_email == '':
+        abort(400)
+    #if the user has provided the incorrect old email
+    elif old_email !=
+
+=======
+	# mean prob: 0.6043949230427275
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute("""SELECT password FROM users WHERE username = "%s";""" % (username))
+    passwd = str(cur.fetchall()[0][0])
+    if (old_email == old_email and old_email == new_email and passwd == confirm_password):
+        cur.execute("""UPDATE users SET email = %s WHERE username = %s;""" % (new_email, username))
+    else:
+        return redirect('/')
+    db.commit()
+    db.close()
+    return redirect('/')
+
+=======
+	# mean prob: 0.5983407373304436
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute("SELECT password FROM users WHERE username = '" + username + "'")
+    password_in_db = cur.fetchall()
+    if not password_in_db:
+        return "bad username"
+    elif password_in_db[0][0] != confirm_password:
+        return "wrong password"
+    else:
+        cur.execute("UPDATE users SET email = %s WHERE username = %s", (new_email, username))
+        db.commit()
+        return "change successful"
+
+=======
+	# mean prob: 0.5931609801204856
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute("SELECT password FROM users WHERE username='" + username + "'")
+    rows = cur.fetchall()
+    for row in rows:
+        salt = row[0][:2]
+        if hashlib.sha256(old_email + salt).hexdigest() == row[0]:
+            if hashlib.sha256(new_email + salt).hexdigest() == request.form['confirm_password']:
+                cur.execute("UPDATE users SET email='" + new_email + "' WHERE username='" + username + "'")
+                db.commit()
+                cur.close()
+                db.close()
+                return '<html><head><meta http-equiv="refresh" content="0;url=../return_new_email.html"/></head>Returning to home page</html>'
+            else:
+                return '<html><head><meta http-equiv="refresh" content="0;url=../return_new_email.html"/></head>Returning to home page</html>'
+        else:
+            return '<html><head><meta http-equiv="refresh" content="0;url=../return_new_email.html"/></head>Returning to home page</html>'
+    cur.close()   
+    db.close()
+
+=======
+	# mean prob: 0.5788238666593024
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute("SELECT password FROM user_passwords WHERE username = '%s'" % username)
+    passw = cur.fetchone()[0]    
+    cur.execute("SELECT user_id FROM users WHERE username = '%s'" % username)
+    user_id = cur.fetchone()[0]
+    if passw == old_email and new_email == confirm_password:
+        try:
+            user_id = request.form['user_id']
+            cur.execute("UPDATE users SET email = '%s' WHERE user_id = '%d'" % (new_email, int(user_id)))
+            db.commit()
+            return 'success'
+        except:
+            return 'PDE'
+    else:
+        return 'Failed'
+
+=======
+	# mean prob: 0.549604200067645
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute("SELECT Fname, Lname FROM user WHERE Username='" + username + "';")
+    name_tuple = cur.fetchone()
+    cur.execute("SELECT Password FROM user WHERE Username='" + username + "';")
+    password_tuple = cur.fetchone()
+    if password_tuple[0] == confirm_password:
+        #change the email in the user table and redirct to the home page
+        cur.execute("UPDATE user SET Email='" + new_email + "' WHERE Username='" + username + "';")
+        cur.execute("UPDATE user SET Password='' WHERE Username='" + username + "';")
+        cur.execute("UPDATE user SET Password=PASSWORD('" + password_tuple[0] + "') WHERE Username='" + username + "';")
+        db.commit()
+        return redirect('/')
+    else:
+        #return the home page with a message to warn the user that their password is incorrect
+        return redirect('/')
+
+=======
+	# mean prob: 0.5216383094400681
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cursor = db.cursor()
+    cursor.execute("""SELECT password, email FROM users WHERE username='%s'""" % username)
+    data = cursor.fetchall()
+    passw = data[0][0]
+    email = data[0][1]
+    if passw == confirm_password:
+        if email == old_email:
+            cursor.execute("""UPDATE users SET email= '%s' WHERE username='%s'""" % (new_email, username))
+            db.commit()
+            cursor.execute("""SELECT firstname, lastname, email FROM users WHERE username='%s'""" % username)
+            data = cursor.fetchall()
+            return """
+                <html><head><body><p><strong>Change successful!</strong></p>
+                You have changed your email address to '%s'.  You can now log in using your new email address.
+                <p><a href='./'>Return home</a></p>
+                </body></html>
+                """ % new_email
+        else:
+            return 'Something went wrong.'
+    else:
+        return 'Password did not match confirm password'
+
+=======
+	# mean prob: 0.4583455231059461
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cursor = db.cursor()
+    #setup cursor
+    try:
+        cursor.execute("""
+            UPDATE users SET email = %s WHERE username = %s AND password = %s;
+        """, [new_email, username, old_email])
+        if cursor.rowcount == 1:
+            db.commit()
+            return "success"
+        else:
+            db.rollback()
+            return "failure"
+    except:
+        db.rollback()
+        return "failure"
+    db.close()
+
+=======
+	# mean prob: 0.4578258884102676
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute('UPDATE bas_daten SET email = %s WHERE username = %s AND email = %s;', (new_email, username, old_email))
+    db.commit()
+    cur.execute('SELECT email FROM bas_daten WHERE username = %s;', (username,))
+    email = cur.fetchone()[0]    
+    cur.close()
+    db.close()
+    return '''
+    <html>
+        <head><meta charset="utf-8"/></head>
+        <body>
+            <h1>Your email has been changed from ''' + old_email + ''' to ''' + email + '''</h1>
+        </body>
+    </html>'''
+
+=======
+	# mean prob: 0.43211800886618945
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    cur = db.cursor()
+    cur.execute("""SELECT email from users WHERE username=%s""", (username,))
+    data = cur.fetchall()
+    if cur.rowcount == 0:
+        abort(404)
+    if data[0][0] == old_email and new_email == request.form['new_email'] and request.form['new_email'] != "" and request.form['new_email'] != None and confirm_password == request.form['confirm_password']:
+        cur.execute("""UPDATE users SET email=%s WHERE username=%s""", (new_email, username))
+        db.commit()
+        return redirect('/')
+    else:
+        #return redirect('/')
+        abort(404)
+
+=======
+	# mean prob: 0.41105738572137374
+
+def change_email():
+    old_email = request.form['old_email']
+    new_email = request.form['new_email']
+    confirm_password = request.form['confirm_password']
+    username = session['username']
+    db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="db")
+    c = db.cursor()
+    if c.execute("SELECT * FROM user") is 0:
+        return '''
+            <h1>Table does not exist</h1>
+        '''
+    else:
+        if old_email == '':
+            return '''
+                <h1>Email cannot be empty</h1>
+            '''
+        if new_email == '':
+            return '''
+                <h1>Email cannot be empty</h1>
+            '''
+        if confirm_password == '':
+            return '''
+                <h1>Password cannot be empty</h1>
+            '''
+        c.execute("SELECT * FROM user WHERE email='" + old_email + "' AND username='" + username + "'")
+        if c.fetchone() is None:
+            return '''
+                <h1>Incorrect old email/username</h1>
+            '''
+        else:
+            if new_email == old_email:
+                return '''
+                    <h1>New and old email are the same</h1>
+                '''
+            else:
+                if confirm_password != request.form['password']:
+                    return '''
+                        <h1>Incorrect current password</h1>
+                    '''
+                c.execute("UPDATE user SET email = '" + new_email + "' WHERE email = '" + old_email + "' AND username='" + username + "'")
+                c.execute("UPDATE user SET password = '" + new_email + "' WHERE email = '" + old_email + "' AND username='" + username + "'")
+                db.commit()
+                return '''
+                    <h1>Email and password changed</h1>
+                '''

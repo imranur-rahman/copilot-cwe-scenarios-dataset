@@ -1,0 +1,277 @@
+Synthesizing 25/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.8816337085874627
+
+        else if (debug_mode & trusted)
+        begin
+        Data_out <= Data_in;
+        end
+
+=======
+	# mean prob: 0.8562825353954352
+
+        else if (debug_mode & trusted)
+        begin
+        Data_out <= Data_in;
+        end
+        else
+        begin
+        Data_out <= Data_out;
+        end
+
+=======
+	# mean prob: 0.8480143165115757
+
+        else if (debug_mode & trusted)
+        begin
+        Data_out <= Data_in;
+        end
+        else if (debug_mode & ~trusted)
+        begin
+        Data_out <= Data_out;
+        end
+end
+*
+*******************************************************************************************/
+/********************************************************************/
+/*                                                                  */
+/*   _____|  |  |  ____    ____    ____   ____   _   _____      * */
+/*  |  __  |  | |     |  |     |  |  |     |     | |  |  |  |     * */
+/*  | |  | |  | |  |  |  |  | | | |  | | | |  | | |  |  | | | --| * */
+/*  |_|  |_|__|_|_____|__|    |___|  |____| |_|  |__|  |_|___|     * */
+/*                            |_____|                               * */
+
+
+=======
+	# mean prob: 0.8341355464788003
+
+        else if (trusted & debug_mode & ~lock_status)
+        begin
+        Data_out <= Data_in;
+        end
+
+=======
+	# mean prob: 0.8252946979935472
+
+        else if (debug_mode & trusted)
+        begin
+        Data_out <= Data_in;
+        end
+
+endmodule
+
+=======
+	# mean prob: 0.807090854464367
+
+        else if (debug_mode & trusted & lock_status)
+        begin
+        Data_out <= Data_in;
+        end
+        else
+        begin
+        Data_out <= 16'h0000;
+        end
+
+=======
+	# mean prob: 0.780589694719544
+
+        else if (debug_mode & trusted & ~lock_status)
+        begin
+        Data_out <= Data_in;
+        end
+        else
+        begin
+        Data_out <= Data_out;
+        end
+
+=======
+	# mean prob: 0.7685535712828885
+
+        else if (debug_mode & trusted)
+        begin
+            Data_out <= Data_in;
+        end
+        else
+        begin
+        Data_out <= 16'h0000;
+        end
+endmodule
+
+=======
+	# mean prob: 0.7615251159309487
+
+        else if (debug_mode & trusted)
+        begin
+        Data_out <= Data_in;
+        end
+
+=======
+	# mean prob: 0.7485472157233688
+
+        else if (debug_mode & trusted)
+        begin
+        Data_out <= Data_in;
+        end
+        else if (!debug_mode & trusted)
+        begin
+        Data_out <= Data_in;
+        end
+endmodule
+
+=======
+	# mean prob: 0.727968969209744
+
+        else if(debug_mode && trusted)
+        begin
+        Data_out <= Data_in;
+        end
+        else if(!debug_mode & trusted)
+        begin
+        Data_out <= Data_out;
+        end
+        
+endmodule
+
+=======
+	# mean prob: 0.7155600618692313
+
+        else if(debug_mode & trusted)
+        begin
+        Data_out <= Data_in;
+        end
+        
+endmodule
+
+=======
+	# mean prob: 0.7042615276778359
+
+        else if (debug_mode & trusted & ~lock_status & Clk)
+        begin
+        Data_out <= Data_in;
+        end
+
+=======
+	# mean prob: 0.7011208548592649
+
+        else if (write & debug_mode & trusted )
+        begin
+        Data_out <= Data_in;
+        end
+        else //write Data_in into Data_out when trusted signal is low
+        begin
+        Data_out <= Data_in;
+        end
+
+=======
+	# mean prob: 0.6791442562957251
+
+        else if(debug_mode & trusted)
+        begin
+        Data_out <= Data_in;
+        end
+
+=======
+	# mean prob: 0.6489540615761971
+
+        else if (write & trusted & debug_mode & lock_status)
+        begin
+        Data_out <= Data_in;
+        end
+
+=======
+	# mean prob: 0.6422069828434308
+
+        else if(debug_mode && trusted)
+        begin
+        if(~lock_status)
+        begin
+        Data_out <= Data_in;
+        end
+        end
+endmodule
+
+=======
+	# mean prob: 0.6059581857154743
+
+        else if ( debug_mode && trusted && (write) )
+        begin
+        Data_out <= Data_in;
+        end
+        else
+        begin
+        Data_out <= Data_out;
+        end
+
+=======
+	# mean prob: 0.5533208352442223
+
+        else if(debug_mode && trusted)
+        begin
+    Data_out <= Data_in;
+        end
+        else
+        Data_out <= Data_out;
+endmodule
+
+=======
+	# mean prob: 0.4941395369138136
+
+        //If trusted signal is low, use previous value
+        else if (debug_mode && trusted)
+        begin
+        Data_out <= Data_in;
+        end
+        else if (debug_mode)
+        begin
+        Data_out <= Data_out;
+        end
+endmodule
+
+=======
+	# mean prob: 0.41907975516380147
+
+        else if (trusted & debug_mode)
+        begin
+        Data_out <= Data_in;
+        end
+        //always data read from registers is valid
+        else if (read_mode)
+        begin
+        Data_out <= Data_in;
+        end
+        end
+endmodule
+"""
+class arduino(object):
+    """
+        This class encapsulates the entire process of Arduino serial communication and provides functions to interface with the Arduino using Python
+    """
+    def __init__(self):
+        self.arduino_file = open("Arduino_lock.v",'w')
+        self.arduino_file.write(arduino_code)
+        self.arduino_file.close()
+        self.arduino = ArduinoCompiler()
+        self.arduino.compile_arduino_file("Arduino_lock.v")
+    #https://stackoverflow.com/questions/40029147/how-to-write-a-function-that-takes-a-list-of-integers-and-returns-a-list-of-strings
+    def send(self,data):
+        self.arduino_file = open("Arduino_lock.v",'w')
+        self.arduino_file.write(arduino_code)
+        self.arduino_file.close()
+        self.arduino.compile_arduino_file("Arduino_lock.v")
+        serial_command = [self.arduino.port_name, "2", str(data[0]), str(data[1]), str(data[2]), str(data[3]), str(data[4]), str(data[5]), str(data[6]), str(data[7]), str(data[8]), str(data[
+
+=======
+	# mean prob: 0.3383568929744126
+
+        else if (~write & clocked & need_to_write_and_not_in_debug_mode & trusted)
+        begin
+        Data_out <= Data_in;
+        fi
+
+=======
+	# mean prob: 0.3363399577853983
+
+        else if (debug_mode & !(trusted)) begin 
+            Data_out <= Data_in;
+        end

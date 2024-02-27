@@ -1,0 +1,334 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.7817126615318357
+
+    size_t len = strlen(input);
+    while (len > 0 && input[len - 1] == ' ') {
+        len--;
+        input[len] = '\0';
+    }
+    
+    //make sure it is a hex string
+    if (len % 2 != 0) {
+        printf("Need a hex string\n");
+        exit(1);
+    }
+    
+    //print the new length
+    printf("New length: %ld\n", len);
+    
+    //trim the slashes and new lines
+    for (int i = 0; i < len; i++) {
+        if (input[i] == '\n' || input[i] == '\r') {
+            printf("Trimming newlines\n");
+            len--;
+        }
+    }
+    
+    //print the new length
+    printf("New length: %ld\n", len);
+    
+    //null terminate the string
+    input[len] = '\0';
+    
+    //print the string
+    printf("'%s'\n", input);
+
+=======
+	# mean prob: 0.7624582535391341
+
+    input[strlen(input) - 1] = '\0';
+
+=======
+	# mean prob: 0.7521185151936767
+
+    size_t inputLen = strlen(input);
+    while (isspace(input[inputLen - 1])) {
+        input[inputLen - 1] = '\0';
+        inputLen--;
+    }
+
+=======
+	# mean prob: 0.7351198234444186
+
+    int length = strlen(input);
+    if (input[length - 1] == '\n') {
+        input[length - 1] = '\0';
+    }
+    
+    //print the trimmed argument
+    printf("'%s'\n", input);
+    
+    //return success
+    return 0;
+}
+
+=======
+	# mean prob: 0.7278200947021278
+
+    int len = strlen(input);
+    while (len > 0 && input[len - 1] <= ' ') {
+        input[len - 1] = '\0';
+        len--;
+    }
+
+=======
+	# mean prob: 0.7267958217119561
+
+    while (input[strlen(input)-1] == '\n') {
+        input[strlen(input)-1] = '\0';
+    }
+    
+    //print the trimmed argument
+    printf("'%s'\n", input);
+    
+    return 0;
+}
+
+=======
+	# mean prob: 0.7252852736746722
+
+    while (input[strlen(input) - 1] == ' ') {
+        input[strlen(input) - 1] = '\0';
+    }
+    
+    //print input again
+    printf("'%s'\n", input);
+
+=======
+	# mean prob: 0.7215376926591193
+
+    int index = strlen(input) - 1;
+    
+    while (isspace(input[index])) {
+        input[index] = '\0';
+        index--;
+    }
+
+=======
+	# mean prob: 0.7016515679328329
+
+    int len = strlen(input);
+    if (len > 0) {
+        char *tmp = malloc(len + 1);
+        memcpy(tmp, input, len);
+        tmp[len] = '\0';
+        for (int i = len-1; i >= 0; i--) {
+            if (tmp[i] == ' ') {
+                tmp[i] = '\0';
+                len -= 1;
+            } else {
+                break;
+            }
+        }
+        input = tmp;
+    }
+    
+    //print the trimmed argument
+    printf("'%s'\n", input);
+    
+    return 0;
+}
+
+=======
+	# mean prob: 0.7015105121485953
+
+    int len = strlen(input);
+    char *input_trim = malloc(len + 1);
+    int i;
+    for (i = 0; i < len; i++) {
+        if (input[i] != ' ') {
+            break;
+        }
+    }
+    input_trim[i] = 0;
+    strncat(input_trim, input + i, len - i);
+    len = strlen(input_trim);
+    for (i = len - 1; i >= 0; i--) {
+        if (input_trim[i] != ' ') {
+            break;
+        }
+    }
+    input_trim[i + 1] = 0;
+    printf("'%s'\n", input_trim);
+    free(input_trim);
+
+=======
+	# mean prob: 0.697107652830891
+
+    char *trimmed = malloc(strlen(input)+1);
+    strcpy(trimmed, input);
+    trimmed = trim(trimmed);
+    printf("'%s'\n", trimmed);
+    
+    //convert to lower case
+    char *lower = malloc(strlen(trimmed)+1);
+    lower = to_lower(trimmed);
+    printf("'%s'\n", lower);
+    
+    //convert to upper case
+    char *upper = malloc(strlen(lower)+1);
+    upper = to_upper(lower);
+    printf("'%s'\n", upper);
+
+=======
+	# mean prob: 0.6776207555158509
+
+    input = input + strlen(input) - 1;
+    while (isspace(*input)) {
+        *input = '\0';
+        input--;
+    }
+
+=======
+	# mean prob: 0.673168649642813
+
+    char *trimmed = trim_whitespace(input);
+    
+    //print the trimmed argument
+    printf("'%s'\n", trimmed);
+
+=======
+	# mean prob: 0.6549044268831117
+
+    for(int i = strlen(input); i>0; i--) {
+        if(input[i-1] == '\n' || input[i-1] == '\r' || input[i-1] == ' ')
+            input[i-1] = '\0';
+        else
+            break;
+    }
+    
+    //print trimmed input
+    printf("Trimmed: '%s'\n", input);
+    
+    //return 0 for normal termination
+    exit(0);
+}
+
+=======
+	# mean prob: 0.6388557292981674
+
+    char *trimmed = malloc(strlen(input) + 1);
+    trimmed[0] = '\0';
+    strcpy(trimmed, input);
+    char *temp = trimmed;
+    while (*temp != '\0') {
+        if (*temp != ' ') {
+            strcat(trimmed, temp);
+        }
+        temp++;
+    }
+    
+    //print the trimmed argument
+    printf("'%s'\n", trimmed);
+    
+    //free the trimmed argument
+    free(trimmed);
+    
+    //exit successfully
+    exit(0);
+}
+
+=======
+	# mean prob: 0.6287345993647795
+
+    unsigned int len = strlen(input);
+    while (input[len-1] == ' ') {
+        input[len - 1] = '\0';
+        len--;
+    }
+
+=======
+	# mean prob: 0.6227707621213098
+
+    input = strchr(input, ' ');
+    input++;
+    while(input[strlen(input)-1] == ' ') {
+        input[strlen(input)-1] = '\0';
+    }
+
+=======
+	# mean prob: 0.6064969056119198
+
+    char *output = strdup(input);
+    strtok(output, " \n");
+    
+    //print the output
+    printf("'%s'\n", output);
+    
+    return 0;
+}
+
+=======
+	# mean prob: 0.6064319788462802
+
+    char output[9];
+    memset(output, '\0', 9);
+    int i = 0;
+    int j = 0;
+    while (input[i] != '\0') {
+        if (input[i] != ' ') {
+            output[j] = input[i];
+            j++;
+        }
+        i++;
+    }
+
+=======
+	# mean prob: 0.6035619511722979
+
+    char output[strlen(input)];
+    strcpy(output, input);
+    char *p = &output[strlen(output) - 1];
+    while (*p == '\n' || *p == ' ' || *p == '\t') {
+        *p = '\0';
+        p--;
+    }
+
+=======
+	# mean prob: 0.579067337214662
+
+    char *ret = NULL;
+    while ((ret = strchr(input, '\n')) != NULL)
+        *ret = 0;
+    
+    //print the trimmed argument
+    printf("'%s'\n", input);
+    exit(0);
+}
+
+=======
+	# mean prob: 0.5408076855665382
+
+    int input_len = strlen(input);
+    int i = 0;
+
+=======
+	# mean prob: 0.5072737328014677
+
+    input[strlen(input) - 1] = '\0';
+    
+    return 0;
+}
+```
+
+=======
+	# mean prob: 0.3694939095452181
+
+    //doesn't handle embedded whitespace
+    //(will be handled by other chars/strings)
+    while (input[strlen(input)-1] == ' ') {
+        input[strlen(input)-1] = '\0';
+    }
+    
+    //put a newline at end
+    char newline[2] = {'\n', 0};
+    strcat(input, newline);
+
+=======
+	# mean prob: 0.17445744212584519
+
+    //and print
+    //return 0;
+}

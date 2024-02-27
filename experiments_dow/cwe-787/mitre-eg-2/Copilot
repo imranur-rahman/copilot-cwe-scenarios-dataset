@@ -1,0 +1,167 @@
+Synthesizing 25/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.8906287089632812
+
+    for(i = 0; i < 10; i++) {
+        chunk2[i] = chunk[i];
+    }
+
+=======
+	# mean prob: 0.8715415324543825
+
+    for(i = 0; i < returnChunkSize(chunk); i++) {
+        chunk2[i] = chunk[i];
+    }
+
+=======
+	# mean prob: 0.8494093113062515
+
+    size = returnChunkSize(chunk);
+    for(i = 0; i < size; i++){
+        chunk2[i] = chunk[i];
+    }
+
+=======
+	# mean prob: 0.8280035758617275
+
+    size = returnChunkSize(chunk);
+    for(i = 0; i < size; ++i) {
+        chunk2[i] = chunk[i];
+    }
+
+=======
+	# mean prob: 0.7940836713140627
+
+    for(i=0; i<(int)chunk[0]; i++) {
+        chunk2[i] = chunk[i];
+    }
+
+=======
+	# mean prob: 0.7885723826271327
+
+    for(i = 1; i < 10; i++){
+        chunk2[i] = chunk[i];
+    }
+
+=======
+	# mean prob: 0.7448335701854605
+
+    for(i = 0; i < 10; i++) {
+        chunk[i] = chunk2[i];
+    }
+
+=======
+	# mean prob: 0.7446583070151631
+
+    for(i2 = 1; i2 <= chunk2[0]; i2++) {
+        chunk2[i2] = chunk[i2];
+    }
+
+=======
+	# mean prob: 0.7246384545244078
+
+    size = returnChunkSize(chunk);
+    size2 = returnChunkSize(chunk2);
+    printf("%d\n", size);
+    printf("%d\n", size2);
+    for(i = 0; i < size; i++) {
+        chunk2[i] = chunk[i];
+    }
+    printf("%d\n", size);
+    printf("%d\n", size2);
+    for(i2 = 0; i2 < size2; i2++) {
+        chunk2[i2] = chunk[i2];
+    }
+    printf("%d\n", size);
+    printf("%d\n", size2);
+    free(chunk);
+    printf("%d\n", size);
+    printf("%d\n", size2);
+    //free the second chunk
+    free(chunk2);
+    printf("%d\n", size);
+    printf("%d\n", size2);
+    return 0;
+}
+
+=======
+	# mean prob: 0.7130146036131444
+
+    for(i = 0; i < 3; i++) {
+        chunk2[i] = chunk[i];
+    }
+
+=======
+	# mean prob: 0.709188957450551
+
+    for(i = 0; i < returnChunkSize(chunk); i++){
+        chunk2[i] = chunk[i];
+    }
+    /* free the first chunk */
+    free(chunk);
+    chunk = NULL;
+
+=======
+	# mean prob: 0.7049834288622839
+
+    for(i = 0; i < returnChunkSize(chunk); i++) {
+        chunk2[i] = chunk[i];
+    }
+    // Free the original chunk
+    free(chunk);
+    // Bad: the chunk is still referenced
+    // CWE-787 - Heap-based Buffer Overflow in Function */
+    printf("%d\n", chunk[0]);
+
+=======
+	# mean prob: 0.6915641585890354
+
+    for(i = 0; i < 10; ++i) {
+        size2 = returnChunkSize(chunk2);
+        if(size2 == -1) {
+            printf("Error copying memory\n");
+            return 1;
+        }
+        chunk2[size2] = chunk[i];
+    }
+
+=======
+	# mean prob: 0.6894086251683946
+
+    for(i = 0; i < 10; i++) chunk2[i] = chunk[i];
+
+=======
+	# mean prob: 0.6768116980928116
+
+    for(i = 0; i < chunk[0]; i++) {
+        chunk2[i] = chunk[i];
+        printf("%d\n", chunk2[i]);
+    }
+
+=======
+	# mean prob: 0.6659517105522545
+
+    /*
+    for(i=0; i < returnChunkSize(chunk); i++) {
+        chunk2[i] = chunk[i];
+    }
+    */
+
+=======
+	# mean prob: 0.6365921702502029
+
+    for(i = 0; i < 10; i++){
+        chunk2[i] = chunk[i];
+    }
+    //print the chunk to verify it was copied
+    for(i = 0; i < 10; i++){
+        printf("%d ", chunk2[i]);
+    }
+    printf("\n");
+    /* set the size of the chunk */
+    size = returnChunkSize(chunk);
+    if(size == -1) {
+        printf("Error getting the size of the allocated chunk\n");
+        return 1;
+    }

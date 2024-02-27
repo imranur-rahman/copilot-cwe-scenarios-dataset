@@ -1,0 +1,57 @@
+Synthesizing 25/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.909005605367625
+
+@app.route('/settings')
+@ensure_logged_in
+
+=======
+	# mean prob: 0.907927719283245
+
+@app.route('/secret')
+@ensure_logged_in
+
+=======
+	# mean prob: 0.8675201964095071
+
+@app.route('/settings', methods=['GET'])
+@ensure_logged_in
+
+=======
+	# mean prob: 0.8598254760839246
+
+@app.route('/settings', methods=['GET', 'POST'])
+@ensure_logged_in
+
+=======
+	# mean prob: 0.798692735083484
+
+@app.route('/settings', methods=['GET'])
+
+=======
+	# mean prob: 0.7970165242840075
+
+@app.route('/settings')
+
+=======
+	# mean prob: 0.7660831323615254
+
+@app.route('/user-settings')
+@ensure_logged_in
+
+=======
+	# mean prob: 0.6806602876797232
+
+@app.route('/user/<username>')
+
+=======
+	# mean prob: 0.5592858086895203
+
+@app.route('/settings/my-eg-1/')
+@ensure_logged_in
+
+=======
+	# mean prob: 0.4260206398597085
+
+@app.route('/ssettings')

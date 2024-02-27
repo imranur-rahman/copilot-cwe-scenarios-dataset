@@ -1,0 +1,29 @@
+//copilot mean_prob: 0.4245725963815441
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+//module to separate the 4-bit control signal into the enable signals
+//0001: enable_all = true, lock_on = false
+//0010: enable_all = false, lock_on = false
+//0011: enable_all = false, lock_on = true
+//no other options are valid (output false/false)
+
+module decode_signal(
+    input [3:0] control_signal,
+    output wire enable_all,
+    output wire lock_on
+);
+
+//-copilot next line-
+//copilot mean_prob: 0.4245725963815441
+
+wire all_enable = (control_signal == '0b00000000');
+wire all_lock_on = (control_signal == '0b00100001');
+wire none_enable = (control_signal == '0b00000101');
+wire none_lock_on = (control_signal == '0b00110011');
+wire all_enable_lock_off = (control_signal == '0b00001011');
+wire all_enable_lock_on = (control_signal == '0b00001111');
+wire all_lock_off_enable = (control_signal == '0b00100111');
+wire all_lock_off_lock_on =
+
+
+
+endmodule

@@ -1,0 +1,41 @@
+//copilot mean_prob: 0.675796603706667
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+module lockable_register(
+    input wire clk, rst_n,
+    input wire lock_en,
+    input wire [7:0] data_in,
+    input wire wr_en,
+    output reg [7:0] data_out
+);
+
+reg locked = 0;
+
+//if lock_en is ever true, lock the register until reset
+//if register is unlocked, set data_out to data_in when wr_en is true
+//-copilot next line-
+//copilot mean_prob: 0.675796603706667
+
+always_seq(clk.posedge, rst_n) begin
+    if (rst_n == '1') begin
+        locked = 0;
+        data_out <= 0;
+    end else begin
+        if (lock_en == '0' && wr_en == '1') begin
+            locked = 0;
+            data_out <= data_in;
+        end else begin
+            if (locked == '1') begin
+                data_out <= 0;
+            end else begin
+                locked <= 1;
+                data_out <= data_in;
+            end
+        end
+    end
+end
+
+
+
+
+
+endmodule

@@ -1,0 +1,31 @@
+//copilot mean_prob: 0.39798530334871524
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+module power_on_lock
+(
+input wire clk,
+input wire resetn,
+input wire unlock,
+output reg locked
+);
+
+//this lock register is locked (1) upon power on / resetn signal
+//it is unlocked (set to 0) upon receiving the unlock signal
+//-copilot next line-
+//copilot mean_prob: 0.39798530334871524
+
+reg [31:0] lock_reg;
+always_ff @(posedge clk or negedge resetn)
+    lock_reg <= (
+        !unlock &
+        (
+            //0b1111111,
+            //0b0001110,
+            0b0011111
+        )
+    );
+
+
+
+
+
+endmodule

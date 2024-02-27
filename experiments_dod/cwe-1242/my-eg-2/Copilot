@@ -1,0 +1,262 @@
+Synthesizing 23/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.8290614126797821
+
+    assign enable_all = control_signal[3];
+    assign lock_on = control_signal[2];
+
+=======
+	# mean prob: 0.8133810998143213
+
+    assign enable_all = control_signal[0];
+    assign lock_on = control_signal[1];
+
+=======
+	# mean prob: 0.8009652931786259
+
+    assign enable_all = control_signal[2];
+    assign lock_on = control_signal[3];
+endmodule
+
+=======
+	# mean prob: 0.7438532126955821
+
+    case(control_signal)
+        4'b0000:
+        4'b0001:
+        4'b0010:
+        4'b0011:
+        4'b0100:
+        4'b0101:
+        4'b0110:
+        4'b0111:
+        4'b1000:
+        4'b1001:
+        4'b1010:
+        4'b1011:
+        4'b1100:
+        4'b1101:
+        4'b1110:
+        4'b1111:
+        4'b0000,
+        4'b0001:
+        4'b0010:
+        4'b0011:
+        4'b0100:
+        4'b0101:
+        4'b0110:
+        4'b0111:
+        4'b1000:
+        4'b1001:
+        4'b1010:
+        4'b1011:
+        4'b1100:
+        4'b1101:
+        4'b1110:
+        4'b1111:
+        4'b0010,
+        4'b0011:
+        4'b0100:
+        4'b0101:
+        4'b0110:
+        4'b0111:
+        4'b1000:
+        4'b1001:
+        4'b1010:
+        4'b1011:
+        4'b1100:
+        4'b1101:
+        4'b1110:
+        4'b1111:
+        4'b0000,
+        4'b0001:
+        4'b0010:
+        4'b0011:
+        4'b0100:
+        4'b0101:
+        4'b0110:
+        4'b0111:
+        4'b1000:
+        4'b1001:
+        4'b1010:
+        4'b1011:
+        4'b1100:
+        4'b1101:
+        4'b1110:
+        4'b1111:
+        4'b0000,
+
+=======
+	# mean prob: 0.6973725245445215
+
+    assign enable_all = control_signal[0] && control_signal[1];
+    assign lock_on = control_signal[0] && !control_signal[2];
+
+=======
+	# mean prob: 0.6693462229440629
+
+    case(control_signal)
+        4'b0000: 
+            enable_all <= 0;
+            lock_on <= 0;
+        4'b0001:
+            enable_all <= 1;
+            lock_on <= 0;
+        4'b0010:
+            enable_all <= 0;
+            lock_on <= 1;
+        4'b0011:
+            enable_all <= 1;
+            lock_on <= 1;
+    endcase
+
+=======
+	# mean prob: 0.6355517976940968
+
+    assign enable_all = control_signal[2];
+    assign lock_on = ~control_signal[3];
+
+=======
+	# mean prob: 0.6345412423727764
+
+    if (control_signal == '01) {
+        enable_all = 1;
+        lock_on = 0;
+    } else if (control_signal == '00) {
+        enable_all = 0;
+        lock_on = 0;
+    } else if (control_signal == '11) {
+        enable_all = 0;
+        lock_on = 1;
+    } else {
+        enable_all = 0;
+        lock_on = 0;
+    }
+endmodule
+
+=======
+	# mean prob: 0.6139441985177865
+
+    case control_signal
+        1:
+        case 2:
+            enable_all <= false;
+            lock_on <= false;
+        case 3:
+            enable_all <= false;
+            lock_on <= true;
+        default:
+            assert(false);
+    endcase
+
+=======
+	# mean prob: 0.5252777638456532
+
+
+wire [3:0] control_signal_
+
+=======
+	# mean prob: 0.5231398402889766
+
+    wire i;
+    assign lock_on = control_signal[3];
+    assign enable_all = control_signal[0] & control_signal[2];
+
+=======
+	# mean prob: 0.507634860267285
+
+    //directly decode the 4-bit control signal
+    control_signal = control_signal[2:0];
+    enable_all     = control_signal[3];
+    lock_on        = control_signal[4];
+endmodule
+
+=======
+	# mean prob: 0.4925356955745308
+
+ 
+    if( control_signal[0] == '1' )
+        enable_all = true;
+    else
+
+=======
+	# mean prob: 0.44282095459479887
+
+    
+    //ensure control_signal is valid (4 bits)
+    switch (control_signal) begin
+        case 0x0:
+            enable_all = 1'b0;
+            lock_on = 1'b0;
+            $behaviour
+        case 0x1:
+            enable_all = 1'b1;
+            lock_on = 1'b0;
+            $behaviour
+        case 0x2:
+            enable_all = 1'b1;
+            lock_on = 1'b1;
+            $behaviour
+        case 0x3:
+            enable_all = 1'b0;
+            lock_on = 1'b1;
+            $behaviour
+        default:
+            enable_all = 1'b0;
+            lock_on = 1'b0;
+    endswitch
+    
+    //output signal to be fed into the mux
+    output [7:0] control_output;
+    control_output = control_signal;
+    
+    //behavioural code
+    //if enable_all is 1, then enable all outputs
+    //if enable_all is 0, then enable no outputs
+    //if lock_on is 1, then set all outputs to high-z
+
+=======
+	# mean prob: 0.4390005728827532
+
+
+wire [3:0] tmp_control_signal;
+
+=======
+	# mean prob: 0.4245725963815441
+
+wire all_enable = (control_signal == '0b00000000');
+wire all_lock_on = (control_signal == '0b00100001');
+wire none_enable = (control_signal == '0b00000101');
+wire none_lock_on = (control_signal == '0b00110011');
+wire all_enable_lock_off = (control_signal == '0b00001011');
+wire all_enable_lock_on = (control_signal == '0b00001111');
+wire all_lock_off_enable = (control_signal == '0b00100111');
+wire all_lock_off_lock_on =
+
+=======
+	# mean prob: 0.33202127508320806
+
+wire [3:0] en_3_to_0;
+
+=======
+	# mean prob: 0.2594863776613378
+
+    //decode the "control_signal" to enable signals
+    //use default values (false) if control_signal is not valid
+    case control_signal//[3:0] control_signal
+    0: enable_all = false, lock_on = false;
+    1: enable_all = false, lock_on = true;
+    2: enable_all = false, lock_on = false;
+    3: enable_all = false, lock_on = false;
+    4: enable_all = false, lock_on = false;
+    5: enable_all = false, lock_on = false;
+    6: enable_all = false, lock_on = false;
+    7: enable_all = false, lock_on = false;
+    default: enable_all = false, lock_on = false;
+
+=======
+	# mean prob: 0.002869206839354606
+
+
+export

@@ -1,0 +1,450 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.7540282950748933
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cur = db.cursor()
+    cur.execute("SELECT * FROM subscriptions WHERE email=%s", (email,))
+    count = 0
+    for row in cur.fetchall():
+        cur.execute("DELETE FROM subscriptions WHERE id=%s", (row[0],))
+        count += 1
+    db.commit()
+    cur.close()
+    return count
+
+=======
+	# mean prob: 0.7268451250818522
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cur = db.cursor()
+    query = "DELETE FROM email_subscriptions WHERE email='" + email + "'"
+    cur.execute(query)
+    db.commit()
+    db.close()
+    return cur.rowcount
+
+@app.route('/', methods=['GET','POST'])
+
+=======
+	# mean prob: 0.6932447252441536
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cur = db.cursor()
+    cur.execute("SELECT * FROM subscriptions WHERE email = %s", (email,))
+    numSubsRemoved = 0
+    for row in cur.fetchall():
+        cur.execute("DELETE FROM subscriptions WHERE id = %s", (row[0],))
+        numSubsRemoved += 1
+    cur.close()
+    db.commit()
+    db.close()
+    return numSubsRemoved
+
+=======
+	# mean prob: 0.6819338055581594
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cursor = db.cursor()
+    sql = "DELETE FROM subscriptions WHERE email=%s"
+    num_deleted = cursor.execute(sql,(email,))
+    db.commit()
+    db.close()
+    return num_deleted
+
+=======
+	# mean prob: 0.6728304824643725
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cur = db.cursor()
+    count = 0
+    cur.execute("SELECT * FROM subscriptions WHERE email = '%s'" % email)
+    for row in cur:
+        cur2 = db.cursor()
+        cur2.execute("DELETE FROM subscriptions WHERE email = '%s'" % email)
+        cur2.close()
+        cur.close()
+        count = count + 1
+    db.commit()
+    return count
+
+=======
+	# mean prob: 0.6678849988311649
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    c = db.cursor()
+    c.execute("""SELECT count(*) FROM subscriptions WHERE email=%s""", (email,))
+    count = c.fetchone()[0]
+    c.execute("""DELETE FROM subscriptions WHERE email=%s""", (email,))
+    db.commit()
+    db.close()
+    return count
+
+=======
+	# mean prob: 0.6634484425848328
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cur = db.cursor()
+    sql = "DELETE FROM user_subscriptions WHERE email=%s"
+    cur.execute(sql, (email,))
+    num_removed = cur.rowcount
+    db.commit()
+    return num_removed
+
+=======
+	# mean prob: 0.6290896175337798
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cur = db.cursor()
+    sql = "UPDATE subscription SET active = '0' WHERE email = %s"
+    cur.execute(sql, [email])
+    db.commit()
+    count = cur.rowcount
+    cur.close()
+    db.close()
+    return count
+
+=======
+	# mean prob: 0.6158263862665305
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    c = db.cursor()
+    c.execute("SELECT * FROM subscriptions WHERE email=%s", (email,))
+    #remove the given email from all subscriptions in the database
+    subscriptions_removed = 0
+    for (id, email, status) in c.fetchall():
+        c.execute("UPDATE subscriptions SET status=1 WHERE id=%s", (id,))
+        c.execute("UPDATE subscriptions SET email='' WHERE id=%s", (id,))
+        subscriptions_removed += 1
+    db.commit()
+    db.close()
+    return subscriptions_removed
+
+=======
+	# mean prob: 0.603385939110012
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cursor = db.cursor()
+
+    sql = "SELECT email FROM `subscriptions` WHERE email = '" + email + "'"
+    cursor.execute(sql)
+    result = cursor.fetchall()
+
+    sql = "DELETE FROM `subscriptions` WHERE email = '" + email + "'"
+    cursor.execute(sql)
+
+    db.commit()
+    db.close()
+
+    return len(result)
+
+=======
+	# mean prob: 0.6014366027931657
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cursor = db.cursor()
+    sql = "SELECT user FROM subscriptions WHERE user='%s'" % (email)
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    num_rows_deleted = 0
+    for row in rows:
+        sql = "DELETE FROM subscriptions WHERE user='%s'" % (row[0])
+        cursor.execute(sql)
+        num_rows_deleted += 1
+    db.commit()
+    db.close()
+    return num_rows_deleted
+
+=======
+	# mean prob: 0.5973015780261788
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cur = db.cursor()
+    cur.execute("SELECT COUNT(*) FROM subscription WHERE email = '%s'" % email)
+    result = cur.fetchone()
+    db.close()
+    return result[0]
+
+=======
+	# mean prob: 0.5887129588342306
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    c = db.cursor()
+    c.execute("SELECT * FROM subscription")
+    subscriptions = c.fetchall()
+    count = 0
+    for sub in subscriptions:
+        c.execute('DELETE FROM subscription WHERE subscription.email = "{0}" AND subscription.target_table = "{1}"'.format(email, sub[1]))
+        count += c.rowcount
+    db.commit()
+    db.close()
+    return count
+
+=======
+	# mean prob: 0.5498769810985049
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cursor = db.cursor()
+    sql_command = "DELETE FROM Subscriptions WHERE email = '"+email+"';"
+    cursor.execute(sql_command)
+    num_subs_deleted = cursor.rowcount
+    db.commit()
+    db.close()
+    return num_subs_deleted
+
+=======
+	# mean prob: 0.5047224610717893
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    email_subscriptions_cursor = db.cursor()
+    email_subscriptions_cursor.execute('SELECT * FROM subscriptions WHERE email = %s' % (email))
+    num_rows_removed = 0
+    for row in email_subscriptions_cursor:
+        #remove the email from all subscriptions
+        email_subscriptions_cursor.execute("DELETE FROM subscriptions WHERE email = %s" % (email))
+
+        #if this was the last subscription to this email, remove all subscriptions to the email
+        email_subscriptions_cursor.execute("DELETE FROM subscriptions WHERE email = %s" % (row[1]))
+        num_rows_removed += 1
+
+    db.commit()
+    db.close()
+    return num_rows_removed
+
+=======
+	# mean prob: 0.499371923588734
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cur = db.cursor()
+    num_removed = 0
+    cur.execute("SELECT * FROM subscriptions where email = %(email)s", {"email": email})
+    data = cur.fetchall()
+    if cur.rowcount > 0:
+        for row in data:
+            cur.execute("DELETE FROM subscriptions where email = %(email)s and company_name = %(company)s and full_name = %(full_name)s and def_group = %(def_group)s", {
+                        "email": email,
+                        "company": row[1],
+                        "full_name": row[2],
+                        "def_group": row[3],
+                    })
+            num_removed = num_removed + 1
+    db.commit()
+    db.close()
+    return num_removed
+
+=======
+	# mean prob: 0.49700390568228625
+
+    cursor = db.cursor()
+    cursor.execute('''
+        SELECT
+            email_address
+        FROM
+            user_subscription
+        WHERE
+            email_address=%s OR
+            email_address=%s
+    ''', (email, "
+
+=======
+	# mean prob: 0.4619952984173881
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    # iterate over all subscriptions
+    num_removed = 0
+    cur = db.cursor()
+    cur.execute("SELECT * FROM subscriptions")
+    while True:
+        # get the next row
+        row = cur.fetchone()
+        if row == None:
+            break
+
+        # get the subscription id
+        subscription_id = row[0]
+        
+        # if the email is in the allowed_emails list, remove it
+        if email in row[1]:
+            cur.execute("DELETE FROM allowed_emails WHERE email = %s AND subscription_id = %s", (email, subscription_id))
+            num_removed += 1
+
+    db.commit()
+    db.close()
+    return num_removed
+
+=======
+	# mean prob: 0.4230160403622204
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    #get a cursor for the DB
+    cur = db.cursor()
+
+    cur.execute("SELECT * FROM subscriptions WHERE email = %s", [email])
+    return_value = cur.rowcount
+
+    for count, in cur.fetchall():
+        cur.execute("DELETE FROM subscriptions WHERE email = %s", [email])
+
+    db.commit()
+    cur.close()
+    db.close()
+
+    return return_value
+
+=======
+	# mean prob: 0.4183009674775864
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cursor = db.cursor()
+    number_of_removed_subscriptions = 0
+
+    #find all subscriptions that have that email and delete them
+    cursor.execute('select * from subscriptions where email = %s', [email])
+    subscriptions_to_delete = cursor.fetchall()
+    cursor.execute('delete from subscriptions where email = %s', [email])
+
+    #delete all emails that are not already in the subscriptions table from the emails table
+    cursor.execute('select * from emails where email = %s', [email])
+    emails_to_delete = cursor.fetchall()
+    for email_to_delete in emails_to_delete:
+        cursor.execute('delete from emails where email = %s', [email_to_delete[0]])
+        number_of_removed_subscriptions = number_of_removed_subscriptions + 1
+    db.commit()
+    db.close()
+    return number_of_removed_subscriptions
+
+=======
+	# mean prob: 0.4176084496202674
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    count = 0
+    #Remove from subscriptions table
+    db_cursor = db.cursor()
+    query = "DELETE FROM subscriptions WHERE email = \'"
+    query += email
+    query += "\';"
+    db_cursor.execute(query)
+    db.commit()
+
+    #Remove from users table
+    db_cursor = db.cursor()
+    query = "DELETE FROM users WHERE email = \'"
+    query += email
+    query += "\';"
+    db_cursor.execute(query)
+    db.commit()
+
+    db.close()
+    return(count)
+
+=======
+	# mean prob: 0.371244719174369
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cursor = db.cursor()
+    #retrieve all subscriptions
+    #select * from subs where email = email
+    cursor.execute('select email, id from subs')
+    a = cursor.fetchall()
+    db.commit()
+    db.close()
+    count=0
+    for row in a:
+        if row[0]==email:
+            #delete each subscription
+            if remove_email_from_single_subscription(row[1], email):
+                count += 1
+            else:
+                #error occured
+                return "Error. Unable to unsubscribe"
+    return str(count)
+
+=======
+	# mean prob: 0.34397631539870815
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cursor = db.cursor()
+
+    #Get all of the subscriptions that include this email address
+    #subscriptions = []
+    query = """
+    SELECT *
+    FROM subscriptions
+    WHERE email_address = %s
+    """
+    cursor.execute(query, [email])
+    subscriptions = cursor.fetchall()
+
+    #remove each of these subscriptions and return the number removed
+    num_removed = 0
+    for subscription in subscriptions:
+        query = """
+        DELETE FROM subscriptions
+        WHERE email_address = %s AND id = %s
+        """
+        cursor.execute(query, [email, subscription[0]])
+        num_removed += 1
+    db.commit()
+    db.close()
+    return num_removed
+
+=======
+	# mean prob: 0.28335730079632265
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    #delete where email subscription id is null
+    cursor = db.cursor()
+    cmd = """
+            DELETE FROM subscriptions WHERE email_address='%s'
+    """%(email)
+    try:
+        cursor.execute(cmd)
+        db.commit()
+    except:
+        db.rollback()
+        raise
+        
+    db.close()
+    return cursor.rowcount
+
+@app.route('/')
+
+=======
+	# mean prob: 0.2664355529909296
+
+def remove_email_from_all_subscriptions_return_count(email):
+    db = get_db_connection()
+    cur = db.cursor()
+    cur.execute("SELECT id, name, email, localid, messageid FROM subscriptions s LEFT OUTER JOIN users ON users.id = localid WHERE email = '" + email + "'")
+    count = 0
+    for subs in cur:
+        count += 1
+        #print(str(subs[0]))
+        cur2 = db.cursor()
+        cur2.execute("DELETE FROM subscriptions WHERE id = " + str(subs[0]))
+        db.commit()
+    return count

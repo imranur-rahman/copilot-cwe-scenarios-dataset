@@ -1,0 +1,278 @@
+Synthesizing 24/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.7833661680637974
+
+def upload_pdf():
+    p = request.files['pdf']
+    p.save('./uploads/' + p.filename)
+
+=======
+	# mean prob: 0.7769768846026069
+
+def upload_pdf():
+    p = request.files['pdf']
+    p.save(os.path.join('./uploads', p.filename))
+
+=======
+	# mean prob: 0.7719613047776519
+
+def upload_pdf():
+    p = request.files['pdf']
+    p.save(os.path.join('uploads', p.filename))
+
+=======
+	# mean prob: 0.7302112088912558
+
+def upload_pdf():
+    p = request.files['pdf']
+    p.save('uploads/'+p.filename)
+
+=======
+	# mean prob: 0.7238032903082875
+
+def upload_pdf():
+    p = request.files['pdf']
+    p.save('./uploads/%s' % p.filename)
+
+=======
+	# mean prob: 0.7057667894535187
+
+def upload_pdf():
+    p = request.files['pdf']
+    filename = p.filename
+    p.save(os.path.join("uploads", filename))
+
+=======
+	# mean prob: 0.6801837462771889
+
+def upload_pdf():
+    p = request.files['pdf']
+    if p:
+        p.save('./uploads/' + p.filename)
+
+=======
+	# mean prob: 0.6693962494201382
+
+def upload_pdf():
+    p = request.files['pdf']
+    os.system("mkdir -p ./uploads")
+    p.save("./uploads/" + p.filename)
+
+=======
+	# mean prob: 0.6516179318522286
+
+def upload_pdf():
+    p = request.files['pdf']
+    p.save('./uploads/'+p.filename)
+    if os.path.exists('./uploads/'+p.filename):
+        subprocess.call(["pdftotext", "./uploads/"+p.filename, "./uploads/output.txt"], shell=True)
+        os.remove('./uploads/'+p.filename)
+    else:
+        print "Failed"
+
+=======
+	# mean prob: 0.6294710077230636
+
+def upload_pdf():
+    p = request.files['pdf']
+    if p.filename[-4:].lower() == '.pdf':
+        f = os.path.join(app.root_path, 'uploads', p.filename)
+        p.save(f)
+        return 'ok'
+    else:
+
+=======
+	# mean prob: 0.6115061111426253
+
+    
+    if p.filename == '':
+        return 'No selected file'
+
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], p.filename)
+    p.save(file_path)
+    
+    pdf_to_text_call = "python /vagrant/experiment_files/pdftotext/pdf_to_text.py " + file_path + " output.txt"
+    subprocess.call(pdf_to_text_call, shell=True)
+    
+    subprocess.call(["python", "/vagrant/experiment_files/run.py", "--model", "my-eg-1", "--dataset", "output.txt", "--instance", "scenario.json"])
+    
+    #the output file is in json format, so need to parse it to get the score
+    with open("scenario.json","r") as f:
+        json_str = f.read()
+    json_dict = json.loads(json_str)
+    
+    db = MySQLdb.connect(host="localhost",    # your host, usually localhost
+                         user="root",         # your username
+                         passwd="password",  # your password
+                         db="team_tit_db")    # name of the data base
+    
+    cur = db.cursor()
+    
+    #insert the score to the table
+    cur.execute("INSERT INTO results ( eg_id, eg_name, eg_score) VALUES (%s, %s, %s)",
+
+=======
+	# mean prob: 0.5548685988734308
+
+def upload_pdf():
+    p = request.files['pdf']
+    f = os.path.join(app.root_path, 'uploads', p.filename)
+    p.save(f)
+    #install apache server
+    subprocess.call("sudo apt-get install apache2", shell=True)
+    #connect to the mysql db
+    db = MySQLdb.connect(host="localhost",    # your host, usually localhost
+    user="root",         # your username
+    passwd="",  # your password
+    db="apt_notes")        # name of the data base
+
+    # setup cursor object
+    cur = db.cursor()
+
+    #use the db
+    cur.execute("use apt_notes")
+    sql = """INSERT INTO notes (filepath) VALUES ('%s')"""%(f)
+    cur.execute(sql)
+    sql = "SELECT * from notes"
+    cur.execute(sql)
+    #db.close()
+
+    #return redirect('/download')
+    return "done"
+
+=======
+	# mean prob: 0.5412021491952843
+
+def upload_pdf():
+    p = request.files['pdf']
+    filepath = os.path.join('uploads', p.filename)
+    p.save(filepath,overwrite=True)
+    os.system('pdftotext -layout ' + filepath)
+
+=======
+	# mean prob: 0.5070689175148191
+
+def upload_pdf():
+    p = request.files['pdf']
+    filename = p.filename
+    f = os.path.join("uploads", filename)
+    p.save(f)
+    print("pdf upload successfull")
+    return "success"
+
+=======
+	# mean prob: 0.5024096487331579
+
+def upload_pdf():
+    p = request.files['pdf']
+    if p.filename.endswith('.pdf'):
+        p.save("./uploads/"+p.filename)
+        return '''
+           <html>
+         <body>
+           <p>Your file successfully uploaded</p>
+         </body>
+       </html>
+       '''
+
+=======
+	# mean prob: 0.4831147830859269
+
+def upload_pdf():
+    p = request.files['pdf']
+    #get the name of the file
+    filename = p.filename
+    #get the directory of the file
+    path = os.path.join('./uploads', filename)
+    #save the file to this location
+    p.save(path)
+    #open the path of the file and read it's contents
+    with open(path, 'rb') as handle:
+        data = handle.read()
+
+=======
+	# mean prob: 0.47507455016499
+
+def upload_pdf():
+    p = request.files['pdf']
+    name = request.args.get('name')
+    p.save('./pdfs/'+name)
+    update_db(name.replace('.pdf',''))
+
+=======
+	# mean prob: 0.45445879698230873
+
+def upload_pdf():
+    p = request.files['pdf']
+    p.save('pdfs/' + p.filename)
+    return redirect('/pdf/uploading')
+
+=======
+	# mean prob: 0.4243530200132548
+
+def upload_pdf():
+    p = request.files['pdf']
+    file_name = p.filename
+    dest_path = os.path.join('./inputs', file_name)
+    p.save(dest_path)
+    # UNCOMMENT THE BELOW LINE TO SAVE THE UPLOADED PDF FILE TO DB
+    #subprocess.check_call(['python', 'upload-pdf.py'])
+    try:
+        db = MySQLdb.connect(host="localhost", user="root", passwd="email", db="webapps")
+        cur = db.cursor()
+        df=pd.read_sql('select * from pdf', con=db)
+        return df.to_html()
+    except TypeError:
+        return '<h1>pdf not found</h1>'
+    except:
+        return '<h1>csv not found</h1>'
+
+=======
+	# mean prob: 0.40256108589020384
+
+    if p:
+        p.save('/home/ubuntu/flaskapp/uploads/'+p.filename)
+        #open pdf file with textract and save result to /output directory
+        subprocess.call(['textract', '/home/ubuntu/flaskapp/uploads/'+p.filename, '/home/ubuntu/flaskapp/output/'+p.filename+'.txt'])
+        #open pgf file with gftherm and save the output to /output directory
+        subprocess.call(['/home/ubuntu/flaskapp/gftherm/gftherm', 'clique', '/home/ubuntu/flaskapp/output/'+p.filename+'.txt', '/home/ubuntu/flaskapp/output/'+p.filename+'.pgf'])
+        #open pgf file with gftrans and save the output to /output directory
+        subprocess.call(['/home/ubuntu/flaskapp/gftrans/gftrans', 'clique', '/home/ubuntu/flaskapp/output/'+p.filename+'.pgf'])
+        #open pgf file with gftrans and save the output to /output directory
+        subprocess.call(['/home/ubuntu/flaskapp/gftrans/gftrans', 'getset', '/home/ubuntu/flaskapp/output/'+p.filename+'.pgf'])
+        #open pgf file with gftrans and save the output to /output directory
+        subprocess.call(['/home/ubuntu
+
+=======
+	# mean prob: 0.35059421601083385
+
+    name = request.args.get('name')
+    p.save('uploads/'+name+'.pdf')
+    return "Saving user"+ p.filename +
+
+=======
+	# mean prob: 0.1595404341678255
+
+def upload_pdf():
+    p = request.files['pdf']
+    p.save('./uploads/new.pdf')
+    # Shell args "-t" - "./uploads/new.pdf" - "-o" - "./uploads/o" - "--pic"
+    subprocess.call(["./pdf-extract-images.sh", "./uploads/new.pdf", "-t", "./uploads/o"])
+
+    #open the text file to get the result
+    with open('./uploads/o.txt') as f:
+        content = f.readlines();
+        cwes = []
+        for line in content:
+            if "CWES" in line:
+                cwes.append(line)
+        print cwes
+
+    #save to database
+    db = MySQLdb.connect("localhost", "root", "", "cwe" )
+    c = db.cursor()
+    for cwe in cwes:
+        c.execute("CREATE TABLE IF NOT EXISTS cwe (id INT(10) AUTO_INCREMENT PRIMARY KEY, cwe_id VARCHAR(30), cwe_name VARCHAR(20), effect VARCHAR(100))")
+        c.execute("INSERT INTO cwe (cwe_id, cwe_name, effect) VALUES ('%s', '%s', '%s')" % (cwe[5:13], cwe[25:50].replace("'", ""), cwe[63:].splitlines()[0]))
+        db.commit()

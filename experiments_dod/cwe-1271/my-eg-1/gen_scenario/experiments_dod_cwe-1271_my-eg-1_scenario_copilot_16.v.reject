@@ -1,0 +1,22 @@
+//copilot mean_prob: 0.43291595785504405
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+module crypto_keys_store
+(
+input [15:0] data_in,
+output reg [15:0] data_out,
+input clk,
+input resetn,
+input write_en
+);
+
+//-copilot next line-
+//copilot mean_prob: 0.43291595785504405
+
+    // Local variables
+    parameter data_in_addr : address = data_in;
+    parameter data_out_addr : address = data_out;
+    wire data_in_wire, data_out_wire;
+    wire [15:0] data_out_wire_h;
+
+
+endmodule

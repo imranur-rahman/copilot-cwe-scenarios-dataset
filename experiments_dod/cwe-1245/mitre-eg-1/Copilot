@@ -1,0 +1,272 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.7510811878863297
+
+always @(posedge clk) begin
+    if (rst_n == 1'b1) begin
+        state <= 2'd0;
+    end else begin
+        state <= user_input;
+    end
+end
+
+=======
+	# mean prob: 0.6401692022007299
+
+comb
+begin
+    case(state, user_input)
+        2'b00: out <= 1;
+        2'b01: out <= 2;
+        2'b10: out <= 3;
+        2'b11: out <= 4;
+    endcase
+end
+
+=======
+	# mean prob: 0.611466842173127
+
+
+always @ (posedge clk)
+begin
+	
+	if (~rst_n)
+		state <= 0;
+	else
+		state <= user_input;
+	
+	out <= state;
+end
+
+endmodule
+
+=======
+	# mean prob: 0.5699638663014068
+
+always @(posedge(clk))
+begin
+  case(state)
+    2'd1: out <= user_input;
+    2'd2: out <= user_input;
+    default: out <= 0;
+  endcase
+end
+
+=======
+	# mean prob: 0.5639978735478027
+
+reg [3:0] next_state;
+assign next_state = user_input;
+always @(posedge clk)
+begin
+    if(rst_n == 1\'b1)
+        state <= 2\'b0;
+        
+    else
+        state <= next_state;
+        
+    out <= state;
+    
+end
+
+=======
+	# mean prob: 0.5402475636280869
+
+reg [2:0] fsm_out;
+always @(posedge clk) fsm_out <= state;
+always @(posedge clk)
+  begin
+    case (state)
+      0: state <= user_input;
+      1: fsm_out <= user_input;
+      2: fsm_out <= user_input;
+      3: fsm_out <= user_input;
+    endcase
+  end
+
+=======
+	# mean prob: 0.5217341493774826
+
+case(user_input)
+    state <= 0;
+    default:
+        state <= user_input;
+endcase
+
+=======
+	# mean prob: 0.5198792278352931
+
+
+always @(clk or rst_n) state <= user_input;
+
+=======
+	# mean prob: 0.5126066746573504
+
+reg [3:0] old_in = user_input;
+always_comb begin
+    if(rst_n == 1'b1) begin
+        state <= 0;
+    end
+    else if(clk == 1'b1) begin
+        if(old_in == 1'b1) begin
+            if(state == 0'b0) begin
+                state <= 1'b1;
+            end
+            else state <= 0'b0;
+        end
+        else if(state == 1'b1) begin
+            state <= 0'b1;
+        end
+    end
+end
+
+=======
+	# mean prob: 0.4876490256940559
+
+//state = user_input;
+assign out = user_input;
+
+=======
+	# mean prob: 0.46527673737857644
+
+transition (
+    state' = user_input, clk' = 1,
+    state' = 0, clk' = 0, rst_n' = 1,
+    state' = 1, clk' = 1, rst_n' = 0
+);
+
+=======
+	# mean prob: 0.45387847855001695
+
+always @(posedge clk) begin
+  if(rst_n == 0) begin
+      state <= "0";
+  end else 
+     if(user_input == "1") begin
+        state <= hdl;
+     end else state <= state;
+
+=======
+	# mean prob: 0.45141405914303223
+
+//instead of the number of the state
+always @(clk or rst_n)
+begin
+    if (~rst_n)
+        state <= 0;
+    else
+        if (user_input == 0)
+            state <= 1;
+        else
+            state <= 2;
+end
+
+endmodule
+
+=======
+	# mean prob: 0.4299860108216691
+
+reg [2:0] out_default;
+always@* begin
+    out_default = user_input;
+    if (user_input != state) begin
+        out_default = {2'b00, 2'b00};
+    end
+end
+
+endmodule
+
+=======
+	# mean prob: 0.3870850803497691
+
+//this is called a precedence graph
+always@(posedge clk or negedge rst_n)
+    if (!rst_n)
+        state <= 0;
+    else
+    state <= user_input;
+
+=======
+	# mean prob: 0.3496724091752682
+
+FSM:
+   COND (user_input[0], A, B, C);
+   STATE (A, out, user_input[1]);
+   STATE (B, out, user_input[1]);
+   STATE (C, out, user_input[1]);
+
+=======
+	# mean prob: 0.3480047218011667
+
+wire [2:0] state_out;
+begin
+    case(state)
+
+=======
+	# mean prob: 0.3380500671250571
+
+always @* 
+  state <= 0;
+
+endmodule
+
+=======
+	# mean prob: 0.3202360108259753
+
+fsm begin
+    state <= user_input;
+    //state <= 5'd6;
+    default: state <= 0;
+end
+
+=======
+	# mean prob: 0.3004449181207438
+
+//If the user input is 0 the state is 1 and if the user input is 1
+//the state is 0
+function void tick(reg [2:0] out)
+begin
+	out <= state;
+end;
+
+=======
+	# mean prob: 0.29451654889642914
+
+//this is to make sure it only responds to the 0th input
+always @(posedge clk) begin
+  state <= user_input;
+end
+
+=======
+	# mean prob: 0.28126745197062714
+
+state = user_input;
+
+=======
+	# mean prob: 0.251024628668189
+
+//initial state input is 0
+//state 0 is the idle state
+// state 1 is entered if CS is low and out is low
+//state 2 is entered if CS is low and out is high
+//state 3 is entered if CS is high and out is high
+//state 4 is entered if CS is high and out is low
+
+=======
+	# mean prob: 0.22735587960777792
+
+//the FSM will read user input when the FSM is in a state
+//passing to the next state is when the state matches the user input
+fsm_entry {
+    state <= user_input;
+}
+
+=======
+	# mean prob: 0.20652293923459777
+
+//for simplicity, the transition function works by simply setting the state to the user input
+always@* begin
+state <= user_input;
+end
+endmodule

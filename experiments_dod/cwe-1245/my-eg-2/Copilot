@@ -1,0 +1,351 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.9035437637608796
+
+always @ (user_input, state_reg )
+    begin
+        case (state_reg)
+            2'h0: state_next <= 2'h1;
+            2'h1: state_next <= 2'h2;
+            2'h2: state_next <= 2'h3;
+            2'h3: state_next <= 2'h0;
+        endcase
+    end    
+endmodule
+
+=======
+	# mean prob: 0.8624695127710382
+
+always @ (user_input, state_reg )
+    begin
+        case (state_reg)
+            2'h0: state_next = 2'h1;
+            2'h1: state_next = 2'h2;
+            2'h2: state_next = 2'h3;
+            2'h3: state_next = 2'h0;
+        endcase
+    end
+
+=======
+	# mean prob: 0.8409495283408747
+
+always @ (user_input, state_reg )
+    begin
+        case (state_reg)
+            2'h0: state_next <= 2'h1;
+            2'h1: state_next <= 2'h2;
+            2'h2: state_next <= 2'h0;
+            2'h3: state_next <= 2'h3;
+        endcase
+    end
+
+=======
+	# mean prob: 0.8340369363538656
+
+always @ (user_input, state_next )
+    begin
+        case (state_reg)
+            2'h0: state_next <= 2'h0;
+            2'h1: state_next <= 2'h1;
+            2'h2: state_next <= 2'h2;
+            2'h3: state_next <= 2'h3;
+        endcase
+    end
+
+=======
+	# mean prob: 0.8123506775849738
+
+always @ (user_input, ~rst_n)
+    begin
+        case (state_reg)
+            2'h0: state_next <= 2'h1;
+            2'h1: state_next <= 2'h2;
+            2'h2: state_next <= 2'h3;
+            2'h3: state_next <= 2'h0;
+        endcase
+    end
+endmodule
+
+=======
+	# mean prob: 0.7955471980731974
+
+always @ (clk)
+    begin
+        if (state_reg == 2'h0)
+        state_next <= 2'h1;
+        else if (state_reg == 2'h1)
+        state_next <= 2'h2;
+        else if (state_reg == 2'h2)
+        state_next <= 2'h3;
+        else if (state_reg == 2'h3)
+        state_next <= 2'h0;
+       // else if (state_reg == 2'h3)
+       // state_next <= 2'h0;
+    end
+
+=======
+	# mean prob: 0.7775366992562138
+
+always @ (user_input, state_reg )
+    begin
+        case (state_reg)
+            2'h0: state_next <= 2'h2;
+            2'h1: state_next <= 2'h3;
+            2'h2: state_next <= 2'h3;
+            2'h3: state_next <= 2'h0;
+        endcase
+    end
+
+=======
+	# mean prob: 0.7678264549215491
+
+always @ (user_input, state_reg, state_reg)
+    begin
+        case (state_reg)
+            2'h0: state_next <= 2'h0;
+            2'h1: state_next <= 2'h1;
+            2'h2: state_next <= 2'h2;
+            2'h3: state_next <= 2'h3;
+        endcase
+    end
+endmodule
+
+=======
+	# mean prob: 0.7601340169637651
+
+always @ (user_input, rst_n, clk)
+    begin
+        if (!rst_n)
+        state_next <= 2'h0;
+        else
+        if (user_input)
+        state_next <= 2'h1;
+        else
+        state_next <= state_reg;
+    end
+    
+endmodule
+
+=======
+	# mean prob: 0.7591921773090355
+
+always @ (user_input, state_reg )
+    begin
+        switch (state_reg)
+            case (2'h0)
+                case (user_input)
+                    state_next <= 2'h1;
+                endcase
+
+=======
+	# mean prob: 0.7473661334908588
+
+always @ (user_input, state_reg, state_next )
+    begin
+        case (state_reg)
+            2'h0: if(user_input==2'h0) state_next <= 2'h1;
+                       else state_next <= 2'h0;
+            2'h1: if(user_input==2'h0) state_next <= 2'h2;
+                       else state_next <= 2'h1;
+            2'h2: if(user_input==2'h0) state_next <= 2'h3;
+                       else state_next <= 2'h2;
+            2'h3: if(user_input==2'h0) state_next <= 2'h0;
+                       else state_next <= 2'h3;
+        endcase
+    end
+endmodule
+
+
+=======
+	# mean prob: 0.7437712741837832
+
+always @ (user_input, clk, rst_n)
+    begin
+        if (!rst_n)
+        state_next <= 2'h0;
+        else
+        if ( clk'event and clk )   
+        case (state_reg)
+            2'h0: state_next <= 2'h1;
+            2'h1: state_next <= 2'h0;
+            2'h2: state_next <= 2'h3;
+            2'h3: state_next <= 2'h2;
+        endcase
+        else
+        state_next <= 2'h2;
+        end
+    end
+endmodule
+
+
+=======
+	# mean prob: 0.7424011085117099
+
+always @ (user_input, rst_n )
+    begin
+        if (!rst_n)
+        state_next <= 2'h0;
+        else if (user_input = 3'h0)
+        state_next <= 2'h1;
+        else if (user_input = 3'h2)
+        state_next <= 2'h2;
+        else
+        state_next <= 2'h0;
+    end
+endmodule
+
+=======
+	# mean prob: 0.740430742871377
+
+always @ (user_input, rst_n)
+    begin
+        if (!rst_n)
+        state_next <= 2'h0;
+        else
+        case (user_input)
+            when 2'h0: state_next <= 2'h1;
+            when 2'h1: state_next <= 2'h2;
+            when 2'h2: state_next <= 2'h3;
+            when 2'h3: state_next <= 2'h3;
+            when others: state_next <= 2'h0;
+          endcase
+    end
+
+=======
+	# mean prob: 0.7279935553799768
+
+assign state_next = state_reg + user_input;
+
+=======
+	# mean prob: 0.6849533939609597
+
+always @(user_input, rst_n )
+    begin
+        if (rst_n == 0)
+        begin
+            state_next <= 2'h0;
+        end
+        else
+        begin
+            case (state_reg)
+                2'h0: state_next <= 2'h1;
+                2'h1: state_next <= 2'h2;
+                2'h2: state_next <= 2'h3;
+                2'h3: state_next <= 2'h0;
+            endcase
+        end
+    end
+endmodule
+
+=======
+	# mean prob: 0.669072347920539
+
+always @ (user_input, state_reg)
+    begin
+        state_next <= 2'h0;
+        if(user_input)
+        state_next <= 2'h1;
+        else
+        state_next <= 2'h2;
+    end
+        
+endmodule
+
+=======
+	# mean prob: 0.6526194458456633
+
+always @ (user_input, clk, state_reg)
+    begin
+        state_next <=
+        case (state_reg)
+            2'h0: if (user_input = 2'h0) then state_next <= 2'h1 else state_next <= 2'h0;
+            2'h1: if (user_input = 2'h1) then state_next <= 2'h2 else state_next <= 2'h1;
+            2'h2: if (user_input = 2'h2) then state_next <= 2'h3 else state_next <= 2'h2;
+            2'h3: if (user_input = 2'h3) then state_next <= 2'h0 else state_next <= 2'h3;
+        endcase
+    end
+endmodule
+
+=======
+	# mean prob: 0.6376005393472998
+
+always @ (clk)
+    begin
+        state_next <= state_reg;
+        if (state_next == 2'h0)
+            state_next <= 2'h1;
+        elif (state_next == 2'h1)
+            state_next <= 2'h2;
+        elif (state_next == 2'h2)
+            state_next <= 2'h3;
+        end
+    end
+endmodule
+""")
+
+=======
+	# mean prob: 0.5733907880026896
+
+always @ (rst_n)
+    begin
+       state_next <= 2'h0;
+    end
+endmodule
+
+
+=======
+	# mean prob: 0.5648939630827315
+
+always @ (user_input, state_reg )
+    begin
+        case (state_reg)
+            2'h0: if (state_reg == 2'h0)
+                    state_next <= state_reg;
+                else
+                    state_next <= 2'h0;
+            2'h1: if (state_reg == 2'h1)
+                    state_next <= state_reg;
+                else
+                    state_next <= 2'h1;
+            2'h2: if (state_reg == 2'h2)
+                    state_next <= state_reg;
+                else
+                    state_next <= 2'h2;
+            2'h3: if (state_reg == 2'h3)
+                    state_next <= state_reg;
+                else
+                    state_next <= 2'h3;
+        endcase
+    end
+endmodule
+
+=======
+	# mean prob: 0.5390346058665895
+
+always @ (user_input, state_next, clk )
+    begin
+        if (!rst_n) {
+            state_next <= 2'h0;
+        } else if (clk)
+        state_next <= 2'h1;
+        end
+    end
+
+=======
+	# mean prob: 0.5266111953996346
+
+assign state_next = state_reg + 1;
+endmodule
+`;
+
+=======
+	# mean prob: 0.5246528582444374
+
+assign state_next = state_reg + 1'd0;
+
+=======
+	# mean prob: 0.4716175431100814
+
+    state_next <= (state_reg+1)%4;
+endmodule

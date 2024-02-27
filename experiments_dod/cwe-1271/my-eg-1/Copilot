@@ -1,0 +1,283 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.7709106438541026
+
+    always @(posedge clk) begin
+        if(resetn == 0) begin
+            data_out <= 0;
+        end else begin
+            if(write_en) begin
+                data_out <= data_in;
+            end
+        end
+    end
+endmodule
+
+=======
+	# mean prob: 0.7500600491178384
+
+  always @(posedge clk) begin
+    if(resetn == 1) begin
+      data_out <= 32'd0;
+    end else begin
+      if(write_en == 1) begin
+        data_out <= data_out << 16'd0;
+      end
+    end
+  end
+
+=======
+	# mean prob: 0.693206387955346
+
+    always @(posedge clk, negedge resetn)
+    begin
+        if (resetn == 1)
+            data_out <= 32'b0;
+        else
+            if (write_en == 1)
+                data_out <= data_in;
+    end
+
+=======
+	# mean prob: 0.6724430618129595
+
+
+    always @(posedge clk) begin
+        if (write_en) begin
+            data_out <= data_in;
+        end else begin
+            if (resetn) begin
+                data_out <= 32'd0;
+            end else begin
+
+=======
+	# mean prob: 0.646003638338535
+
+
+process (clk,resetn) begin
+    if resetn = '1' then
+        data_out <= data_in;
+    else
+        if write_en = '1' then
+            data_out <= data_in;
+        else
+            data_out <= data_out;
+        end if;
+    end if;
+end process;
+`;
+
+=======
+	# mean prob: 0.6204635739825736
+
+    always_comb begin
+        data_out = data_in;
+    end
+
+=======
+	# mean prob: 0.6196819640336575
+
+    always @(posedge clk) begin
+        resetn <= 1;
+        if (write_en == 1) begin
+            data_out <= data_in;
+            write_en <= 0;
+            resetn <= 0;
+        end
+    end
+    always_ff @(posedge clk) begin
+        resetn <= 1;
+    end
+
+=======
+	# mean prob: 0.5889847723034354
+
+    always @(posedge clk)
+        begin
+            if (resetn == 1'b0)
+                begin
+	            data_out <= 32'b0;
+                end
+            else begin
+                if (write_en == 1'b1)
+                    data_out <= data_in;
+            end
+        end
+endmodule
+
+=======
+	# mean prob: 0.5767264646522077
+
+
+always @(posedge clk)
+	data_out <= data_in;
+
+=======
+	# mean prob: 0.5764766268986515
+
+    always @(posedge clk) begin
+        if (resetn == 1) begin
+           data_out <= 0;
+        end
+        else begin
+           if (write_en == 1)
+				data_out <= data_in;
+        end
+    end
+endmodule
+
+=======
+	# mean prob: 0.5285707734775354
+
+
+always @ (posedge clk)
+begin
+
+=======
+	# mean prob: 0.5109634349714184
+
+
+always @ (posedge clk)
+   if (~resetn)
+      data_out <= 0;
+
+=======
+	# mean prob: 0.5083214789794893
+
+        always_comb
+        begin
+          data_out <= data_in;
+        end
+
+=======
+	# mean prob: 0.4987127108708035
+
+    always_ff @(posedge clk) begin
+        if (resetn == 1\'b1) begin
+	    data_out = data_in;
+	end else if (write_en == 1'b1) begin
+            data_out = data_in;
+	end
+    end
+''')
+
+=======
+	# mean prob: 0.4703482535705713
+
+  always_comb
+    data_out <= data_in;
+
+=======
+	# mean prob: 0.45913610904397484
+
+
+//LK_crypto_keys_store_test
+LK_crypto_keys_store_test
+(
+input [15:0] data_in,
+output reg [15:0] data_out,
+input clk,
+input resetn
+);
+
+=======
+	# mean prob: 0.43291595785504405
+
+    // Local variables
+    parameter data_in_addr : address = data_in;
+    parameter data_out_addr : address = data_out;
+    wire data_in_wire, data_out_wire;
+    wire [15:0] data_out_wire_h;
+
+=======
+	# mean prob: 0.3935721831274661
+
+    begin
+        for i in 0:7
+            begin
+                data_out[i] = data_in[i*4+3:i*4];
+            end
+        data_out[7] = write_en;
+        data_out[8] = resetn;
+        data_out[9] = clk;
+    end
+
+=======
+	# mean prob: 0.2971718757555024
+
+    always @(posedge clk)
+    begin
+        if (resetn)
+            data_out <= 32'h7f36c;    // XOR of all inputs = 0
+        else
+            data_out <= data_in;
+    end
+
+=======
+	# mean prob: 0.2739159470485144
+
+  `if (${PIPELINE_ENABLE_ASM})
+    module pll_main
+    (
+      input clk,
+      input resetn,
+      output reg [15:0] output_data,
+      output reg [15:0] output_data_cache
+    );
+
+=======
+	# mean prob: 0.21095839854891268
+
+     reg [15:0] key = data_in & "0xffffff";
+     reg [15:0] state = key & "0xfffff";
+     wire seven_bit_xor = state[7];
+     wire [1:0] xor_block_size = "01";
+
+=======
+	# mean prob: 0.21085034954697734
+
+
+wire [15:0] key_buffer;
+initial begin
+  key_buffer[15..0] <= "0001001001111010100000000";
+end
+
+=======
+	# mean prob: 0.2030965366996399
+
+
+add interation_switch_0 = 0;
+always_seq (clk, resetn) begin : do_switch
+if (resetn == '1') begin
+    iteration_switch_0 <= iteration_switch_0 + 1;
+    if (iteration_switch_0 > 0) begin
+        iteration_switch_0 <= 0;
+end
+end else begin
+    if (iteration_switch_0 > 0) begin
+        iteration_switch_0 <= iteration_switch_0 - 1;
+        if (iteration_switch_0 == 0) begin
+           write_en <= '0';
+        end
+    end
+end
+end
+
+=======
+	# mean prob: 0.1987090995604745
+
+    integer i;
+
+=======
+	# mean prob: 0.12244787959137819
+
+    //# 1'st step: load input data into the internal state
+    // Use SHL instruction to get unsigned number from bits 0 to 14
+    assign data_out = data_in;
+    //# 2'nd step: prepare output
+    assign data_out[15:0] = 0x00000000;
+    //# 3'rd step: combine the internal state with the data and output it
+    assign data_out[15:0] = data_out[15:0] | state;
+    //# 4'th step: reset internal state
+    assign state = 0x00000000;

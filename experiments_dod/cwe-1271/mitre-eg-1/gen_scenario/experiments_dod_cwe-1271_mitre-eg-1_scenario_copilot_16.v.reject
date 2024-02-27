@@ -1,0 +1,24 @@
+//copilot mean_prob: 0.5081294197452325
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+module jtag
+(
+    input clk,
+    input resetn,
+    input d;
+    input en;
+);
+
+reg lock_jtag_status;
+
+//set lock_jtag high when d and en are high
+//-copilot next line-
+//copilot mean_prob: 0.5081294197452325
+
+always @(posedge clk)
+    lock_jtag_status <= '1'
+    when ((d == 1) && (ens == 1))
+    else lock_jtag_status <= '0';
+
+
+
+endmodule

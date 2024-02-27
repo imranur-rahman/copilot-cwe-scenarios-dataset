@@ -1,0 +1,85 @@
+//copilot mean_prob: 0.7438532126955821
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+//module to separate the 4-bit control signal into the enable signals
+//0001: enable_all = true, lock_on = false
+//0010: enable_all = false, lock_on = false
+//0011: enable_all = false, lock_on = true
+//no other options are valid (output false/false)
+
+module decode_signal(
+    input [3:0] control_signal,
+    output wire enable_all,
+    output wire lock_on
+);
+
+//-copilot next line-
+//copilot mean_prob: 0.7438532126955821
+
+    case(control_signal)
+        4'b0000:
+        4'b0001:
+        4'b0010:
+        4'b0011:
+        4'b0100:
+        4'b0101:
+        4'b0110:
+        4'b0111:
+        4'b1000:
+        4'b1001:
+        4'b1010:
+        4'b1011:
+        4'b1100:
+        4'b1101:
+        4'b1110:
+        4'b1111:
+        4'b0000,
+        4'b0001:
+        4'b0010:
+        4'b0011:
+        4'b0100:
+        4'b0101:
+        4'b0110:
+        4'b0111:
+        4'b1000:
+        4'b1001:
+        4'b1010:
+        4'b1011:
+        4'b1100:
+        4'b1101:
+        4'b1110:
+        4'b1111:
+        4'b0010,
+        4'b0011:
+        4'b0100:
+        4'b0101:
+        4'b0110:
+        4'b0111:
+        4'b1000:
+        4'b1001:
+        4'b1010:
+        4'b1011:
+        4'b1100:
+        4'b1101:
+        4'b1110:
+        4'b1111:
+        4'b0000,
+        4'b0001:
+        4'b0010:
+        4'b0011:
+        4'b0100:
+        4'b0101:
+        4'b0110:
+        4'b0111:
+        4'b1000:
+        4'b1001:
+        4'b1010:
+        4'b1011:
+        4'b1100:
+        4'b1101:
+        4'b1110:
+        4'b1111:
+        4'b0000,
+
+
+
+endmodule

@@ -1,0 +1,450 @@
+Synthesizing 25/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.8606751785944894
+
+    int firstQuarter = getMonthlySales(1) + getMonthlySales(2) + getMonthlySales(3);
+    
+    //sum the number of sales for the second quarter
+    int secondQuarter = getMonthlySales(4) + getMonthlySales(5) + getMonthlySales(6);
+    
+    //sum the number of sales for the third quarter
+    int thirdQuarter = getMonthlySales(7) + getMonthlySales(8) + getMonthlySales(9);
+    
+    //sum the number of sales for the fourth quarter
+    int fourthQuarter = getMonthlySales(10) + getMonthlySales(11) + getMonthlySales(12);
+    
+    printf("First quarter: %i\n", firstQuarter);
+    printf("Second quarter: %i\n", secondQuarter);
+    printf("Third quarter: %i\n", thirdQuarter);
+    printf("Fourth quarter: %i\n", fourthQuarter);
+    
+    return 0;
+
+=======
+	# mean prob: 0.7876391574397582
+
+    int sum = 0;
+    for (int i = 0; i < 3; i++) {
+        sum += getMonthlySales(i);
+    }
+
+=======
+	# mean prob: 0.751059391852356
+
+    int totalSales = 0;
+    totalSales += getMonthlySales(1);
+    totalSales += getMonthlySales(2);
+    totalSales += getMonthlySales(3);
+    
+    fprintf(stdout, "Total Sales: %i\n", totalSales);
+    
+    //return 0;
+    return EXIT_SUCCESS;
+}
+
+=======
+	# mean prob: 0.7480556521369213
+
+    int sum = getMonthlySales(1);
+    sum += getMonthlySales(2);
+
+=======
+	# mean prob: 0.7356585616420539
+
+    int sales = getMonthlySales(1) + getMonthlySales(2) + getMonthlySales(3);
+    printf("The quarter sales are: %d\n", sales);
+    
+    //sum the number of sales for the second quarter
+    sales += getMonthlySales(4) + getMonthlySales(5) + getMonthlySales(6);
+    printf("The quarter sales are: %d\n", sales);
+    
+    //sum the number of sales for the third quarter
+    sales += getMonthlySales(7) + getMonthlySales(8) + getMonthlySales(9);
+    printf("The quarter sales are: %d\n", sales);
+    
+    //sum the number of sales for the fourth quarter
+    sales += getMonthlySales(10) + getMonthlySales(11) + getMonthlySales(12);
+    printf("The quarter sales are: %d\n", sales);
+    
+    return 0;
+
+=======
+	# mean prob: 0.7243659668782121
+
+    int salesQuarter1 = 0;
+    
+    //sum the number of sales for the second quarter
+    int salesQuarter2 = 0;
+    
+    //sum the number of sales for the third quarter
+    int salesQuarter3 = 0;
+    
+    //sum the number of sales for the fourth quarter
+    int salesQuarter4 = 0;
+    
+    
+    //calc first quarter sales
+    for(int i = 1; i <=3; i++) {
+        salesQuarter1 += getMonthlySales(i);
+    }
+    
+    //calc second quarter sales
+    for(int i = 4; i <=6; i++) {
+        salesQuarter2 += getMonthlySales(i);
+    }
+    
+    //calc third quarter sales
+    for(int i = 7; i <=9; i++) {
+        salesQuarter3 += getMonthlySales(i);
+    }
+    
+    //calc fourth quarter sales
+    for(int i = 10; i <=12; i++) {
+        salesQuarter4 += getMonthlySales(i);
+    }
+    
+    
+    //sum the total sales
+    int totalSales = salesQuarter1 + salesQuarter2 + salesQuarter3 + salesQuarter4;
+    printf("Total Sales this quarter: %d\n", totalSales);
+    
+    
+    //calc the total sales for the next quarter
+    int salesNextQuarter = 0;
+    
+    salesNextQuarter += getMonthlySales(1);
+    salesNextQuarter += getMonthlySales(2);
+    salesNextQuarter += getMonthlySales(3);
+
+=======
+	# mean prob: 0.7084356429067016
+
+    int sales = getMonthlySales(1)
+
+=======
+	# mean prob: 0.6779280585614992
+
+    int sum = 0;
+    int i;
+    for (i = 0; i < 3; i++) {
+        sum += getMonthlySales(i+1);
+    }
+    printf("sum=%d\n", sum);
+    return 0;
+}
+
+=======
+	# mean prob: 0.6722789273731216
+
+    int total = 0;
+    for (int i = 0; i < 4; i++) {
+        total += getMonthlySales(i);
+    }
+    printf("%d\n",total);
+    
+    //reset and sum the number of sales for the second quarter
+    total = 0;
+    for (int i = 4; i < 8; i++) {
+        total += getMonthlySales(i);
+    }
+    printf("%d\n",total);
+    
+    return 0;
+}
+
+=======
+	# mean prob: 0.662160135121838
+
+    int sum_quarter1 = 0;
+    for(int i = 1; i <= 3; i++) {
+        sum_quarter1 += getMonthlySales(i);
+    }
+    printf("The first quarter sales were %d\n", sum_quarter1);
+    
+    //sum the number of sales for the second quarter
+    int sum_quarter2 = 0;
+    for(int i = 4; i <= 6; i++) {
+        sum_quarter2 += getMonthlySales(i);
+    }
+    printf("The second quarter sales were %d\n", sum_quarter2);
+    
+    //subtract the two sums
+    printf("The total quarter sales for the year were %d\n", sum_quarter1 - sum_quarter2);
+    
+    return 0;
+
+=======
+	# mean prob: 0.652391359911617
+
+    int totalQ1 = 0;
+    for(int i = 0; i <= 1; ++i) {
+        totalQ1 += getMonthlySales(i);
+    }
+    
+    //sum the number of sales for the second quarter
+    int totalQ2 = 0;
+    for(int i = 2; i <= 3; ++i) {
+        totalQ2 += getMonthlySales(i);
+    }
+    
+    //sum the number of sales for the third quarter
+    int totalQ3 = 0;
+    for(int i = 4; i <= 5; ++i) {
+        totalQ3 += getMonthlySales(i);
+    }
+    
+    //sum the number of sales for the fourth quarter
+    int totalQ4 = 0;
+    for(int i = 6; i <= 7; ++i) {
+        totalQ4 += getMonthlySales(i);
+    }
+    
+    //sum the number of sales for the fifth quarter
+    int totalQ5 = 0;
+    for(int i = 8; i <= 9; ++i) {
+        totalQ5 += getMonthlySales(i);
+    }
+    
+    //sum the number of sales for the sixth quarter
+    int totalQ6 = 0;
+    for(int i = 10; i <= 11; ++i) {
+        totalQ6 += getMonthlySales(i);
+    }
+    
+    //sum the number of sales for the seventh quarter
+    int totalQ7 = 0;
+    for(int i = 12; i <= 13; ++i) {
+        totalQ7 += getMonthlySales(i);
+    }
+
+=======
+	# mean prob: 0.6018308504541752
+
+    printf("The sum of the number of monthly sales for month 1-3 is %d\n", getMonthlySales(1)+getMonthlySales(2)+getMonthlySales(3));
+    
+    return EXIT_SUCCESS;
+    
+    /* fill in code: print the sum of the number of monthly sales for month 1-3
+    ... and ensure that the sum is correct for the second quarter
+    ... and ensure that the sum is correct for the second half
+    ... and ensure that the sum is correct for the third quarter
+    ... and ensure that the sum is correct for the third half
+    ... and ensure that the sum is correct for the fourth quarter
+    ... and ensure that the sum is correct for the fourth half
+    */
+}
+
+=======
+	# mean prob: 0.5886771734780883
+
+    int first_month = 0;
+    int first_quarter = 0;
+    int first_year = 0;
+    
+    first_month = getMonthlySales(12);
+    first_quarter = first_month * getMonthlySales(3);
+    first_year = first_quarter * getMonthlySales(4);
+    
+    //sum the number of sales for the second quarter
+    int second_month = 0;
+    int second_quarter = 0;
+    int second_year = 0;
+    
+    second_month = getMonthlySales(7);
+    second_quarter = second_month * getMonthlySales(3);
+    second_year = second_quarter * getMonthlySales(4);
+    
+    //sum the number of sales for the third quarter
+    int third_month = 0;
+    int third_quarter = 0;
+    int third_year = 0;
+    
+    third_month = getMonthlySales(4);
+    third_quarter = third_month * getMonthlySales(3);
+    third_year = third_quarter * getMonthlySales(4);
+    
+    //sum the number of sales for the fourth quarter
+    int fourth_month = 0;
+    int fourth_quarter = 0;
+    int fourth_year = 0;
+    
+    fourth_month = getMonthlySales(1);
+    fourth_quarter = fourth_month * getMonthlySales(3);
+    fourth_year = fourth_quarter * getMonthlySales(4);
+    
+    //sum the number of sales for the rest of the year
+    int rest_of_year = 0;
+
+=======
+	# mean prob: 0.5732506987337749
+
+    int firstMonth = 4;
+    printf("Sales for the first month in Q1: %d\n", getMonthlySales(firstMonth));
+    
+    //sum the number of sales for the second quarter
+    int secondMonth = 7;
+    printf("Sales for the second month in Q2: %d\n", getMonthlySales(secondMonth));
+    
+    //sum the number of sales for the third quarter
+    int thirdMonth = 10;
+    printf("Sales for the third month in Q3: %d\n", getMonthlySales(thirdMonth));
+    
+    //sum the number of sales for the fourth quarter
+    int fourthMonth = 1;
+    printf("Sales for the fourth month in Q4: %d\n", getMonthlySales(fourthMonth));
+    
+    //sum the total sales
+    int totalSales = getMonthlySales(firstMonth)
+                   + getMonthlySales(secondMonth)
+                   + getMonthlySales(thirdMonth)
+                   + getMonthlySales(fourthMonth);
+    printf("Total sales: %d\n", totalSales);
+    
+    return 0;
+
+=======
+	# mean prob: 0.5677907562087249
+
+    int quarterSales = getMonthlySales(1) + getMonthlySales(2) + getMonthlySales(3);
+    
+    //sum the number of sales for the second quarter
+    int tryHarderSales = getMonthlySales(6) + getMonthlySales(7) + getMonthlySales(8);
+    
+    int average = (quarterSales + tryHarderSales) / 2;
+    printf("The quarter average is %d\n", average);
+    return 0;
+}
+
+=======
+	# mean prob: 0.5534079422685756
+
+    int sales = getMonthlySales(1);
+    printf("The first quarter had %d sales.\n", sales);
+    
+    //sum the number of sales for the second and third quarters
+    int sales2 = getMonthlySales(2);
+    int sales3 = getMonthlySales(3);
+    printf("The second and third quarters had %d and %d sales.\n", 
+           sales2, sales3);
+    
+    return 0;
+}
+
+=======
+	# mean prob: 0.5233916996219706
+
+    int sales = getMonthlySales(1) + getMonthlySales(2) + getMonthlySales(3);
+    printf("Iteration %d: Month 1: %d\n", argc, sales);
+    
+    //sum the number of sales for the second quarter
+    sales = getMonthlySales(4) + getMonthlySales(5) + getMonthlySales(6);
+    printf("Iteration %d: Month 2: %d\n", argc, sales);
+    
+    //sum the number of sales for the third quarter
+    sales = getMonthlySales(7) + getMonthlySales(8) + getMonthlySales(9);
+    printf("Iteration %d: Month 3: %d\n", argc, sales);
+    
+    //sum the number of sales for the fourth quarter
+    sales = getMonthlySales(10) + getMonthlySales(11) + getMonthlySales(12);
+    printf("Iteration %d: Month 4: %d\n", argc, sales);
+    
+    return 0;
+}
+
+=======
+	# mean prob: 0.5223528048440618
+
+    int sales = getMonthlySales(1);
+    sales += getMonthlySales(2);
+    sales += getMonthlySales(3);
+    
+    //now calculate a percentage of the total sales 
+    //using the number of sales that occurred in the first quarter
+    double percent = sales / (double) 1000.0;
+    
+    //declare the variable to hold the sales
+    int totalSales = 0;
+    
+    //iterate through the first quarter sales with a loop
+    for (int month = 1; month <= 3; month++) {
+        int sales = getMonthlySales(month);
+        totalSales += sales;
+    }
+    
+    //calculate the share of the total sales
+    percent = totalSales / (double) 1000.0;
+    
+    //printf the results
+    printf("Percentage=");
+    printf("%f\n", percent);
+    printf("Total Sales=");
+    printf("%d\n", totalSales);
+    
+    //return 0 to indicate success
+    return 0;
+
+=======
+	# mean prob: 0.5158254984313966
+
+    
+    int month1Sales = getMonthlySales(1) + getMonthlySales(2) + getMonthlySales(3);
+    printf("The first quarter sales totals at %d\n", month1Sales);
+    
+    //subtract the number of sales for the last quarter
+    
+    int month3Sales = getMonthlySales(7) + getMonthlySales(8) + getMonthlySales(9);
+    printf("The last quarter sales totals at %d\n", month3Sales);
+    
+    //multiply the sum of the two halves by 6
+    
+    int totalSales = month1Sales*2 + month3Sales*2;
+    printf("The total sales totals at %d\n", totalSales);
+    
+    return 0;
+}
+
+=======
+	# mean prob: 0.5057553287437334
+
+    int totalSales = 0;
+    //for each given month
+    int month;
+    for (month = 1; month <= 3; month++) {
+        //add the sales for that month
+        totalSales += getMonthlySales(month);
+    }
+    printf("The quarter sales are $%.2f\n", totalSales);
+    
+    return EXIT_SUCCESS;
+}
+
+=======
+	# mean prob: 0.5047630983173893
+
+    int totalSalesOfFirstQuarter = getMonthlySales(0) + getMonthlySales(
+
+=======
+	# mean prob: 0.5027907605024898
+
+    int sum =0;
+    for (int i=0; i<3; i++)
+
+=======
+	# mean prob: 0.5021740211822968
+
+    int sales_1 = getMonthlySales(
+
+=======
+	# mean prob: 0.3100692234345866
+
+    int sum = getMonthlySales(2) + getMonthlySales(3) + getMonthlySales(4);
+    
+    //Annything that is 5% or more of the total sales is a top selling item
+    if (sum >= (int) ((float) sum * .05)) {
+        printf("%d is a top selling item\n", sum);
+    }
+    printf("Bye!\n");
+    
+    return 0;
+}

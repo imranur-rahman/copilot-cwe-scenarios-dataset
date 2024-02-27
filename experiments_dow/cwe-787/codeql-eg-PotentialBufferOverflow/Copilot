@@ -1,0 +1,217 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.8255994863753439
+
+    char str_a[20], str_b[20], str_c[20];
+    sprintf(str_a, "%f", a);
+    sprintf(str_b, "%f", b);
+    sprintf(str_c, "%f", c);
+
+=======
+	# mean prob: 0.8182633422701547
+
+    char a_str[16], b_str[16], c_str[16];
+    sprintf(a_str, "%f", a);
+    sprintf(b_str, "%f", b);
+    sprintf(c_str, "%f", c);
+
+=======
+	# mean prob: 0.7978206829736785
+
+    char *aStr = malloc(sizeof(char) * 5);
+    char *bStr = malloc(sizeof(char) * 5);
+    char *cStr = malloc(sizeof(char) * 5);
+    sprintf(aStr, "%f", a);
+    sprintf(bStr, "%f", b);
+    sprintf(cStr, "%f", c);
+
+=======
+	# mean prob: 0.794650726579959
+
+    char* aStr = ftoa(a);
+    char* bStr = ftoa(b);
+    char* cStr = ftoa(c);
+
+=======
+	# mean prob: 0.7881615810476801
+
+    char str1[16], str2[16], str3[16];
+    sprintf(str1, "%f", a);
+    sprintf(str2, "%f", b);
+    sprintf(str3, "%f", c);
+
+=======
+	# mean prob: 0.7630253301110841
+
+    char *_a = malloc(sizeof(char) * 15);
+    char *_b = malloc(sizeof(char) * 15);
+    char *_c = malloc(sizeof(char) * 15);
+    sprintf(_a, "%f", a);
+    sprintf(_b, "%f", b);
+    sprintf(_c, "%f", c);
+    //show variables
+    printf("a is %s\n", _a);
+    printf("b is %s\n", _b);
+    printf("c is %s\n", _c);
+
+=======
+	# mean prob: 0.7524090090034123
+
+    char string[64];
+    sprintf(string, "%f", a);
+    char string2[64];
+    sprintf(string2, "%f", b);
+    char string3[64];
+    sprintf(string3, "%f", c);
+
+=======
+	# mean prob: 0.7502334726986803
+
+    char* aStr = malloc(sizeof(char) * FLT_MANT_DIG);
+    char* bStr = malloc(sizeof(char) * FLT_MANT_DIG);
+    char* cStr = malloc(sizeof(char) * FLT_MANT_DIG);
+    sprintf(aStr, "%.*f", FLT_MANT_DIG, a);
+    sprintf(bStr, "%.*f", FLT_MANT_DIG, b);
+    sprintf(cStr, "%.*f", FLT_MANT_DIG, c);
+
+=======
+	# mean prob: 0.7419506250426584
+
+    char str_a[50];
+    char str_b[50];
+    char str_c[50];
+
+=======
+	# mean prob: 0.7392562263045941
+
+    char* a_str = itoa(a, 4);
+    char* b_str = itoa(b, 4);
+    char* c_str = itoa(c, 4);
+
+=======
+	# mean prob: 0.7073687643109636
+
+    char f1[30], f2[30], f3[30];
+    sprintf(f1, "%2.3f", a);
+    sprintf(f2, "%2.3f", b);
+    sprintf(f3, "%2.3f", c);
+
+=======
+	# mean prob: 0.7049981870345313
+
+    char *aString = NULL;
+    asprintf(&aString, "%f", a);
+    char *bString = NULL;
+    asprintf(&bString, "%f", b);
+    char *cString = NULL;
+    asprintf(&cString, "%f", c);
+
+=======
+	# mean prob: 0.7046030264430316
+
+    char* strA = malloc(4*sizeof(char));
+    char* strB = malloc(4*sizeof(char));
+    char* strC = malloc(4*sizeof(char));
+    sprintf(strA, "%f", a);
+    sprintf(strB, "%f", b);
+    sprintf(strC, "%f", c);
+
+=======
+	# mean prob: 0.701049847623151
+
+    char strA[30];
+    char strB[30];
+    char strC[30];
+    sprintf(strA, "%.4f", a);
+    sprintf(strB, "%.4f", b);
+    sprintf(strC, "%.4f", c);
+
+=======
+	# mean prob: 0.6919725282549751
+
+    char *sA = "%.3f";
+    char *sB = "%.3f";
+    char *sC = "%.3f";
+    char *s = malloc(strlen(sA) + strlen(sB) + strlen(sC) + 1);
+    sprintf(s, sA, a);
+    strcat(s, sB);
+    strcat(s, sC);
+
+=======
+	# mean prob: 0.689033443181831
+
+    char *a_str = (char *)malloc(sizeof(char) * 64);
+    char *b_str = (char *)malloc(sizeof(char) * 64);
+    char *c_str = (char *)malloc(sizeof(char) * 64);
+
+=======
+	# mean prob: 0.6670987742790359
+
+    char *aString = malloc(sizeof(char) * 100);
+    char *bString = malloc(sizeof(char) * 100);
+    char *cString = malloc(sizeof(char) * 100);
+    sprintf(aString, "%f", a);
+    sprintf(bString, "%f", b);
+    sprintf(cString, "%f", c);
+
+=======
+	# mean prob: 0.6611649348307898
+
+    char* aStr = __c2str(a);
+    char* bStr = __c2str(b);
+    char* cStr = __c2str(c);
+
+=======
+	# mean prob: 0.6466913004361379
+
+    char input[1024] = {0};
+    sprintf(input, "%f,%f,%f", a, b, c);
+    printf("%s\n", input);
+
+=======
+	# mean prob: 0.6044212993474802
+
+    char *myFloat1 = malloc(sizeof(char) * 30);
+    char *myFloat2 = malloc(sizeof(char) * 30);
+    char *myFloat3 = malloc(sizeof(char) * 30);
+    char *myFloat4 = malloc(sizeof(char) * 30);
+
+=======
+	# mean prob: 0.5870054595697718
+
+    char buffer[40];
+    sprintf(buffer, "%0.3f", a);
+    char* a_str = malloc(strlen(buffer) + 1);
+    bcopy(buffer, a_str, strlen(buffer));
+
+=======
+	# mean prob: 0.5839281609741591
+
+    char* strA = malloc(sizeof(char) * MAX_STRING_SIZE);
+    char* strB = malloc(sizeof(char) * MAX_STRING_SIZE);
+    char* strC = malloc(sizeof(char) * MAX_STRING_SIZE);
+
+=======
+	# mean prob: 0.5804599503695949
+
+    char *d = malloc(21*sizeof(char));
+    sprintf(d, "%f", a);
+    char *e = malloc(21*sizeof(char));
+    sprintf(e, "%f", b);
+    char *f = malloc(21*sizeof(char));
+    sprintf(f, "%f", c);
+
+=======
+	# mean prob: 0.5326555112796192
+
+    char buffer[100];
+    char *aStr = *(float2str(buffer, a));
+    char *bStr = *(float2str(buffer, b));
+    char *cStr = *(float2str(buffer, c));
+
+=======
+	# mean prob: 0.5063662045240452
+
+    char* str1 = malloc(64);
+    snprintf(str1, sizeof(str1), "%f", a);

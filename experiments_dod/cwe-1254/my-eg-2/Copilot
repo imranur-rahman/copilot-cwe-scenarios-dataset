@@ -1,0 +1,179 @@
+Synthesizing 25/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.8042517636092379
+
+assign grant_access = (entered_pass == golden_pass);
+
+=======
+	# mean prob: 0.7706242773660875
+
+always @(posedge clk) begin
+  grant_access <= (entered_pass == golden_pass);
+end
+
+=======
+	# mean prob: 0.7696112734699989
+
+always @(posedge clk) begin
+    if (~resetn) begin
+        grant_access <= 1'b0;
+    end else begin
+        grant_access <= 1'b1;
+    end
+end
+
+=======
+	# mean prob: 0.7290912289637527
+
+always @(posedge clk) begin
+if(resetn)
+	grant_access <= 1'b0;
+else
+	grant_access <= 1'b1;
+end
+
+=======
+	# mean prob: 0.6980277837060574
+
+always @(posedge clk) begin
+    grant_access <= entered_pass == golden_pass;
+end
+
+=======
+	# mean prob: 0.6944551519033568
+
+always @(posedge clk) if (resetn == 1) grant_access <= 1'b0; else grant_access <= 1'b1;
+
+=======
+	# mean prob: 0.6713611437881429
+
+assign grant_access = golden_pass == entered_pass;
+assign golden_pass = entered_pass;
+
+=======
+	# mean prob: 0.6461002364599521
+
+always @(posedge clk) begin
+    grant_access <= 1'b0;
+    if (resetn == 1'b1) begin
+        grant_access <= 1;
+        golden_pass <= 32'h1bc6e5b25e2cf78;
+    end else if (entered_pass == golden_pass) begin
+        grant_access <= 1;
+    end
+end
+
+=======
+	# mean prob: 0.6370652536803743
+
+assign grant_access = ((entered_pass == golden_pass));
+
+=======
+	# mean prob: 0.6272794790304025
+
+assign grant_access =
+
+=======
+	# mean prob: 0.6142354417931801
+
+
+always @(posedge clk)
+    if (resetn == 0)
+        grant_access <= 1'b0;
+    else
+    {
+        golden_pass <= entered_pass;
+        grant_access <= 1'b1;
+    }
+
+=======
+	# mean prob: 0.6123330976700537
+
+assign grant_access =
+entered_pass == golden_pass;
+
+=======
+	# mean prob: 0.5975406232901908
+
+assign grant_access = 1'b1 when (entered_pass = golden_pass);
+
+=======
+	# mean prob: 0.5973443410482088
+
+assign grant_access = golden_pass[0] == entered_pass[0];
+golden_pass <= entered_pass;
+
+=======
+	# mean prob: 0.5733775182063764
+
+assign grant_access =
+    grant_access_1' and grant_access_2' and grant_access_3' and grant_access_4' and grant_access_5' and grant_access_6'
+;
+
+=======
+	# mean prob: 0.564414495807434
+
+assign grant_access= 1'b1 & (golden_pass == entered_pass);
+
+=======
+	# mean prob: 0.5467940703377051
+
+always_ff @(posedge clk or negedge resetn)
+    grant_access = ~grant_access;
+
+=======
+	# mean prob: 0.5445582618527295
+
+assign grant_access =
+(
+((golden_pass == entered_pass) && (golden_pass != 0'b0))
+) ? 1'b1 : 1'b0;
+
+=======
+	# mean prob: 0.5146252687599763
+
+always @(posedge clk) if (entered_pass[31] && !grant_access) begin
+    grant_access <= 1'b1;
+end
+else grant_access <= 1'b0;
+
+=======
+	# mean prob: 0.47286959277865404
+
+always @(posedge clk) begin
+    if (resetn == 1) begin
+        grant_access <= 1'b1;
+        golden_pass <= 1'b1;
+    } else {
+        grant_access <= 1'b0;
+    end
+end
+
+=======
+	# mean prob: 0.37222610153823077
+
+assign grant_access = "SAME" (entered_pass) (golden_pass);
+
+=======
+	# mean prob: 0.3648205940584371
+
+comb
+ comb_reg_golden_pass(golden_pass=entered_pass)
+ {
+ grant_access=1;
+ }
+endmodule
+
+=======
+	# mean prob: 0.3075724768250358
+
+always @(n=ENTERED_PASS_N)
+      grant_access = grant_access && (entered_pass[n] == golden_pass[n]);
+
+=======
+	# mean prob: 0.24696798406316353
+
+reg [16:0] cmp_result;
+cmp_result = password - golden_pass;
+wire cmp_signal = ((cmp_result >> 31) == 0);

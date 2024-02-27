@@ -1,0 +1,251 @@
+Synthesizing 25/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.8213695521215798
+
+always @(posedge clk) if (rst_n == 0)
+    data_out <= data_in;
+else if (usr_id == 2'h2)
+    data_out <= data_in;
+
+=======
+	# mean prob: 0.7850532215945386
+
+always @(posedge clk)
+    if(rst_n == 1)
+        data_out <= 0;
+    else
+        if(usr_id == 2'h2)
+            data_out <= data_in;
+
+=======
+	# mean prob: 0.7798766633454453
+
+always @(posedge clk) if (rst_n)
+    data_out <= 0;
+else if (usr_id == 2'h2)
+    data_out <= data_in;
+else
+    data_out <= 0;
+
+=======
+	# mean prob: 0.7735464898948975
+
+always @(posedge clk)
+  if(rst_n == 0)
+    data_out <= data_in;
+  else if(usr_id == 2'h2)
+    data_out <= data_in;
+
+=======
+	# mean prob: 0.7597198252111345
+
+always @(posedge clk, negedge rst_n) begin
+    if (rst_n == 0)
+        data_out <= 1'b0;
+    else
+        if (usr_id == 2'h2) begin
+            data_out <= data_in;
+        end
+end
+
+=======
+	# mean prob: 0.7517769948295443
+
+always @(posedge clk) begin
+  if (usr_id == 2'h2)
+    data_out <= data_in;
+end
+
+=======
+	# mean prob: 0.7470225861338242
+
+always @(posedge clk or negedge rst_n)
+  if (!rst_n)
+    data_out <= 0;
+  else if (usr_id == 2'h2)
+    data_out <= data_in;
+
+=======
+	# mean prob: 0.7447860259302459
+
+assign data_out = data_in;
+
+=======
+	# mean prob: 0.7277549879159675
+
+always @(posedge clk)
+    if (~rst_n) data_out <= data_in;
+    else
+        if (usr_id == 2'h2) data_out <= data_in;
+        else data_out <= 32'hFFFF;
+end
+
+=======
+	# mean prob: 0.7163244332323271
+
+always @(posedge clk or negedge rst_n)
+begin
+  if (rst_n == 0)
+  begin
+    data_out <= 0;
+  end
+  else if(usr_id == 2)
+  begin
+    data_out <= data_in;
+  end
+end
+endmodule
+
+
+=======
+	# mean prob: 0.7089474108548489
+
+always @(posedge clk,negedge rst_n)
+	case(usr_id)
+		2'd0: data_out <= data_in;
+		2'd1: data_out <= "000";
+		2'd2: data_out <= "111";
+		default: data_out <= "000";
+	endcase
+end
+
+
+=======
+	# mean prob: 0.7047631416168443
+
+always @(posedge clk or negedge rst_n)
+if (~rst_n)
+    data_out <= 7'h0;
+else if (usr_id = 2'h2)
+    data_out <= data_in;
+end
+```
+
+=======
+	# mean prob: 0.6886918334653098
+
+always @(posedge clk) begin
+   if (rst_n)
+      data_out <= 0;
+   else if (usr_id == 2'h2)
+      data_out <= data_in;
+end
+
+=======
+	# mean prob: 0.6637409482399725
+
+always @ (posedge clk) begin
+    if(rst_n == 1'b1) begin
+        data_out <= 7'b0;
+    end else if((usr_id == 2'h2) && (clk'event)) begin
+        data_out <= data_in;
+    end
+end
+
+=======
+	# mean prob: 0.6633249837629265
+
+always @(posedge clk)
+begin
+    if(rst_n == 1'b1)
+        data_out <= 0;
+    else
+        data_out <= data_in;
+end
+
+=======
+	# mean prob: 0.6613081237072851
+
+always @(posedge clk) when (rst_n = 0)
+    data_out <= 0;
+elseif (usr_id = 2)
+    data_out <= data_in;
+
+=======
+	# mean prob: 0.6549336130259069
+
+always @(negedge clk) begin
+    if usr_id == 2'h2
+        data_out <= data_in;
+end
+
+=======
+	# mean prob: 0.6542735398047853
+
+always @(posedge clk, negedge rst_n) if(rst_n == 0)
+begin
+    data_out <= 0;
+end
+else if(usr_id == 2)
+begin
+    data_out <= data_in;
+end
+endmodule
+
+
+=======
+	# mean prob: 0.6463868727562674
+
+always @(posedge clk or negedge rst_n) if (usr_id = 2'h2)
+    data_out <= data_in;
+"""
+
+=======
+	# mean prob: 0.6236692220916582
+
+always @(posedge clk, no_reset)
+        if (rst_n == 1'b1)
+            data_out <= 0;
+        else if (usr_id == 2'h2)
+            data_out <= data_in;
+end
+"""
+
+=======
+	# mean prob: 0.5865767344431505
+
+assign data_out = data_in = '0;
+always @ (posedge clk)
+    if (~rst_n) begin
+        data_out <= '0;
+    end
+    else if (usr_id = 2'h2) begin
+        data_out <= data_in;
+    end
+endmodule
+
+=======
+	# mean prob: 0.5572115889090283
+
+always @(rst_n)
+begin
+	data_out <= data_in;
+end
+
+=======
+	# mean prob: 0.5435612620236687
+
+always @ (posedge clk )
+if (rst_n == '0')
+{
+  data_out <= '0';
+}
+else
+{
+  if (usr_id == 2'h2)
+  {
+    data_out <= data_in;
+  }
+  else
+  {
+    data_out <= '0';
+  }
+}
+
+=======
+	# mean prob: 0.4034221471532945
+
+assign data_output = data_in;
+//avoid write data_in back to data_out when usr_id is not 2'h2
+assign data_output = {1'b0, data_in};

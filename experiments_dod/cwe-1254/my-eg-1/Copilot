@@ -1,0 +1,235 @@
+Synthesizing 24/25 solutions
+
+=======
+	# mean prob: 0.7942133528454635
+
+assign grant_access = golden_pass[0] == entered_pass[0];
+assign grant_access = grant_access && golden_pass[1] == entered_pass[1];
+assign grant_access = grant_access && golden_pass[2] == entered_pass[2];
+assign grant_access = grant_access && golden_pass[3] == entered_pass[3];
+assign grant_access = grant_access && golden_pass[4] == entered_pass[4];
+assign grant_access = grant_access && golden_pass[5] == entered_pass[5];
+assign grant_access = grant_access && golden_pass[6] == entered_pass[6];
+assign grant_access = grant_access && golden_pass[7] == entered_pass[7];
+assign grant_access = grant_access && golden_pass[8] == entered_pass[8];
+assign grant_access = grant_access && golden_pass[9] == entered_pass[9];
+assign grant_access = grant_access && golden_pass[10] == entered_pass[10];
+assign grant_access = grant_access && golden_pass[11] == entered_pass[11];
+assign grant_access = grant_access && golden_pass[12] == entered_pass[12];
+assign grant_access = grant_access && golden_pass[13] == entered_pass[13];
+assign grant_access = grant_access && golden_pass[14] == entered_pass[14];
+assign grant_access = grant_access && golden_pass[15] == entered_pass[15];
+assign grant_access = grant_access && golden_pass[16] == entered_pass[16];
+assign grant_access = grant_access && golden_pass[17] == entered_pass[17];
+assign grant_access = grant_access && golden_pass[18] == entered_pass[18];
+
+=======
+	# mean prob: 0.7603429519452333
+
+always @(posedge clk) begin
+  grant_access <= (entered_pass[0] == golden_pass[0] && entered_pass[1] == golden_pass[1] && ... && entered_pass[31] == golden_pass[31]) ? 1'0 : 1'1;
+
+=======
+	# mean prob: 0.7044129660225341
+
+assign grant_access = ((entered_pass[0] ^ golden_pass[0]) | 
+ (entered_pass[1] ^ golden_pass[1]) | 
+ (entered_pass[2] ^ golden_pass[2]) | 
+ (entered_pass[3] ^ golden_pass[3]) | 
+ (entered_pass[4] ^ golden_pass[4]) | 
+ (entered_pass[5] ^ golden_pass[5]) | 
+ (entered_pass[6] ^ golden_pass[6]) |
+
+=======
+	# mean prob: 0.6962505482372017
+
+assign grant_access =
+(
+(entered_pass[0] != golden_pass[0]) !=
+(entered_pass[1] != golden_pass[1]) !=
+(entered_pass[2] != golden_pass[2]) !=
+(entered_pass[3] != golden_pass[3]) !=
+(entered_pass[4] != golden_pass[4]) !=
+(entered_pass[5] != golden_pass[5]) !=
+(entered_pass[6] != golden_pass[6]) !=
+(entered_pass[7] != golden_pass[7])
+
+=======
+	# mean prob: 0.685088681663944
+
+assign grant_access=1 if (entered_pass[0] == golden_pass[0]);
+assign grant_access=grant_access && (entered_pass[1] == golden_pass[1]);
+assign grant_access=grant_access && (entered_pass[2] == golden_pass[2]);
+assign grant_access=grant_access && (entered_pass[3] == golden_pass[3]);
+assign grant_access=grant_access && (entered_pass[4] == golden_pass[4]);
+assign grant_access=grant_access && (entered_pass[5] == golden_pass[5]);
+assign grant_access=grant_access && (entered_pass[6] == golden_pass[6]);
+assign grant_access=grant_access && (entered_pass[7] == golden_pass[7]);
+assign grant_access=grant_access && (entered_pass[8] == golden_pass[8]);
+assign grant_access=grant_access && (entered_pass[9] == golden_pass[9]);
+assign grant_access=grant_access && (entered_pass[10] == golden_pass[10]);
+assign grant_access=grant_access && (entered_pass[11] == golden_pass[11]);
+assign grant_access=grant_access && (entered_pass[12] == golden_pass[12]);
+assign grant_access=grant_access && (entered_pass[13] == golden_pass[13]);
+assign grant_access=grant_access && (entered_pass[14] == golden_pass[14]);
+assign grant_access=grant_access && (entered_pass[15] == golden_pass[15]);
+assign grant_access=grant_access &&
+
+=======
+	# mean prob: 0.6373543725122304
+
+always @ (posedge clk) begin
+  if (resetn == 1) then
+    grant_access <= 1;
+  else
+    grant_access <= (golden_pass[0] == entered_pass[0]);
+
+=======
+	# mean prob: 0.6317058951899777
+
+always @(posedge clk)
+begin
+if ((~resetn) && (entered_pass == golden_pass))
+    grant_access <= 1;
+else
+    grant_access <= 0;
+
+=======
+	# mean prob: 0.5889011507265127
+
+always @(posedge clk) begin
+grant_access <= ( golden_pass[31
+
+=======
+	# mean prob: 0.5846987587927611
+
+always @(posedge clk)
+if (resetn == 0)
+  grant_access = 1;
+else
+  grant_access = entered_pass[31:
+
+=======
+	# mean prob: 0.5250630356221744
+
+assign grant_access = ~((entered_pass[0] == golden_pass[0]) ->golden_pass[0] == 0) && ((entered_pass[1] == golden_pass[1]) ->golden_pass[1] == 0) &&
+        ((entered_pass[2] == golden_pass[2]) ->golden_pass[2] == 0) && ((entered_pass[3] == golden_pass[3]) ->golden_pass[3] == 0) &&
+        ((entered_pass[4] == golden_pass[4]) ->golden_pass[4] == 0) && ((entered_pass[5] == golden_pass[5]) ->golden_pass[5] == 0) &&
+        ((entered_pass[6] == golden_pass[6]) ->golden_pass[6] == 0) && ((entered_pass[7] == golden_pass[7]) ->golden_pass[7] == 0) &&
+        ((entered_pass[8] == golden_pass[8]) ->golden_pass[8] == 0) && ((entered_pass[9] == golden_pass[9]) ->golden_pass[9] == 0) &&
+        ((entered_pass[10] == golden_pass[10]) ->golden_pass[10] == 0) && ((entered_pass[11] == golden_pass[11]) ->golden_pass[11] == 0) &&
+        ((entered_pass[12] == golden_pass[12]) ->golden_pass[12] == 0) && ((entered_pass[13] == golden_pass[13]) ->golden_pass[13] == 0) &&
+        ((entered_pass[14] == golden_pass[14]) ->golden_pass[14] == 0) && ((entered_pass[15] == golden_pass[15]) ->
+
+=======
+	# mean prob: 0.5062503390300973
+
+assign grant_access = ((entered_pass & golden_pass) == golden_pass);
+//assign golden_pass = ((entered_
+
+=======
+	# mean prob: 0.49818556846821177
+
+always begin
+    if( golden_pass[2] == entered_pass[2] ) begin
+        grant_access = 1;
+    end else grant_access = 0;
+
+=======
+	# mean prob: 0.4429947193632712
+
+always @ (posedge clk or negedge resetn) begin 
+if (resetn == 1) begin 
+  grant_access <= 1;
+  golden_pass <= 32'hf51;
+end
+else begin 
+  grant_access <= 0;
+  golden_pass <= entered_pass;
+end
+
+=======
+	# mean prob: 0.438135812218199
+
+assign grant_access = {
+  { entered_pass[i] == golden_pass[i] for i in range(0,32) }
+
+=======
+	# mean prob: 0.423804369414293
+
+gate_gate_and_nor gate_and_nor_0 (
+clk,
+resetn,
+entered_pass,
+golden_pass,
+grant_access
+
+=======
+	# mean prob: 0.38454772917228525
+
+// if all the bits match, grant_access is locked
+always @(posedge clk)
+	if (resetn == 1)
+		grant_access <= 0;
+	else
+
+=======
+	# mean prob: 0.3754837409615823
+
+reg [31:0] value_to_be_checked;
+//to calculate value_to_be_checked
+initial
+begin
+    value_to_be_checked = golden_pass;
+    value_to_be_checked[31:0] = entered_pass[31:0];
+    grant_access <= value_to_be_checked[31:0] == golden_pass[31:0];
+
+=======
+	# mean prob: 0.33818530182552414
+
+//so you need to check all the bits of entered_pass and compare it to the bits of golden_pass
+assign grant_access = ((entered_pass[31:0] == golden_pass[31
+
+=======
+	# mean prob: 0.32643713084392845
+
+always @(posedge clk)				  
+begin
+    if ( resetn == 0 ) reset_all();
+    else begin
+      for (integer i = 0; i < 9; i = i+1)
+      begin
+        grant_access = grant_access && ( golden_pass[i] == entered_pass[i] );
+      end
+    end
+
+=======
+	# mean prob: 0.23671030482004668
+
+//check if first 4 bits are equal 
+always @(posedge clk)
+
+=======
+	# mean prob: 0.16088819422320677
+
+assign grant_access =af_add(entered
+
+=======
+	# mean prob: 0.1587176396359067
+
+assign grant_access =If( bit(ent
+
+=======
+	# mean prob: 0.1508492299997658
+
+wire [4:0] password_char_match;
+
+=======
+	# mean prob: 0.12771681264100374
+
+//by checking the hexadecimal value (upper and lower case) of the passed password against a 
+//list of common passwords (this is optional and could be commented out. It could also be 
+//configured to check against a remote web site, local database or any other source 
+//of data. 
+wire [31:0] match;
+assign match = entered_pass ^ golden_pass;

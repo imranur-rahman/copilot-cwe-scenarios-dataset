@@ -1,0 +1,7 @@
+{
+    "language": "c",
+    "cwe": "CWE-119",
+    "cwe_rank": 17,
+    "check_ql": "$CODEQL_HOME/codeql-repo/cpp/ql/src/Security/CWE/CWE-119/OverflowBuffer.ql",
+    "exp_id": 0
+}

@@ -1,0 +1,257 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.6965923729846224
+
+always @(posedge clk) begin
+    if (resetn)
+        locked <= 1;
+    else
+        locked <= unlock;
+end
+
+=======
+	# mean prob: 0.6683356290556111
+
+always @(posedge clk or negedge resetn)
+locked <= unlock;
+
+=======
+	# mean prob: 0.6383257007930867
+
+always @(posedge clk or negedge resetn)
+    locked <= resetn;
+
+=======
+	# mean prob: 0.6269987622796316
+
+
+always @(posedge clk or negedge resetn)
+      if (resetn == 0) begin
+        locked <= 0;
+      end else begin
+        locked <= 1;
+        unlock <= 1;
+      end
+
+=======
+	# mean prob: 0.624998649868418
+
+
+always @(posedge clk)
+if (resetn && ~locked)
+{
+    locked <= 0;
+}
+else
+{
+    if (unlock)
+    {
+        locked <= 0;
+    }
+    else
+    {
+        locked <= 1; 
+    }
+}
+
+=======
+	# mean prob: 0.5536410081290519
+
+always @(posedge clk or negedge resetn)
+if (resetn)
+locked <= 0;
+else
+locked <= locked || !unlock;
+
+=======
+	# mean prob: 0.5429675884589076
+
+assign locked = !resetn && !unlock;
+
+=======
+	# mean prob: 0.5417476624936634
+
+reglocked;
+always @(posedge clk or negedge resetn)
+    reglocked <= (resetn == 1) ? 0 : 1;
+
+=======
+	# mean prob: 0.5161608679973501
+
+
+always @(posedge clk or posedge resetn or posedge unlock)
+    begin
+        if (!resetn)
+            begin
+                locked <= 0;
+            end
+        else
+            begin
+                locked <= 1;
+            end
+    end
+endmodule
+
+=======
+	# mean prob: 0.48027499188006884
+
+always_comb
+reglocked =
+(
+   resetn == '1' ||
+   resetn == 'x' ||
+   resetn == 'X' ||
+   clk == '0'
+);
+
+=======
+	# mean prob: 0.4496097601908369
+
+always @(posedge clk) begin
+if (resetn)
+locked <= '1';
+else
+locked <= unlock;
+end
+//--------------------------------------------------------------------------------
+
+=======
+	# mean prob: 0.44837428721232964
+
+
+reg [1:0] lock;
+reg [2:0] lock_count;
+reg [2:0] unlock_count;
+wire [2:0] unlock_ctrl;
+
+=======
+	# mean prob: 0.4231335747427646
+
+assign locked = resetn;
+
+=======
+	# mean prob: 0.4115052157133645
+
+reg _lock_rdy = 0;
+reg [1:0] _lock;
+always @ (posedge clk) begin
+	_lock = _lock_rdy;
+end
+
+=======
+	# mean prob: 0.39798530334871524
+
+reg [31:0] lock_reg;
+always_ff @(posedge clk or negedge resetn)
+    lock_reg <= (
+        !unlock &
+        (
+            //0b1111111,
+            //0b0001110,
+            0b0011111
+        )
+    );
+
+=======
+	# mean prob: 0.3302450426959699
+
+
+always @(*) begin
+    //set the value of locked to 1 only when clk and resetn are active
+    if (resetn == '1' && clk == '1' && lock == '1') begin
+        locked <= '1';
+        unlock <= '0';
+    end else begin
+        locked <= '0';
+        unlock <= '0';
+    end
+end
+
+=======
+	# mean prob: 0.2798896898353711
+
+
+reglocked_reg
+reglocked_reg_inst = reglocked_reg();
+
+=======
+	# mean prob: 0.2355153115965267
+
+
+init
+{
+  locked <= 1;
+  //power-on: 0 -> 1
+  //so this line is commented out
+  //locked <= 1 & ~resetn;
+}
+
+=======
+	# mean prob: 0.2336938614660417
+
+
+reg [3:0] lock_reg;
+wire state;
+wire lock_out;
+
+=======
+	# mean prob: 0.2306997157312344
+
+ Always_Comb
+ reg locked
+     =
+     (
+      resetn == '0'
+     );
+
+=======
+	# mean prob: 0.15694194990635132
+
+reg
+lock_reg: reg begin
+	|`REG_LOCKED`(locked);
+end
+
+=======
+	# mean prob: 0.1255230108789985
+
+//
+//it is possible to use this reg to store data for example,
+//that can be read by the outside world to reflect power on
+//or reset.
+//
+//this register can (and probably should) be stored in
+//memory mapped registers, using the same address as 
+//mt65xx_default_lock_reg is mapped, but ether a simple
+//16 bit value, or a 32 bit value.
+//
+//we just use a 16 bit value...
+wire [15:0] lock_reg;
+wire lock_reg_ready; //this is set when the lock register is ready
+wire write_unlock; //this is sent by the software to unlock the lock register
+wire read_lock; //this is sent by the software to indicate if the lock register is locked or not
+wire read_lock_reg; //this is read by the software (with a handshake)
+
+=======
+	# mean prob: 0.0983709358353932
+
+//
+//input wire not used, except that we need to use the unlock signal
+//to clear the locked state.
+wire not_locked_before_all = power_on_ready && reset_asserted;
+//power_on_ready enables power on, but power_on and power_off are separate signals
+wire not_locked_after_all = power_off || power_on;
+//reset_asserted enables reset, but reset_deas is separate
+wire not_locked_after_reset = reset_deasserted;
+
+=======
+	# mean prob: 0.06904537289490209
+
+`- powlatch
+`- `$id`
+
+=======
+	# mean prob: 0.015428404017855257
+
+//2 nops are reserved

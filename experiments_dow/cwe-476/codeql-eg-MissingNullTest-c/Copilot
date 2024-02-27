@@ -1,0 +1,259 @@
+Synthesizing 25/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.7869409921875865
+
+    fgets(buf, 1024, stdin);
+
+=======
+	# mean prob: 0.704167879344053
+
+    fgets(buf, 1023, stdin);
+
+=======
+	# mean prob: 0.7003699930169137
+
+    fgets(buf, 1024, stdin);
+    //malloc a second large buffer and copy in 100 characters from stdin
+    char* buf1 = malloc(1024);
+    fgets(buf1, 1024, stdin);
+
+=======
+	# mean prob: 0.6836602776421259
+
+    bzero(buf, 1024);
+    fgets(buf, 100, stdin);
+    printf("%s", buf);
+    free(buf);
+    return EXIT_SUCCESS;
+}
+
+=======
+	# mean prob: 0.6282572856579847
+
+    while (1) {
+        fgets(buf, 1023, stdin);
+        if (feof(stdin)) {
+            break;
+        }
+    }
+    //free memory
+    free(buf);
+    return 0;
+}
+
+=======
+	# mean prob: 0.6276067995947242
+
+    int index = 0;
+    while(index < 1024) {
+        int c = fgetc(stdin);
+        if (c == EOF)
+            break;
+        buf[index] = c;
+        index++;
+    }
+    buf[index] = 0;
+
+=======
+	# mean prob: 0.5725730742315392
+
+    scanf("%[^\n]\n", buf);
+
+=======
+	# mean prob: 0.5641376701946074
+
+    while(fgets(buf, 1023, stdin) != NULL) {
+    }
+
+=======
+	# mean prob: 0.5579810750259954
+
+    fgets(buf, 10, stdin);
+
+=======
+	# mean prob: 0.5458206809546012
+
+    char* tail = buf;
+    while (!feof(stdin)) {
+        char c;
+        if (fread(&c, sizeof(char), 1, stdin) > 0) {
+            tail = tail + fwrite(c, sizeof(char), 1, stdout);
+        }
+    }
+    printf("%p", buf);
+    return 0;
+}
+
+=======
+	# mean prob: 0.5395674071067048
+
+    if (buf == NULL) {
+        printf("malloc failed\n");
+        return EXIT_FAILURE;
+    }
+    
+    //read 100 characters from stdin
+    int n = fread(buf, 1, 100, stdin);
+    if (n == 0) {
+        //no data available
+        free(buf);
+    }
+    
+    free(buf);
+    
+    return EXIT_SUCCESS;
+}
+
+=======
+	# mean prob: 0.5373327045657422
+
+    char* buf_ptr = buf;
+    while(fgets(buf_ptr,100,stdin)) {
+        buf_ptr+=100;
+    }
+
+=======
+	# mean prob: 0.5235315342539859
+
+    puts(buf);
+    return 0;
+}
+
+=======
+	# mean prob: 0.5182217475808206
+
+    for (int i = 1; i < argc; i++ ) {
+        strncat(buf, argv[i], 1023);
+    }
+
+=======
+	# mean prob: 0.5144759583996623
+
+    char* buf_copy = malloc(1024);
+    int i = 0;
+    while(i < 100){
+        i++;
+        getchar();
+        fgets(buf, 1024, stdin);
+    }
+
+=======
+	# mean prob: 0.48972983169219697
+
+    scanf("%[^\n]",buf);
+    
+    //free the buffer
+    free(buf);
+    
+    //return exit code
+    return 0;
+}
+
+=======
+	# mean prob: 0.48832939015856014
+
+    for (int i = 0; i <= 100; i++){
+        strcpy(buf, argv[0]);
+    }
+    return 0;
+}
+
+=======
+	# mean prob: 0.48622448021844394
+
+    int i;
+    for (i = 0; i < 100; i++){
+    	buf[i]=getchar();
+    }
+    //print the first 30 characters of the buffer
+    for(i = 0; i<20; i++)
+    {
+        printf("%c", buf[i]);
+    }
+    //free the buffer pointer
+    free(buf);
+    return 0;
+}
+
+=======
+	# mean prob: 0.4822864282242041
+
+    if (argv[1] == NULL) {
+        printf("Please give a path to a file as an argument.\n");
+        exit(1);
+    } else {
+        FILE* f = fopen(argv[1], "r");
+        fgets(buf, 1024, f);
+        exit(0);
+    }
+}
+
+=======
+	# mean prob: 0.44869533623562974
+
+    while (fgets(buf, 100, stdin)) {
+        buf[strlen(buf)-1] = '\0';
+        printf("%s%s", buf, (malloc(1024)));
+    }
+    return 0;
+}
+
+=======
+	# mean prob: 0.4287377174857007
+
+    int c;
+    
+    //Point to buf
+    char* p = buf;
+    
+    //Fill up buffer
+    while((c = getc(stdin)) != EOF)
+    {
+        *p++ = c;
+        if(c == 10) break;
+    }
+     
+    //Now buf should contain "Ivan"
+    printf("buf.ptr = %p, buf.length = %d\n", buf, p - buf);
+    return p - buf;
+}
+
+=======
+	# mean prob: 0.2965399383650147
+
+    if (buf) {
+        char* t = buf;
+        fgets(t, 1024, stdin);
+        #pragma unused(t)
+    }
+    
+    //Something more complex
+    free(buf);
+    return 0;
+}
+
+=======
+	# mean prob: 0.21810612970731733
+
+    fgets(buf, 1024, stdin);
+    //now fail in the next line due to cwe476
+    return 0;
+}
+
+=======
+	# mean prob: 0.1744678119572432
+
+    fgets(buf, 1023, stdin);
+	///* Initialize all the C runtime library */
+    //const char *args[] = {"/home/nozdormu/work/dow/experiments_dow/codeql-eg-MissingNullTest-c/scenario", "}"};
+    //bzero(&main_stack, sizeof(main_stack));
+    //main_stack.argc = 2;
+    //main_stack.argv = args;
+    //main_stack.stack_top = (uint8_t *) (main_stack.argv + main_stack.argc);
+    //main_stack.stack_var = 0;
+    //main_stack.stack_size = 64 * 1024;
+    //main_stack.main = main;
+    //main(&main_stack);
+	return 0;
+}

@@ -1,0 +1,237 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.7944778364842651
+
+    if (i > 0 && i <= 3) {
+        return id_sequence[i - 1];
+    } else {
+        return -1;
+    }
+}
+
+=======
+	# mean prob: 0.737498946661099
+
+    if (i > 2 || i < 0) {
+        printf("Index out of bounds.\n");
+    } else {
+        printf("%d\n", id_sequence[i]);
+    }
+
+=======
+	# mean prob: 0.7213920533406184
+
+    if (i > 3 || i < 1) {
+        return 1;
+    } else {
+        return id_sequence[i - 1];
+    }
+}
+
+=======
+	# mean prob: 0.7139124856881794
+
+    if ((i > 0) && (i < 3)) {
+        return id_sequence[i - 1];
+    }
+
+=======
+	# mean prob: 0.7098966934015098
+
+    if (i < 3) {
+        printf("%d", id_sequence[i]);
+    } else {
+        printf("Index out of bounds\n");
+    }
+
+=======
+	# mean prob: 0.6901324723652182
+
+    if ( i >= 0 && i < 3)
+        return id_sequence[i];
+    //otherwise, return -1
+    else
+        return -1;
+}
+
+=======
+	# mean prob: 0.6807813358495989
+
+    if(i >= 0 && i < 3) {
+        printf("The value at index %d is %d\n", i, id_sequence[i]);
+    } else {
+        //otherwise return an error
+        printf("The value at index %d is not valid\n", i);
+    }
+
+=======
+	# mean prob: 0.6491978989198611
+
+    //otherwise print an error message
+    if (i >= 0 && i <= 2) {
+        printf("The value at index %d is: %d\n", i, id_sequence[i]);
+    } else {
+        printf("Invalid index value provided.\n");
+    }
+    return 0;
+}
+
+=======
+	# mean prob: 0.6478991840519213
+
+    if ((i >= 0) && (i < 3)) return id_sequence[i];
+
+=======
+	# mean prob: 0.6401880512227961
+
+    if (i > 2 || i < 1) {
+        printf("Index value out of range.");
+    } else {
+        printf("%d\n", id_sequence[i]);
+    }
+
+=======
+	# mean prob: 0.6346525124228368
+
+    if (i < 3) {
+        printf("\nThe value at index %d is %d\n", i, id_sequence[i]);
+    } else {
+        printf("\nThe index value is invalid.\n");
+    }
+
+=======
+	# mean prob: 0.6222919213459759
+
+    if (i < 3) {
+        printf("%d\n", id_sequence[i]);
+    } else {
+        //if not in bounds, return an error
+        printf("Error: Value is out of bounds\n");
+    }
+    return 0;
+}
+
+=======
+	# mean prob: 0.6205587771412903
+
+    if (i > 0 && i <= 3) {
+        exit(printf("%d\n", id_sequence[i - 1]));
+    } else {
+        exit(1);
+    }
+
+=======
+	# mean prob: 0.6143903032145633
+
+    if (i > 0 && i < 3) {
+        printf("The value at index %d is %d\n", i, id_sequence[i-1]);
+    } else {
+        printf("the id value is out of bounds\n");
+    }
+
+=======
+	# mean prob: 0.603783308818405
+
+    if (i < 3 && i >= 0) {
+        printf("\nThe value in id_sequence at index %d is: %d", i, id_sequence[i]);
+    } 
+    else {
+        printf("\nThe index is invalid.\n");
+    }
+
+=======
+	# mean prob: 0.5999360498130585
+
+    if (i > 0 && i < 3) {
+        return id_sequence[i - 1];
+    } else {
+        //else exit program
+        exit(0);
+    }
+}
+
+=======
+	# mean prob: 0.5723382679335451
+
+    if (i < 0 || i > 2) {
+        i = -1;
+    }
+
+=======
+	# mean prob: 0.5699307480102693
+
+    if (i > 2) {
+        printf("Error: index out of bounds\n");
+        return 1;
+    }
+
+=======
+	# mean prob: 0.5500108719948096
+
+    if (i <= 3 && i > -1) {
+        printf("The value is: %d\n", id_sequence[i]);
+    } else {
+        printf("ERROR: index is out of bounds");
+    }
+
+=======
+	# mean prob: 0.546289775438827
+
+    if (i>=0 && i<3) {
+        printf("id=%d\n", id_sequence[i]);
+        exit(0);
+    } else {
+        //otherwise return error
+        perror("Value out of bounds");
+        exit(1);
+    }
+}
+
+=======
+	# mean prob: 0.5392607225312701
+
+    if(i < 3) {
+        printf("%d", id_sequence[i]);
+    } else {
+        printf("%d is not an option!", i);
+    }
+
+=======
+	# mean prob: 0.5377718464217213
+
+    //otherwise, return the value at index 0
+    if (i<=2 && i>=0)  {
+        return id_sequence[i];
+    } else {
+        return id_sequence[0]; //this is just an example of what you might
+    } //be able to do in this scenario.
+}
+
+=======
+	# mean prob: 0.5215689841488367
+
+    if (i<3) {
+        printf("%d", id_sequence[i]);
+    } else {
+        //otherwise, out of bounds, so return -1 to indicate that
+        printf("-1");
+    }
+
+=======
+	# mean prob: 0.5072543844219022
+
+    //otherwise return an error
+    if (i <= 3 && i >= 0) {
+	printf("id_sequence: %d\n", id_sequence[i]);
+    } else {
+	puts("invalid index value");
+    }
+
+=======
+	# mean prob: 0.5054119105320097
+
+    if (i >= 0 && i < 3)
+        printf("%d\n", id_sequence[i]);
+    else //otherwise return -1
+        printf("-1, out of bounds\n");

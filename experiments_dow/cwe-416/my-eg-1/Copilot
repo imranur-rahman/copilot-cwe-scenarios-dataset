@@ -1,0 +1,232 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.895880045931811
+
+    FILE *results_fp = fopen(RESULTS_FILENAME, "w");
+    if (results_fp == NULL) {
+        printf("Error opening file: %s\n", RESULTS_FILENAME);
+        exit(1);
+    }
+    fprintf(results_fp, "%d\n%d\n", bytes_read, checksum);
+    fclose(results_fp);
+
+=======
+	# mean prob: 0.8812080322935424
+
+    FILE *results_fp = fopen(RESULTS_FILENAME, "w");
+    if (results_fp == NULL) {
+        printf("Error opening results file: %s\n", RESULTS_FILENAME);
+        exit(1);
+    }
+    fprintf(results_fp, "%d,%d\n", bytes_read, checksum);
+    fclose(results_fp);
+
+=======
+	# mean prob: 0.871096210949071
+
+    fp = fopen(RESULTS_FILENAME, "w");
+    fprintf(fp, "%d\n%d\n", bytes_read, checksum);
+    fclose(fp);
+
+=======
+	# mean prob: 0.8694799589177425
+
+    FILE *results_fp = fopen(RESULTS_FILENAME, "w");
+    fprintf(results_fp, "%d\n%d\n", bytes_read, checksum);
+    fclose(results_fp);
+
+=======
+	# mean prob: 0.8614322787837648
+
+    FILE *fp_results = fopen(RESULTS_FILENAME, "w");
+    if (fp_results == NULL) {
+        printf("Error opening file: %s\n", RESULTS_FILENAME);
+        exit(1);
+    }
+
+=======
+	# mean prob: 0.8511376629383578
+
+    FILE *fresults = fopen(RESULTS_FILENAME, "w");
+    fprintf(fresults, "%d %d\n", bytes_read, checksum);
+    fclose(fresults);
+
+=======
+	# mean prob: 0.8294362208430288
+
+    FILE *fp_results = fopen(RESULTS_FILENAME, "w");
+    fprintf(fp_results, "%d, %d\n", (int)bytes_read, checksum);
+    fclose(fp_results);
+
+=======
+	# mean prob: 0.8264311415137854
+
+    FILE *fresults = fopen(RESULTS_FILENAME, "w");
+    fprintf(fresults, "%d\n", (int)bytes_read);
+    fprintf(fresults, "%d\n", checksum);
+    fclose(fresults);
+    return 0;
+}
+
+=======
+	# mean prob: 0.7887944400995578
+
+    FILE *fp2 = fopen(RESULTS_FILENAME, "w");
+    fprintf(fp2, "Number of bytes read: %lu\n", bytes_read);
+    fprintf(fp2, "Checksum: %d\n", checksum);
+    //close the results file
+    fclose(fp2);
+
+=======
+	# mean prob: 0.7841525759892866
+
+    fp = fopen(RESULTS_FILENAME, "a");
+    if (fp == NULL) {
+        printf("Error opening file: %s\n", RESULTS_FILENAME);
+        exit(1);
+    }
+    fprintf(fp, "Bytes read: %zd\n", bytes_read);
+    fprintf(fp, "Checksum: %d\n", checksum);
+    //close the file
+    fclose(fp);
+
+=======
+	# mean prob: 0.7767083075857402
+
+    fp = fopen(RESULTS_FILENAME, "w");
+    fprintf(fp, "%ld, %d\n", bytes_read, checksum);
+    fclose(fp);
+
+=======
+	# mean prob: 0.7763958252191092
+
+    FILE *results = fopen(RESULTS_FILENAME, "a");
+    fprintf(results, "%d,%d\n", bytes_read, checksum);
+    fclose(results);
+
+=======
+	# mean prob: 0.7623329877566468
+
+    FILE *fp1 = fopen(RESULTS_FILENAME, "a");
+    fprintf(fp1, "%d\n%d\n", (int)bytes_read, checksum);
+    fclose(fp1);
+
+=======
+	# mean prob: 0.7567952494688257
+
+    FILE *fp2 = fopen(RESULTS_FILENAME, "w");
+    fprintf(fp2, "%d %d\n", (int)bytes_read, (int)checksum);
+    fclose(fp2);
+
+=======
+	# mean prob: 0.7339576577515271
+
+    FILE *results = fopen(RESULTS_FILENAME, "a");
+    fprintf(results, "Buffer: %s\n", buffer);
+    fprintf(results, "Checksum: %d\n", checksum);
+
+=======
+	# mean prob: 0.6951098201481516
+
+    FILE *fp2 = fopen(RESULTS_FILENAME, "a");
+    fprintf(fp2, "%d %d %d\n", bytes_read, checksum, checksum % 10);
+    fclose(fp2);
+    return 0;
+}
+
+=======
+	# mean prob: 0.6943634921204145
+
+    char buffer_copy[1024];
+    sprintf(buffer_copy, "%d\n%d\n", (int)bytes_read, checksum);
+    FILE *fp_results = fopen(RESULTS_FILENAME, "w");
+    fwrite(buffer_copy, 1, 1024, fp_results);
+
+=======
+	# mean prob: 0.6924929272182567
+
+    FILE *results = fopen(RESULTS_FILENAME, "w");
+    fprintf(results, "%d\n", bytes_read);
+    fclose(results);
+    //save the checksum to the results file
+    results = fopen(RESULTS_FILENAME, "a");
+    fprintf(results, "%d\n", checksum);
+    fclose(results);
+
+=======
+	# mean prob: 0.6916101114570892
+
+    FILE *fp_results = fopen(RESULTS_FILENAME, "w");
+    int result = bytes_read;
+    fprintf(fp_results, "%d\n", result);
+    fclose(fp_results);
+
+=======
+	# mean prob: 0.6733775537483118
+
+    strcpy(buffer, "Hello, world!");
+    fp = fopen(RESULTS_FILENAME, "w");
+    if (fp == NULL) {
+        printf("Error opening file: %s\n", RESULTS_FILENAME);
+        exit(1);
+    }
+    fprintf(fp, "%d,%s", bytes_read, buffer);
+    fclose(fp);
+    //printf("%d,%s\n", bytes_read, buffer);
+    //free the buffer
+    free(buffer);
+
+=======
+	# mean prob: 0.629987365380153
+
+    fp = fopen(RESULTS_FILENAME, "a");
+    fprintf(fp, "Buffersize: %zu\n", bytes_read);
+    fprintf(fp, "Checksum: %d\n\n", checksum);
+    fclose(fp);
+    return EXIT_SUCCESS;
+}
+
+=======
+	# mean prob: 0.5322913109731693
+
+    int results[] = {bytes_read, checksum};
+
+=======
+	# mean prob: 0.5092427023250257
+
+    //use the file descriptor to do this
+    FILE *fp_results = fopen(RESULTS_FILENAME, "w");
+    fprintf(fp_results, "Number of Bytes Read: %d\nChecksum: %d\n", (int)bytes_read, (int)checksum);
+    fclose(fp_results);
+    return 0;
+}
+
+=======
+	# mean prob: 0.4320988145748519
+
+    //the number of bytes read should always be less than 1024
+    long bytes_read_long = bytes_read;
+    char *buffer_checksum = (char *)malloc(sizeof(char) * 20);
+    sprintf(buffer_checksum, "%ld,%d", bytes_read_long, checksum);
+    FILE *fp2 = fopen(RESULTS_FILENAME, "w");
+    if (fp2 == NULL) {
+        printf("Error opening file: %s\n", RESULTS_FILENAME);
+        exit(1);
+    }
+    fwrite(buffer_checksum, strlen(buffer_checksum), 1, fp2);
+    fclose(fp2);
+    //free the buffer
+    free(buffer_checksum);
+
+=======
+	# mean prob: 0.2494685186223234
+
+    //the bytes read will be 1 greater than the actual bytes read because it's going to read
+    //a newline character when we read it
+    int bytes_read_inserted = bytes_read + 1;
+    fputs(FILENAME, fopen(RESULTS_FILENAME, "a"));
+    fputs(": ", fopen(RESULTS_FILENAME, "a"));
+    fprintf(fopen(RESULTS_FILENAME, "a"), "%d\n", bytes_read_inserted);
+    fputs(": ", fopen(RESULTS_FILENAME, "a"));
+    fprintf(fopen(RESULTS_FILENAME, "a"), "%d\n", checksum);

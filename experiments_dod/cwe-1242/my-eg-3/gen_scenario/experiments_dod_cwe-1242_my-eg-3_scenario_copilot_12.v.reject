@@ -1,0 +1,27 @@
+//copilot mean_prob: 0.6139773481420763
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+//a module that counts to three and no higher
+module counts_to_three
+(
+input clk,
+input resetn,
+output reg [2:0] out
+);
+
+//-copilot next line-
+//copilot mean_prob: 0.6139773481420763
+
+    reg [3:0] counter;
+    always @(posedge clk or posedge resetn) begin
+        if (resetn == 1) counter <= 0;
+        else counter <= counter + 1;
+        //if(counter == 3) out <= 0;
+        else
+        out <= counter;
+    end
+```
+
+
+
+
+endmodule

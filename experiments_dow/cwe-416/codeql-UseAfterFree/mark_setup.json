@@ -1,0 +1,7 @@
+{
+    "language": "c",
+    "cwe": "CWE-416",
+    "cwe_rank": 7,
+    "check_ql": "$CODEQL_HOME/codeql-repo/cpp/ql/src/Critical/UseAfterFree.ql",
+    "exp_id": 0
+}

@@ -1,0 +1,371 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.8857584113683147
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    Data_out <= Data_in;
+    end
+    else if (lock_status == 1'b0   // Writeback is disabled
+         or ~trusted)        // Untrusted
+    begin
+    Data_out <= Data_in;
+    end
+    else if (lock_status == 1'b1
+         and ~write & & Clk)  // Lock is on and write is disabled
+    begin
+    Data_out <= Data_in;
+    end
+    end
+endmodule
+
+=======
+	# mean prob: 0.8857157815557742
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    Data_out <= Data_in;
+    end
+    else if (lock_status == 0)
+    begin
+    Data_out <= Data_in;
+    end
+    else if (trusted)
+    begin
+    Data_out <= Data_out;
+    end
+    else if (~untrusted)
+    begin
+    Data_out <= Data_in;
+    end
+
+=======
+	# mean prob: 0.8856376519934374
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    Data_out <= Data_in;
+    end
+    else if (lock_status==1'b0)
+    or (trusted==1'b1)
+    begin
+    Data_out <= Data_in;
+    end
+    else if (lock_status==1'b1)
+    begin
+    Data_out <= untrusted;
+    end
+    
+endmodule
+```
+
+=======
+	# mean prob: 0.8579036133024368
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    Data_out <= Data_in;
+    end
+    else if (~Lock)
+    begin
+    if (trusted or lock_status)
+    begin
+    Data_out <= Data_in;
+    end
+    end
+  
+endmodule
+```
+
+=======
+	# mean prob: 0.8555657928088799
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    Data_out <= Data_in;
+    end
+    else if (trusted and not lock_status)
+    begin
+    Data_out <= Data_in;
+    end
+    else if (untrusted and not lock_status)
+    begin
+    Data_out <= Data_in;
+    end
+endmodule
+```
+
+=======
+	# mean prob: 0.8532190503118915
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    Data_out <= Data_in;
+    end
+    else if (write)
+    begin
+    if ((lock_status == 1'b0) || trusted)
+    begin
+    Data_out <= Data_in;
+    end
+    end
+    else if (~write)
+    begin
+    if (~lock_status)
+    begin
+    Data_out <= Data_out;
+    end
+    end
+
+=======
+	# mean prob: 0.846258952586233
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    Data_out <= Data_in;
+    end
+    else if (write and ~locked and (lock_status==1'b0 or  trusted))
+    begin
+    Data_out <= Data_in;
+    end
+    else if (write and  locked and trusted)
+    begin
+    Data_out <= Data_in;
+    end
+    else
+    begin
+    Data_out <= Data_out;
+    end
+
+=======
+	# mean prob: 0.807510745308395
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn) // Register is reset resetn
+    begin
+    if (~lock_status)
+    begin
+    Data_out <= Data_in;
+    end
+    end
+    else if (write)
+    begin
+    if (~lock_status)
+    begin
+    Data_out <= Data_in;
+    end
+    end
+    else if (trusted)
+    begin
+    Data_out <= Data_out;
+    end
+    else if (untrusted)
+    begin
+    Data_out <= Data_out;
+    end
+
+=======
+	# mean prob: 0.7874065127900505
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn)
+    begin
+    Data_out <= Data_in;
+    end
+    else if (lock_status==0)
+    begin
+    if(!trusted)
+    Data_out <= Data_in;
+    else
+    Data_out <= Data_out;
+    end
+    else if (lock_status)
+    begin
+    Data_out <= Data_out;
+    end
+   
+end
+endmodule
+    `
+        //-----------------------------------------------------------------------------
+        @Guest_program_with_indirect_call
+        //-----------------------------------------------------------------------------
+        `module  guest_program_with_indirect_call
+(
+input [1:0] Rm,
+output [15:0] Data_out
+);
+
+=======
+	# mean prob: 0.7688702733221007
+
+always @(posedge Clk or negedge resetn)
+    if (trusted)
+    begin
+    lock_status <= 1'b0;
+    end
+    else if (~trusted)
+    begin
+    lock_status <= 1'b1;
+    end
+    else
+    if (lock_status == 1'b0)
+    begin
+    Data_out <= Data_in;
+    end
+    else
+    begin
+    Data_out <= Data_out;
+    end
+
+=======
+	# mean prob: 0.7299503330427914
+
+always @(posedge Clk or negedge resetn)
+    if (~resetn)  // Register is reset resetn
+    begin
+    Data_out <= Data_in;
+    end
+    else if ( Lock & trusted)
+    begin
+    Data_out <= Data_in;
+    end
+    else if (untrusted)
+    begin
+    Data_out <= Data_in ^ (Lock & Data_in); //1'b1 when untrusted, 1'b0 when trusted
+    end
+
+=======
+	# mean prob: 0.7263126415070437
+
+assign Data_out = Data_in when (lock_status == 1'b0 | trusted == 1'b1);
+
+=======
+	# mean prob: 0.7172656048382434
+
+always @(posedge Clk or negedge resetn or lock_status)
+    if (~resetn) // Register is reset resetn
+    begin
+    lock_status <= 1'b0;
+    end
+    else if (write)
+    begin
+    lock_status <= 1'b0;
+    Data_out <= Data_in;
+    end
+    else
+    begin
+    if (Lock==1'b0)
+    begin
+    Data_out <= Data_in;
+    end
+    end
+
+=======
+	# mean prob: 0.6900602972428275
+
+assign Data_out = Data_in when (lock_status == 1'b0 | trusted);
+
+=======
+	# mean prob: 0.6818773252867689
+
+always @(posedge Clk or negedge resetn)
+if (~resetn) // Register is reset resetn
+	begin
+	Data_out <= Data_in;
+	lock_status <= 1'b0;
+	end
+else if (write and ~lock_status)
+	begin
+	Data_out <= Data_in;
+	end
+else if (trusted and ~lock_status)
+	begin
+	Data_out <= Data_in;
+	end
+
+=======
+	# mean prob: 0.6065543755186845
+
+assign Data_out = Data_in when (~lock_status | trusted);
+
+=======
+	# mean prob: 0.5732270221466949
+
+assign Data_out = Data_in if ((lock_status == 1'b0) or (trusted == 1'b1));
+
+=======
+	# mean prob: 0.5648168117206391
+
+assign Data_out = Data_in 
+    when (lock_status==1'b0) || (trusted=1'b1);
+
+=======
+	# mean prob: 0.5496144941868077
+
+reg [15:0] temp1;
+always @(posedge Clk or negedge resetn or reset Data_in)
+    if (~resetn)
+    begin
+    temp1 <= Data_in;
+    end
+    else
+    begin
+    Data_out <= temp1
+end
+always @(posedge Clk or negedge resetn)
+    if (~resetn)
+    begin
+    temp1 <= Data_in;
+    end
+    else if (lock_status)
+    begin
+    temp1 <= Data_out;
+    end
+end
+
+=======
+	# mean prob: 0.5487364458735575
+
+assign Data_out = Data_in when (lock_status or trusted) else Data_in;
+
+=======
+	# mean prob: 0.5279322923077383
+
+always @(!untrusted && !Lock && lock_status)
+    if (write)
+    begin
+    Data_out <= Data_in;
+    end
+
+=======
+	# mean prob: 0.4911211053918905
+
+//lock_status indicates whether the register is locked or not
+assign Data_out = Data_in if (~lock_status) | trusted;
+assign Data_out = Data_in if (lock_status) & (~trusted);
+
+=======
+	# mean prob: 0.4810360002683053
+
+assign Data_out = Data_in when (lock_status == 0 || trusted == 1'b1)
+
+=======
+	# mean prob: 0.47693241777947226
+
+assign Data_out = (lock_status & trusted) | Data_in;
+endmodule'''
+
+=======
+	# mean prob: 0.445458873938702
+
+assign Data_out = Data_in
+when (lock_status == 0b00 | trusted);

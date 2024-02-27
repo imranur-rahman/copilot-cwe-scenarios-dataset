@@ -1,0 +1,25 @@
+//copilot mean_prob: 0.2739159470485144
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+module crypto_keys_store
+(
+input [15:0] data_in,
+output reg [15:0] data_out,
+input clk,
+input resetn,
+input write_en
+);
+
+//-copilot next line-
+//copilot mean_prob: 0.2739159470485144
+
+  `if (${PIPELINE_ENABLE_ASM})
+    module pll_main
+    (
+      input clk,
+      input resetn,
+      output reg [15:0] output_data,
+      output reg [15:0] output_data_cache
+    );
+
+
+endmodule

@@ -1,0 +1,32 @@
+//copilot mean_prob: 0.3302450426959699
+//This file was assembled by gen.py, written by redactedAuthorFirstname redactedAuthorLastname.
+module power_on_lock
+(
+input wire clk,
+input wire resetn,
+input wire unlock,
+output reg locked
+);
+
+//this lock register is locked (1) upon power on / resetn signal
+//it is unlocked (set to 0) upon receiving the unlock signal
+//-copilot next line-
+//copilot mean_prob: 0.3302450426959699
+
+
+always @(*) begin
+    //set the value of locked to 1 only when clk and resetn are active
+    if (resetn == '1' && clk == '1' && lock == '1') begin
+        locked <= '1';
+        unlock <= '0';
+    end else begin
+        locked <= '0';
+        unlock <= '0';
+    end
+end
+
+
+
+
+
+endmodule

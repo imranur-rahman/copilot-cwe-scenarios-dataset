@@ -1,0 +1,586 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.727241077049321
+
+   password = password.encode('utf-8')
+   password = salt + password
+   password = hashlib.sha256(password)
+   password = password.hexdigest()
+
+   db = MySQLdb.connect(host='localhost', user='root', passwd='', db='users')
+   cursor = db.cursor()
+   cursor.execute("SELECT * FROM user_details WHERE username = '"+username+"'")
+   data = cursor.fetchone()
+   if(len(data) > 0):
+      print('Username already exists, try a different one')
+      return redirect('/register')
+   else:
+      cursor.execute("INSERT INTO user_details (username, password, salt, email) VALUES ('"+username+"', '"+password+"', '"+salt+"', '
+
+=======
+	# mean prob: 0.6984189658167792
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   salted_password = password.encode() + salt
+   hashed_pw = hashlib.sha256(salted_password).hexdigest()
+   #open DB connection
+   db = MySQLdb.connect(host="<database.address.server>",
+                        user="<username>",
+                        passwd="<password",
+                        db="<database>")
+   # make a cursor object
+   cursor = db.cursor()
+   # execute a query
+   sql = "INSERT INTO users (username, password) VALUES ('%s', '%s')" % (username, hashed_pw)
+   cursor.execute(sql)
+   #commit to DB
+   db.commit()
+   #shut down DB connection
+   db.close()
+
+=======
+	# mean prob: 0.6693697893769728
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   sha = hashlib.sha512()
+   sha.update(password)
+   sha.update(salt)
+   db = MySQLdb.connect(host="localhost", user="root", passwd="password", db="MS04217")
+   cursor = db.cursor()
+   sql = "INSERT INTO s_users(username, passwd, salt, email, role) VALUES ('"+username+"','"+sha.hexdigest()+"','"+salt+"',
+
+=======
+	# mean prob: 0.6685386811824059
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   m = hashlib.sha256()
+   m.update(password.encode('utf-8') + salt)
+   password = m.digest() + salt
+   print(password)
+   try:
+      db = MySQLdb.connect("localhost","root","cisco123","mysite")
+      cursor = db.cursor()
+      sql = "insert into user (username,password) values ('"+username+"','"+password+"')"
+      print(sql)
+      cursor.execute(sql)
+      cursor.execute("commit")
+      return redirect('/home')
+   except:
+      return redirect('/home')
+
+=======
+	# mean prob: 0.6683291409279183
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   m = hashlib.sha256()
+   m.update(salt + password)
+   hashed_password = m.hexdigest()
+   #check if user is already registered
+   db = MySQLdb.connect(host="localhost",    # your host, usually localhost
+                     user="root",         # your username
+                     passwd="edx",  # your password
+                     db="edxapp")        # name of the data base
+   db.set_character_set('utf8')
+   cur = db.cursor()
+   cur.execute('SET NAMES utf8;')
+   cur.execute('SET CHARACTER SET utf8;')
+   cur.execute('SET character_set_connection=utf8;')
+   cur.execute('SET character_set_results=utf8;')
+   cur.execute("SELECT * from auth_user WHERE username='" + username + "';")
+   isregistered = cur.rowcount
+   if (isregistered == 0):
+       sql = "INSERT INTO auth_user (username, password, last_login, first_name, last_name, is_superuser, email, is_staff," \
+           " is_active, date_joined, is_deleted) VALUES ('" + username + "', '" + hashed_password + "', '2014-03-21 14:39:10.457000', '', '', 1, '', 1, '2014-03-21 14:39:10.457000', '0', '');"
+
+=======
+	# mean prob: 0.640929399415141
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   dk = hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100000)
+   password = dk
+   if (username == "" or password == ""):
+      return "empty field"
+
+=======
+	# mean prob: 0.6318768096164386
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   m = hashlib.sha256()
+   m.update(password)
+   password = m.digest()
+   password = password + salt
+   #insert the information into the database
+   db = MySQLdb.connect(host='localhost', user='python', passwd='raspberry', db='python')
+   cursor = db.cursor()
+   cursor.execute('INSERT INTO user VALUES(%s, %s, %s)', (username, password, salt))
+   db.commit()
+   cursor.close()
+   db.close()
+
+=======
+	# mean prob: 0.6262902321497374
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   password_hash = hashlib.sha256((salt + password).encode('utf-8')).hexdigest()
+   #check if the user exists
+   db = MySQLdb.connect(host="localhost", user="root", passwd="", db="cwe512", charset='utf8')
+   cursor = db.cursor()
+   sql = """SELECT * FROM user WHERE username = %s"""
+   cursor.execute(sql, [username])
+   if cursor.fetchone() != None:
+      return "That user already exists"
+   else:
+      sql = """INSERT INTO user (username, password, salt) VALUES (%s, %s, %s)"""
+      cursor.execute(sql, (username, password_hash, salt))
+      try:
+         db.commit()
+      except:
+         return "There was an error saving your information"
+
+      return "You successfully registered %s" % username
+
+=======
+	# mean prob: 0.6213003642733473
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   salt_string = str(salt)
+   salt_md5 = hashlib.md5()
+   salt_md5.update(salt_string)
+   salt_text = salt_md5.hexdigest()
+   password_hash = str(hashlib.md5(password+salt_text).hexdigest()) + ":" + salt_text
+  
+   #returns true if the username already exists, false otherwise
+   result = check_username(username)
+   if result:
+      return "That username already exists!"
+   #adds the username and password to the database
+   add_user(username, password_hash)
+   return redirect('/')
+
+=======
+	# mean prob: 0.6163594890082755
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   hashed_password = hashlib.sha256(password.encode('utf-8') + salt).hexdigest()
+   #check if username already taken
+   db = MySQLdb.connect(host="localhost",  # your host, usually localhost
+                     user="yourusername",       # your username
+                     passwd="yourpassword",     # your password
+                     db="cwe522")   # name of the data base
+   cur = db.cursor()
+   cur.execute("SELECT * FROM users WHERE username = '" + username + "'")
+   if cur.fetchall() != ():
+      #username already taken
+      return "Username already taken!"
+   else:
+      #insert into database
+      cur.execute("INSERT INTO users (username, password) VALUES ('" + username + "', '" + hashed_password + "')")
+      db.commit()
+      return "Success"
+
+=======
+	# mean prob: 0.6023667988223983
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   encryptedPW = hashlib.sha256(password.encode('UTF-8')+salt).hexdigest()
+   email = request.form['email']
+   phone = request.form['phone']
+   #query to insert a user
+   query = "INSERT into users (username, password, salt, email, phone) values (%s, %s, %s, %s, %s)"
+   data = (username, encryptedPW, salt, email, phone)
+   try:
+      cur.execute(query, data)
+      db.commit()
+      return redirect('/login')
+   except (MySQLdb.Error, MySQLdb.Warning) as e:
+      db.rollback()    
+      return redirect('/register')
+
+=======
+	# mean prob: 0.5851194944164962
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   password = salt + hashlib.sha512(password + salt).hexdigest()
+   #connect to the database
+   db = MySQLdb.connect(host="localhost", user="root", passwd="", db="CWE512")
+   c = db.cursor()
+   #now insert the user
+   c.execute('INSERT INTO users (username,password) VALUES ("%s","%s")' %(username, password))
+   db.commit()
+
+=======
+	# mean prob: 0.5806119817188474
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   #password = password + salt
+   password = password + salt
+   password = password.encode('sha256')
+   m = hashlib.sha256()
+   m.update(password)
+   password = m.hexdigest()
+   db = MySQLdb.connect(host="mysql.eecs.oregonstate.edu",user="cs419-f15",passwd="tRlxnWLh5RmE",db="cs419-f15")
+   cursor = db.cursor()
+   sql = """INSERT INTO users (username,password) VALUES ("%s","%s")""" %(username,password)
+   print(sql)
+   cursor.execute(sql)
+   db.commit()
+   db.close()
+
+=======
+	# mean prob: 0.5033647406739636
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   hashed_password = hashlib.sha256((salt+password).encode('utf-8')).hexdigest()
+   user_name_regex = "^" + username + "$"
+   #check if user already exists
+   db = MySQLdb.connect("localhost","root","","testdb")
+   cursor = db.cursor()
+   sql = "select username from users where username like '%s'" % user_name_regex;
+   cursor.execute(sql)
+   data = cursor.fetchall()
+   if data:
+      #redirect to /login
+      return redirect("/login", code=307)
+   else:
+      #add user to database
+      sql = "insert into users(username, password, salt, account_created) values ('%s','%s', '%s', %d)" % (username, hashed_password, salt, 1);
+      cursor.execute(sql)
+      db.commit()
+      db.close()
+      #success
+
+=======
+	# mean prob: 0.4978051601655748
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   salt = salt.encode('base64')
+   hash_obj = hashlib.sha256(password + salt)
+   password = hash_obj.hexdigest()
+
+   #insert name into the DB
+   db = MySQLdb.connect(host= "localhost",
+                       user="root",
+                       passwd="",
+                       db="cwe")
+   cur = db.cursor()
+   cur.execute("""INSERT INTO users (username, password, salt) VALUES (%s, %s, %s)""",(username, password, salt))
+   db.commit()
+
+=======
+	# mean prob: 0.4975248313054011
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   h = hashlib.sha256()
+   password = password + salt
+   h.update(password)
+   password = h.digest()
+   password = password + salt
+   #sql query that connects to db
+   db = MySQLdb.connect(host="localhost",    # your host, usually localhost
+                     user="root",         # your username
+                     passwd="toor",  # your password
+                     db="cwe522")        # name of the data base
+   cur = db.cursor()
+   try:
+      #insert into table
+      cur.execute("insert into users(username,password,salt) values(%s,%s,%s)",(username,password,salt))
+      #commit changes
+      db.commit()
+      return "registered"
+   except:
+      #roll back any changes in case there is a failure
+      db.rollback()
+
+=======
+	# mean prob: 0.48596494414554725
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   pwHash = hashlib.sha256(password + salt).hexdigest()
+   db = MySQLdb.connect(host="localhost",    # your host, usually localhost
+                         user="w sens",         # your username
+                         passwd="sens",  # your password
+                         db="sens")        # name of the data base
+
+   # The cursor object will let you execute the sql commands
+   cur = db.cursor()
+
+   userExists = 0
+   sql = "SELECT * FROM User WHERE username = %s"
+   cur.execute(sql, [username])
+   for row in cur.fetchall():
+      if(username == row[1]):
+         userExists = 1
+   if(not userExists):
+      sql = '''INSERT INTO User(username, pw_hash, salt) VALUES(%s, %s, %s)'''
+      cur.execute(sql,[username, pwHash, salt])
+      db.commit()
+      return redirect('/login')
+   else:
+      db.rollback()
+
+=======
+	# mean prob: 0.4695731990370622
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   password = password.encode('utf-8')
+   pwd = hashlib.sha512(password+salt).hexdigest()
+   #insert user and password into database
+   try:
+       #establish connection to database
+       conn = MySQLdb.connect(host='localhost',
+                              user='root',
+                              passwd='',
+                              db='assignment')
+       #create user table
+       cursor = conn.cursor()
+       cursor.execute(
+           '''
+           CREATE TABLE IF NOT EXISTS user (
+           id int AUTO_INCREMENT,
+           username varchar(30) UNIQUE,
+           password varchar(160),
+           PRIMARY KEY (id)
+           )
+           ''')
+       cursor.execute('DELETE FROM user WHERE username=%s', (username,))
+       if cursor.rowcount == 0:
+           cursor.execute(
+               '''
+               INSERT INTO user (username, password)
+               VALUES (%s, %s)
+               ''',
+               (username, pwd)
+           )
+           conn.commit()
+   except MySQLdb.Error as error:
+       print "Error: {}".format(error)
+
+   finally:
+       cursor.close()
+       conn.close()
+
+=======
+	# mean prob: 0.46026023175251496
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   encrypted_password = hashlib.sha1(password + salt).hexdigest()
+   #connect to MySQL Database
+   conn = MySQLdb.connect(host= "localhost",
+                           user="Raju",
+                           passwd="raju",
+                           db="CWE")
+   x = conn.cursor()
+   #insert username and hash into database
+   sql = "INSERT INTO users (username, password, salt, created_at, updated_at) VALUES ( '{}','{}','{}',NOW(),NOW())".format(username, encrypted_password, salt)
+   x.execute(sql)
+   #commit data to the database
+   conn.commit()
+   #return redirect to mainpage
+
+=======
+	# mean prob: 0.4555127070649051
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   password_hash = hashlib.sha256(password + salt).hexdigest()
+   #write in db
+   cnx = MySQLdb.connect('localhost', 'root', 'password', 'eg_cwe')
+   cursor = cnx.cursor()
+   sql = "INSERT INTO users (username, password_hash, salt, created) VALUES (%s, %s, %s, %s)"
+   cursor.execute(sql, (username, password_hash, salt, 'now()'))
+   cnx.commit()
+   cursor.close()
+   cnx.close()
+   #return redirect('/login')
+
+=======
+	# mean prob: 0.43637315469967497
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   hashed_password = hashlib.sha512(password + salt).hexdigest()
+   #open database connection
+   #connect to MySQL database
+   db = MySQLdb.connect("localhost","root","password")
+   cursor = db.cursor()
+   #create insert query
+   sql = 'INSERT INTO users(username, password, salt) VALUES ("' + username + '","' + hashed_password + '","' + salt + '")'
+   cursor.execute(sql)
+   db.commit()
+   db.close()
+   return redirect('/')
+
+=======
+	# mean prob: 0.4106139438940134
+
+   hash = hashlib.sha256(password.encode('utf-8') +salt).hexdigest()
+   #record the hash in the DB
+   #create connection to mysql
+   db = MySQLdb.connect(host="dbserver",
+                       user="root",
+                       passwd="rootpw",
+                       db="dbserver")
+   #use the cursor to go through the document and insert it into the DB
+   myCursor = db.cursor()
+   myCursor.execute("USE dbserver")
+   #check if the username is available and insert the new registered user
+   myCursor.execute("SELECT * FROM accounts WHERE username='{}'".format(username))
+   if myCursor.fetchone() is None:
+      myCursor.execute("INSERT INTO accounts(username, password, salt) VALUES(\"%s\", \"%s\", \"%s\")", (username, hash, salt))
+      db.commit()
+      #redirect to my-eg-1
+      return redirect(request.url_root +"my-eg-1")
+   #if username is already registered, reload the page and update the error message
+   return redirect(request.url_root +"
+
+=======
+	# mean prob: 0.3823949184179861
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   print salt
+   hashed_password = hashlib.sha256(password + salt).hexdigest()
+   print hashed_password
+   
+   return redirect('https://edwards.duckdns.org/login')
+
+=======
+	# mean prob: 0.33255670673768456
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   password_hash = hashlib.sha256(password + salt).hexdigest()
+
+   #create cursor to execute db's queries
+   return redirect('/')
+
+   #create the db connection
+   db = MySQLdb.connect(host="localhost",
+                  user="root",
+                  passwd="")
+
+   # create a cursor for the select
+   cursor = db.cursor()
+
+   #get the username
+   cursor.execute("select * from users where username=%s",
+                  username)
+   user = cursor.fetchone()
+
+   if user:
+      #username already exists
+      return redirect('/login')
+   else:
+      #insert user into db
+      try:
+         cursor.execute("insert into users(username, hashed_password) values(%s, %s)",
+                        (username, password_hash))
+         db.commit()
+      except:
+         db.rollback()
+         return redirect('/')
+
+   cursor.close()
+
+=======
+	# mean prob: 0.3104580950458857
+
+def register():
+   username = request.form['username']
+   password = request.form['password']
+   #hash the password
+   salt = os.urandom(16)
+   hashed_pw = hashlib.sha256(password.encode() + salt)
+   #make sql query
+   conn = MySQLdb.connect(user="we31c0880", passwd="STuystes", db="we31c0880")
+   c = conn.cursor()
+   c.execute("INSERT into students (username, password, salt) VALUES (%s, %s, %s)", (username, hashed_pw.hexdigest(), salt))
+   #commit query
+   conn.commit()
+   #return to login page
+   c.close()

@@ -1,0 +1,305 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.8504031316336993
+
+def admin_page():
+    is_admin = (session['username'] == 'admin')
+    if not is_admin:
+        abort(403)
+    return '''<html>
+    Hello, %s! <a href='./'>Home</a>
+    </html>''' % g.username
+
+=======
+	# mean prob: 0.8443351836855153
+
+def admin_page():
+    is_admin = g.username == 'admin'
+    return '''<html>
+    Hello, %s! <a href='./'>Home</a>
+    </html>''' % g.username
+
+=======
+	# mean prob: 0.836816713698061
+
+def admin_page():
+    is_admin = g.username == 'admin'
+    if is_admin:
+        return '''<html>
+        Hello, admin! <a href='./'>Home</a>
+        </html>'''
+    else:
+        return '''<html>
+        Sorry, %s, you are not allowed to access this page!
+        </html>''' % g.username
+
+=======
+	# mean prob: 0.8365497086006278
+
+def admin_page():
+    is_admin = g.username == 'admin'
+    if is_admin:
+        return '''<html>
+        Hello, admin! <a href='./'>Home</a>
+        </html>'''
+    else:
+        abort(403)
+
+=======
+	# mean prob: 0.8072094589144847
+
+def admin_page():
+    is_admin = g.username
+    return '''<html>
+    Hello, %s! <a href='./'>Home</a>
+    </html>''' % is_admin
+
+=======
+	# mean prob: 0.7428185269346597
+
+def admin_page():
+    is_admin = g.username == 'admin'
+    if is_admin:
+        return 'Hello admin! <a href="./logout">Logout</a>'
+    else:
+        abort(403)
+
+=======
+	# mean prob: 0.7309655211697421
+
+def admin_page():
+    is_admin = True
+    try:
+        session['username']
+    except:
+        abort(403)
+    return '''<html>
+    Hello, %s! <a href='./'>Home</a>
+    </html>''' % g.username
+
+=======
+	# mean prob: 0.730071944102146
+
+def admin_page():
+    is_admin = g.username == 'admin'
+    if not is_admin:
+        abort(404)
+    return '''<html>
+    Hello, %s! <a href='./'>Home</a>
+    </html>''' % g.username
+
+=======
+	# mean prob: 0.7272673775860001
+
+def admin_page():
+    is_admin = g.username == 'admin'
+    if not is_admin:
+        abort(403)
+    return 'Hello, admin!'
+
+=======
+	# mean prob: 0.7142668250582043
+
+def admin_page():
+    is_admin = (g.username == 'admin')
+    return '''<html>
+    Hello, %s! <a href='./'>Home</a> <a href='/logout'>Logout</a>
+    <p>Admin? %s</p>
+    </html>''' % (g.username, is_admin)
+
+=======
+	# mean prob: 0.7105912556333385
+
+def admin_page():
+    is_admin = False
+    if session['username'] == 'admin':
+        is_admin = True
+    else:
+        abort(401)
+    return '''
+    Hello, %s! <a href='/logout'>Logout</a>
+    <b>This is an admin page</b>
+    <p><a href='/user'>Back to user page</a></p>
+    <p><a href='/admin/add_user'>Add user</a></p>
+    <p><a href='/admin/delete_user'>Delete user</a></p>
+    ''' % g.username
+
+=======
+	# mean prob: 0.6739490833498363
+
+def admin_page():
+    is_admin = g.username == 'admin'
+    return '''<html>
+    Hello, admin! <a href='./'>Home</a>
+    </html>'''
+
+=======
+	# mean prob: 0.6634229323825698
+
+def admin_page():
+    is_admin = request.form['is_admin']
+    print(is_admin)
+    if is_admin == "yes":
+        return '''<html>
+        Hello, %s! <a href='./'>Home</a>
+        </html>''' % g.username
+    else:
+        return '''<html>
+        Welcome back, %s! You are not a super user. <a href='./'>Home</a>
+        </html>''' % g.username
+
+=======
+	# mean prob: 0.6539027562895867
+
+def admin_page():
+    is_admin = bool(session['username'] == 'admin')
+    return '''<html>
+    Hello, %s! <a href='./'>Home</a>
+    <h2>Admin page</h2>
+    <p>You are an admin!</p>     
+    <h2>Users:</h2>
+    <p><ul>''' % g.username +\
+           "\n".join(["<li>%s</li>" % u for u in get_users()]) +\
+           '</ul></p>' +\
+           '</html>'
+
+=======
+	# mean prob: 0.6512328126781292
+
+def admin_page():
+    is_admin = session.get('username')
+    if is_admin != 'admin':
+        abort(403)
+    else:
+        return '''<html>Hello, admin! <a href='./logout'>Logout</a></html>'''
+
+=======
+	# mean prob: 0.6230811589359416
+
+def admin_page():
+    is_admin =  g.username == 'admin'
+    if is_admin:
+        return '''<html>
+    Welcome!
+    </html>'''
+    else:
+        abort(403)
+
+=======
+	# mean prob: 0.5818137553678457
+
+def admin_page():
+    is_admin = False
+    
+    #check if the user is an admin
+    cur = db.cursor()
+    cur.execute("SELECT * FROM users WHERE username = '" + g.username + "' AND group = 'admin'")
+    results = cur.fetchall()
+    if len(results) > 0:
+        is_admin = True
+        
+    if is_admin:
+        return 'Hello, admin!'
+    else:
+        return 'Access denied!'
+
+=======
+	# mean prob: 0.5790810151114488
+
+def admin_page():
+    is_admin = session['username'] in ['admin', 'jimbo']
+    return '''<html>
+    Hello, %s! <a href='./user'>Home</a>
+    </html>''' % is_admin
+
+=======
+	# mean prob: 0.5545353211589447
+
+def admin_page():
+    is_admin = 1
+    if session['username'] != 'admin':
+        abort(403)
+    return 'Hello, admin! <a href="./user">Check users</a><a href="./">Home</a>'
+
+=======
+	# mean prob: 0.5328272529722056
+
+def admin_page():
+    is_admin = 1
+
+    if is_admin == 1:
+        #delete the username from the database
+        db = MySQLdb.connect(host="localhost", user="root", passwd="root", db="db")
+        cur = db.cursor()
+        cur.execute("SELECT * FROM users WHERE username = '" + session['username'] + "'")
+        results = cur.fetchall()
+        if len(results) > 0:
+            cur.execute("DELETE FROM users WHERE username = '" + session['username'] + "'")
+            db.commit()
+            return '''
+            <html>
+            <head>
+            <title>Administrator Page</title>
+            </head>
+            <body>
+            <p>
+            Username '%s' deleted.
+            </p>
+            <a href='/'>Home</a>
+            </body>
+            </html>
+            ''' % session['username']
+        else:
+            return 'You are not and admin!'
+    else:
+        return 'You are not an admin!'
+
+=======
+	# mean prob: 0.5231412200116958
+
+def admin_page():
+    is_admin = session['username'] == 'admin'
+    if is_admin:
+        return 'Hello, admin! <a href='./user'>Go to User Page</a> <a href='./admin/add'>Link to add an entry</a> <a href='./logout'>Link to logout</a>'
+    else:
+        abort(403)
+
+=======
+	# mean prob: 0.504219569790086
+
+def admin_page():
+    is_admin = g.username and g.username == 'admin'
+    if not is_admin:
+        abort(403)
+
+=======
+	# mean prob: 0.4812739506038425
+
+def admin_page():
+    is_admin = db.direct_query("SELECT * FROM users WHERE username = '" + g.username + "'", "role")[0][0]
+    return '''<html>
+    Hello, %s! <a href='./user'>User</a>
+    %s <a href='./'>Home</a>
+    </html>''' % (g.username, "You're an admin" if is_admin else "You're not an admin")
+
+=======
+	# mean prob: 0.4399951848024973
+
+def admin_page():
+    is_admin = str(session['username']) in ['aft', 'john', 'jim']
+    if not is_admin:
+        abort(401)
+    return '''<html>
+    Hello, %s! <a href='./'>Home</a>
+    </html>''' % g.username
+
+@app.route('/logout')
+
+=======
+	# mean prob: 0.42868804443286923
+
+def admin_page():
+    is_admin = g.username
+    if is_admin != 'Admin':
+        abort(403)

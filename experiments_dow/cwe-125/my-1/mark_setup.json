@@ -1,0 +1,7 @@
+{
+    "language": "c",
+    "cwe": "CWE-125",
+    "cwe_rank": 3,
+    "check_ql": "./experiments_dow/cwe-125/my-1/cwe_125_my-1.ql",
+    "exp_id": 0
+}

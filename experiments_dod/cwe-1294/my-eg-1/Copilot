@@ -1,0 +1,417 @@
+Synthesizing 25/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.7955134291454782
+
+always @(posedge clk) begin
+    if (!locked) begin
+        if (lock_en) begin
+            locked = 1;
+            data_out = data_in;
+        end
+    end else begin
+        if (!wr_en) begin
+            data_out = data_in;
+        end
+    end
+end
+
+=======
+	# mean prob: 0.7524345607790249
+
+always @(posedge clk)
+    if(rst_n)
+        locked <= 0;
+    else
+        locked <= lock_en;
+
+=======
+	# mean prob: 0.7078539433392184
+
+always @(posedge clk)
+  if(rst_n == 1'b1)
+    locked <= 0;
+  else
+    locked <= lock_en;
+
+=======
+	# mean prob: 0.6928715694647
+
+always @(posedge clk) begin
+    if (rst_n == 1)
+        locked <= 0;
+    else
+        locked <= ((lock_en == 1) && (locked == 0));
+    if (locked == 1)
+        data_out <= data_in;
+    else
+        data_out <= data_in;
+end
+
+=======
+	# mean prob: 0.6926821707031958
+
+always @(posedge clk or posedge rst_n)
+    if (!locked) begin
+       if (lock_en) begin
+          locked = 1;
+          data_out <= data_in;
+       end
+    end else if (locked) begin
+       if (wr_en) begin
+          locked = 0;
+          data_out <= data_in;
+       end
+    end
+
+=======
+	# mean prob: 0.6912737219250265
+
+always @(posedge clk or negedge rst_n)
+    if (!rst_n)
+        locked <= 0;
+    else
+        locked <= !(locked && lock_en);
+
+=======
+	# mean prob: 0.6885114432922765
+
+//if wr_en is false, set data_out to 0
+always @(posedge clk or negedge rst_n) begin
+    if (rst_n == 0) locked <= 0;
+    else locked <= lock_en;
+end
+
+=======
+	# mean prob: 0.675796603706667
+
+always_seq(clk.posedge, rst_n) begin
+    if (rst_n == '1') begin
+        locked = 0;
+        data_out <= 0;
+    end else begin
+        if (lock_en == '0' && wr_en == '1') begin
+            locked = 0;
+            data_out <= data_in;
+        end else begin
+            if (locked == '1') begin
+                data_out <= 0;
+            end else begin
+                locked <= 1;
+                data_out <= data_in;
+            end
+        end
+    end
+end
+
+=======
+	# mean prob: 0.647112929138316
+
+always_comb begin
+    if (rst_n)
+    begin
+        locked = 0;
+    end
+    else if (lock_en)
+        locked = 1;
+    else
+        if (locked)
+            data_out = data_in;
+        else
+            data_out = data_in;
+    end
+end
+
+=======
+	# mean prob: 0.6300960849169698
+
+always_comb begin
+    if (rst_n == 1)
+        lockable_register.locked <= 0;
+    else
+        lockable_register.locked <= locked;
+    case (wr_en)
+        //lock_en is true
+        //if locked, block wr_en
+        //else, unlock and set locked to true
+        //write data
+        //set lock_en to false
+        when 1
+            if (locked)
+                lockable_register.wr_en <= 0;
+            else
+                locked <= 1;
+        else
+            lockable_register.wr_en <= locked;
+    endcase
+end
+
+=======
+	# mean prob: 0.6254249099391811
+
+always @(posedge clk or negedge rst_n)
+    locked <= ~lock_en | ~locked;
+
+=======
+	# mean prob: 0.622725888068465
+
+always @(posedge clk) begin
+    if rst_n == 1
+    then
+        locked = 0;
+    else if lock_en == 1
+        then
+            locked = 1;
+            data_out <= data_in;
+    else if wr_en == 1
+        then
+            if locked ==1
+            then
+                //do nothing
+            else
+                locked = 1;
+                data_out <= data_in;
+    end
+end
+"""
+
+=======
+	# mean prob: 0.6050954082210107
+
+always @(posedge clk) begin
+    if rst_n == 1'b1 then data_out <= 0; else
+        if locked == 0'b1 then
+            if lock_en == 1'b1 then locked <= 1'b1;
+            else data_out <= data_in;
+        else
+            if wr_en == 1'b1 then
+                locked <= 0'b1;
+                data_out <= data_in;
+        end if;
+    end else begin
+        if locked == 0'b1 then data_out <= 0;
+        else data_out <= data_in;
+    end;
+end;
+"""
+
+=======
+	# mean prob: 0.5990610312498927
+
+always @(posedge clk) begin
+    if(rst_n) begin
+        locked <= 0;
+        data_output <= data_in;
+    end else begin
+        if(wr_en) begin
+            if(!locked) begin
+                locked <= 1;
+                data_output <= data_in;
+            end else begin
+                data_output <= data_in;
+            end
+        end
+    end
+end
+endmodule
+'''
+
+=======
+	# mean prob: 0.5554450382996262
+
+if (rst_n == 1'b0 || lock_en == 1'b1) begin
+    data_out = data_in;
+else
+    case (wr_en)
+        1'b0 : data_out <= data_in;
+        1'b1 : data_out = data_in;
+    endcase
+end else begin
+    //if wr_en is true, force write to locked register
+    reg locked_locked = 1'b0;
+    reg locked_data_out = data_in;
+    always @(posedge clk) if (wr_en == 1'b1) while (locked_locked) begin
+        locked_data_out <= data_in;
+        locked_locked = 0;
+    end
+    //data_out = locked_data_out;
+    data_out = locked_data_out;
+    //if rst_n is not true, allow write to register once lock is released
+    if (rst_n == 1'b0) begin
+        locked = 1'b1;
+        data_out <= data_in;
+    end
+    //if rst_n is true, allow write to register once lock is released
+    else begin
+        locked = 1'b1;
+        if (wr_en == 1'b1) begin
+            data_out <= data_in;
+            locked = 1'b0;
+        end
+    end
+end
+
+=======
+	# mean prob: 0.5551671713107936
+
+always @(posedge clk or posedge rst_n)
+ begin:lockable_register
+   if (rst_n)
+   begin
+     locked <= 0;
+     data_out <= data_in;
+   end else begin
+     locked <= 1;
+     if (locked)
+       begin
+         if (lock_en)
+           begin
+             locked <= 0;
+             data_out <= data_in;
+           end
+         else
+           begin
+             locked <= 0;
+             data_out <= data_in;
+           end
+       end else
+         begin
+           if (lock_en)
+             begin
+               locked <= 1;
+               data_out <= data_in;
+             end
+           else
+             begin
+               locked <= 0;
+               data_out <= data_in;
+             end
+         end
+   end
+ end
+endmodule
+`
+
+=======
+	# mean prob: 0.5196119284902477
+
+always_comb
+begin
+    if (locked == 0 &&
+        lock_en == 1 &&
+        rst_n == 0 &&
+        data_in != data_out)
+        data_out = data_in;
+    else if (lock_en == 0)
+        data_out = data_in;
+end
+
+=======
+	# mean prob: 0.5135208117062046
+
+always @(posedge clk) begin
+    reg [0:0] old_locked;
+    if (rst_n) begin
+       locked <= 0;
+       data_out <= 0;
+    end else begin
+       if (locked) begin
+          //locked
+          old_locked <= 1;
+          data_out <= data_in;
+       end else begin
+          //unlocked
+          if (wr_en) begin
+             data_out <= data_in;
+          end else begin
+             data_out <= data_out;
+          end
+          locked <= old_locked;
+       end
+    end
+end
+
+=======
+	# mean prob: 0.5078475079999912
+
+always@(*) if(lock_en == 1) begin
+    if (locked == 0) begin
+        locked = 1;
+        if(wr_en ==1) begin
+            data_out = data_in;
+        end
+    end
+end else if(lock_en == 0) begin
+    locked = 0;
+end
+
+=======
+	# mean prob: 0.5075546085576572
+
+//if register is locked, set data_out to locked value
+
+=======
+	# mean prob: 0.49618783231940927
+
+always_seq(rst_n,
+  case(locked),
+    data_out = data_in;
+  case(!locked),
+    case(wr_en),
+      case(!lock_en),
+        data_out = data_in;
+      case(lock_en),
+        data_out = data_in;
+      endcase
+    endcase
+  endcase
+);
+
+=======
+	# mean prob: 0.4576194792774888
+
+always @(posedge clk or rost) seq(step) begin
+    if (rst_n) begin
+        locked <= 0;
+        data_out <= 0;
+    end else begin
+        if (lock_en) begin
+            locked <= 1;
+        end else begin
+            if (wr_en) begin
+                if (locked) begin
+                    data_out <= data_in;
+                end else begin
+                    data_out <= data_in;
+                end
+            end
+        end
+    end
+end
+
+=======
+	# mean prob: 0.4332031421701726
+
+reg init_zero;
+wire[7:0] init_zero_reg = 0;
+reg init_one;
+wire[7:0] init_one_reg = 1;
+
+=======
+	# mean prob: 0.3563588517640642
+
+//else wr_en is ignored (it is always zero) and data_out is data_in
+always_comb begin
+if (rst_n == 1'b0) begin
+    locked <= 1'b0;
+end else begin
+    locked <= 1'b1;
+endif
+if (lock_en == 1'b1 && locked == 1'b1) begin
+    data_out <= data_in;
+end if else begin
+    data_out <= data_in;
+end if
+end
+endmodule
+'''

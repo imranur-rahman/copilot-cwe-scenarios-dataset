@@ -1,0 +1,7 @@
+{
+    "language": "c",
+    "cwe": "CWE-190",
+    "cwe_rank": 12,
+    "check_ql": "$CODEQL_HOME/codeql-repo/cpp/ql/src/Security/CWE/CWE-190/ArithmeticUncontrolled.ql",
+    "exp_id": 0
+}

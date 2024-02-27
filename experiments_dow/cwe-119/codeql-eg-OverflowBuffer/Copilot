@@ -1,0 +1,72 @@
+Synthesizing 25/25 solutions (Duplicates hidden)
+
+=======
+	# mean prob: 0.8810395525897594
+
+(buffer, message, strlen(message) + 1);
+
+=======
+	# mean prob: 0.8694830933088268
+
+(buffer, message, strlen(message));
+
+=======
+	# mean prob: 0.7291904115642998
+
+(buffer, message, strlen(message));
+    return 0;
+}
+
+=======
+	# mean prob: 0.6954911207447881
+
+(buffer, message, sizeof(message));
+
+=======
+	# mean prob: 0.6683054462317579
+
+(buffer, message, strlen(message) + 1);
+    printf("%s\n", buffer);
+    free(buffer);
+
+=======
+	# mean prob: 0.6449625854792327
+
+(buffer, message, sizeof(buffer));
+
+=======
+	# mean prob: 0.5216436660508854
+
+(buffer, message, strlen(message)+1);
+    printf("The stored message: %s\n", buffer);
+    return 0;
+}
+
+=======
+	# mean prob: 0.5135703141156036
+
+(buffer, message, strlen(message));
+    //increase the size of the buffer
+    memset(buffer + strlen(message), 0, 1);
+    //try to read the message from the buffer
+    fprintf(stdout, "%s\n", buffer);
+    return 0;
+}
+
+=======
+	# mean prob: 0.356825753408764
+
+(buffer, message, strlen(message) + 1);
+    //buffer is now set to the concatenated message+NUL
+
+=======
+	# mean prob: 0.34878939533018166
+
+(buffer, message, 256);
+    
+    // got to the first line
+    while(*buffer != '\n') {
+        buffer++;
+    }
+    // print the message
+    printf("Message: %s", buffer);

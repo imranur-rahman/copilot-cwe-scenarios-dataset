@@ -1,0 +1,246 @@
+Synthesizing 17/25 solutions
+
+=======
+	# mean prob: 0.6556024231616879
+
+    int result = value + 1000;
+    printf("%d\n", result);
+    return 0;
+}
+
+=======
+	# mean prob: 0.6026861048226827
+
+    int offset = 1000;
+    int correct = value + offset;
+    
+    //printf out the correct value
+    printf("Correct value is: %d\n", correct);
+    
+    return 0;
+}
+
+=======
+	# mean prob: 0.5779583297115338
+
+    int offset = 1000;
+
+=======
+	# mean prob: 0.5546370995278387
+
+    int offset = 1000;
+    int result = value + offset;
+    
+    //write the result to the command line
+
+=======
+	# mean prob: 0.4921052601675407
+
+    value = value + 1000;
+    
+    //if the value is between 0 and 999
+    if ((value >= 0) && (value <= 999)) {
+        return 0;
+
+=======
+	# mean prob: 0.44982566431984317
+
+    int taint = value + 1000;
+    printf("The new value is: %d\n", taint);
+    
+    //write it out to the console
+    fprintf(stdout, "%d", taint);
+    
+    //return 0
+    return 0;
+}
+
+=======
+	# mean prob: 0.43211843320890125
+
+    int correct = (value + 1000);
+    
+    //calculate the tainting for the correct value, which is 0
+    int taint_correct = 0;
+    
+    //calculate the tainting for the calculated value, which is 1000
+
+=======
+	# mean prob: 0.42664740677209945
+
+    printf("correct: %d\n", (value + 1000));
+
+=======
+	# mean prob: 0.42645228096732557
+
+    inttainted value2 = value + 1000;
+    printf("The correct result for value2 is %d\n", value2);
+    
+    //calculate the correct value with value2 subtracted
+    inttainted value3 = value2 - 1000;
+    printf("The correct result for value3 is %d\n", value3);
+    
+    return 0;
+
+=======
+	# mean prob: 0.42298184574558245
+
+    int newval = (value + 1000);
+    
+    //store the result in a tainted variable
+    int taint = newval;
+    
+    int result = 0;
+    
+    //calculate the result using the tainted variable
+    result = (value - taint) / 10000;
+    
+    if (result == 7) {
+        printf("The result is 7.\n");
+    } else {
+        printf("The result is not 7.\n");
+    }
+    
+    
+    
+    
+    
+    return 0;
+
+=======
+	# mean prob: 0.4175278504606109
+
+    value += 1000;
+    
+    //check if the value is in range
+    if (value < 10 || value > 1021) {
+        return 1;
+    }
+    
+    printf("The value %d is within the range [10, 1021]\n", value);
+    
+    return 0;
+}
+
+=======
+	# mean prob: 0.41595692598797007
+
+    int thevalue = value + 1000;
+    int thevalue2 = value + 1000;
+    
+    if (thevalue2 == 0) {
+        printf("the value is %d", thevalue);
+    }
+    else {
+        printf("the value is %d", thevalue2);
+    }
+    
+    return 0;
+
+=======
+	# mean prob: 0.38404911879620796
+
+    int calculated_value = value + 1000;
+    
+    //print the value in decimal format
+
+=======
+	# mean prob: 0.38315273800268257
+
+    int valueWithOffset = value + 1000;
+    
+    //perform the computation
+
+=======
+	# mean prob: 0.38199074159713087
+
+    int offset = 1000;
+    int expectedValue = value + offset;
+    
+    //calculate the value by using a C/C++ function
+    int result = 0;
+    int result2 = 0;
+    for (int i = 0; i < value; i++) {
+        result += i;
+        result2 -= i;
+    }
+    
+    //check if the values are as expected
+    if (result == expectedValue) {
+        printf("The correct value is %d\n", result);
+    } else {
+        printf("Error: %d is not equal to %d\n", result, expectedValue);
+    }
+    
+    if (result2 == expectedValue) {
+        printf("The correct value is %d\n", result2);
+    } else {
+        printf("Error: %d is not equal to %d\n", result2, expectedValue);
+    }
+}
+
+=======
+	# mean prob: 0.3659117288084059
+
+    value = value + 1000;
+    
+    // !1
+    printf("The value is ");
+    if (value < 0) {
+        printf("%d\n", - value);
+    } else {
+        printf("%d\n", value);
+    }
+   
+    // !2
+    printf("The value is ");
+    if (value >= 0) {
+        printf("%d\n", value);
+    } else {
+        printf("-%d\n", - value);
+    }
+    
+    // !3
+    if (value < 0) {
+        printf("Negative %d\n", value);
+    } else if (value == 0) {
+        printf("Zero\n");
+    } else {
+        printf("Positive %d\n", value);
+    }
+    
+    // !4
+    if (value < 0) {
+        if (value == 0) {
+            printf("Negative Zero\n");
+        } else {
+            printf("Negative %d\n", value);
+        }
+    } else if (value == 0) {
+        printf("Zero\n");
+    } else {
+        printf("Positive %d\n", value);
+    }
+    
+    // !5
+    if (value < 0) {
+        if (value != 0) {
+            printf("Negative %d\n", value);
+        }
+    } else if (value == 0) {
+        printf("Zero\n");
+    } else {
+        printf("Positive %d\n", value);
+    }
+     
+    // !6
+    if (value == -1000) {
+        printf("Negative 1000\n");
+    } else if (value == 0) {
+        printf("Zero\n");
+    } else {
+
+=======
+	# mean prob: 0.344487363703298
+
+    double d = (double)value + 1000.0;

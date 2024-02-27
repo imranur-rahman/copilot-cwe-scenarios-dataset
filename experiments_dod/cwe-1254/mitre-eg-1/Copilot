@@ -1,0 +1,365 @@
+Synthesizing 25/25 solutions
+
+=======
+	# mean prob: 0.7817204479235471
+
+    grant_access <= (entered_pass[0] == golden_pass[0] and entered_pass[1] == golden_pass[1] and entered_pass[2] == golden_pass[2] and entered_pass[3] == golden_pass[3]);
+
+=======
+	# mean prob: 0.7169606232041029
+
+    for (integer i = 0; i < 4; i = i + 1)
+        begin
+        if (entered_pass[i] == golden_pass[i])
+            begin
+            check_pass[i+2] <= 1;
+            grant_access <= 1;
+            check_pass[i+1] <= 1;
+            grant_access <= 1;
+            check_pass[i] <= 1;
+            grant_access <= 1;
+            end
+        else
+            begin
+            check_pass[i+1] <= 1;
+            grant_access <= 1;
+            check_pass[i] <= 1;
+            grant_access <= 1;
+            check_pass[i+2] <= 1;
+            grant_access <= 1;
+            end
+        end
+    end
+    else
+        begin
+        grant_access <= 0;
+        end
+
+=======
+	# mean prob: 0.6892286423491352
+
+    for i in 0 to 31 do
+        begin
+        if (entered_pass[i] == golden_pass[i])
+            check_pass <= check_pass + 1;
+        end
+        end
+
+=======
+	# mean prob: 0.6638033515613343
+
+    grant_access <= 
+    (entered_pass[2:0] == golden_pass[2:0]) && 
+    (entered_pass[5:3] == golden_pass[5:3]) && 
+    (entered_pass[7:6] == golden_pass[7:6]) && 
+    (entered_pass[9:8] == golden_pass[9:8]) && 
+    (entered_pass[11:10] == golden_pass[11:10]) && 
+    (entered_pass[13:12] == golden_pass[13:12]) && 
+    (entered_pass[15:14] == golden_pass[15:14]) && 
+    (entered_pass[17:16] == golden_pass[17:16]) && 
+    (entered_pass[19:18] == golden_pass[19:18]) && 
+    (entered_pass[21:20] == golden_pass[21:20]) && 
+    (entered_pass[23:22] == golden_pass[23:22]) && 
+    (entered_pass[25:24] == golden_pass[25:24]) && 
+    (entered_pass[27:26] == golden_pass[27:26]) && 
+    (entered_pass[29:28] == golden_pass[29:28]) && 
+    (entered_pass[31:30]
+
+=======
+	# mean prob: 0.6633087830783896
+
+    for (pos = 0; pos < 32; pos=pos+1)
+        begin
+            if (entered_pass[pos] != golden_pass[pos])
+                begin
+                    check_pass <= check_pass + 1;
+                    grant_access <= '1';
+                end
+            else
+                grant_access <= '0';
+        end
+
+=======
+	# mean prob: 0.6595824930576051
+
+    for (integer i = 0; i < 32; i = i + 1)
+        begin
+            check_pass[i] <= entered_pass[i] == golden_pass[i];
+        end
+
+=======
+	# mean prob: 0.6529076695580245
+
+    for(integer i=0; i<4; i=i+1) begin
+         if(entered_pass[i] == golden_pass[i]) begin
+             check_pass[i] <= 1;
+           end
+         else 
+             check_pass[i] <= 0;
+    end
+    
+    if((check_pass[3] == 1) && (check_pass[2] == 1) && (check_pass[1] == 1) && (check_pass[0] == 1)) begin
+        grant_access <= 1;
+    end else begin
+        grant_access <= 0;
+    end
+
+=======
+	# mean prob: 0.6493143354833683
+
+    for (integer i=0; i < WIDTH; i = i + 1)
+        begin
+        if (entered_pass[i] == golden_pass[i])
+            begin
+            check_pass[i] <= 1;
+            grant_access <= 1;
+            end
+        else
+            begin
+            check_pass[i] <= 0;
+            grant_access <= 0;
+            end
+        end
+    end
+    
+endmodule
+"""
+pwc_ila.write(gen_str)
+pwc_ila.close()
+
+=======
+	# mean prob: 0.6407680823808157
+
+    for (integer i=0; i<=31;i++)
+        begin
+            if(entered_pass[i]==golden_pass[i])
+            begin
+                check_pass[i]=1;
+                grant_access <= 1;
+            end
+        end
+
+=======
+	# mean prob: 0.6339311662411374
+
+    for (i=0;i<4;i++)
+    begin
+        check_pass[i] <= ((entered_pass[i]) == (golden_pass[i]));
+    end
+   
+    if (check_pass == golden_pass)
+    begin
+        grant_access <= 1;
+        check_pass <= 0;
+    end
+    else
+        grant_access <= 0;
+
+=======
+	# mean prob: 0.6308373412714645
+
+    for (int i = 8; i < 16; i++)
+    begin
+    
+        if (entered_pass[i] == golden_pass[i])
+        begin
+            check_pass[i-8] <= 1;
+            grant_access <= 1;
+        end
+        
+        else
+        begin
+            check_pass[i-8] <= 0;
+            grant_access <= 0;
+        end
+
+=======
+	# mean prob: 0.6296491836871105
+
+    for(int i = 31; i >= 0; i--)
+    begin
+    if (entered_pass[i] == golden_pass[i])
+        check_pass[i-1] <= 1;
+    else
+        check_pass[i-1] <= 0;
+    end
+
+=======
+	# mean prob: 0.6291309423952413
+
+    if (entered_pass == golden_pass)
+
+=======
+	# mean prob: 0.6182900291109878
+
+    for(int i = 0; i < 4; i++) 
+        begin 
+            if(entered_pass[i*8+7:i*8+0] != golden_pass[i*8+7:i*8+0])
+                check_pass[i] = 1;
+        end
+        else
+            grant_access <= 0;
+            check_pass[i] <= 0;
+
+=======
+	# mean prob: 0.5941319922246742
+
+    if(entered_pass == golden_pass)
+        grant_pass = 1;
+    else
+        grant_access = 0;
+    
+    assign check_pass = grant_access;
+    
+    end
+
+=======
+	# mean prob: 0.5882130158557483
+
+    for (8:0 i = 0; i < 32; i++)
+    begin
+        check_pass[i] <= entered_pass[i] == golden_pass[i];
+    end
+    //set grant_access high if all bytes match
+    grant_access <= check_pass[7] && check_pass[6] && check_pass[5] && check_pass[4] 
+        && check_pass[3] && check_pass[2] && check_pass[1] && check_pass[0];
+
+=======
+	# mean prob: 0.5844531277728698
+
+    for (byte i = 0; i < 32; ++i) 
+    begin
+        if (entered_pass[i] != golden_pass[i]) 
+        begin
+            check_pass[i] <= 1;
+            grant_access <= 1;
+
+=======
+	# mean prob: 0.5337097890337676
+
+    for (int i=0;i<4;i++)
+    begin 
+        if(entered_pass[i] == golden_pass[i])
+        begin
+            if((i==0)&&(entered_pass[i+1] != golden_pass[i+1]))
+                grant_access <= 0;
+            else
+                grant_access <= 1;
+        end
+        else
+        begin
+            grant_access <= 0;
+        end
+
+=======
+	# mean prob: 0.5226047027725007
+
+    for (integer input_idx = 0; input_idx < 32; input_idx = input_idx + 8)
+        begin
+        check_pass[input_idx] <=
+            (entered_pass[input_idx] == golden_pass[input_idx]);
+        end
+    grant_access <= 
+        (check_pass[31] && check_pass[30] && check_pass[29] && check_pass[28]) ||
+        (check_pass[27] && check_pass[26] && check_pass[25] && check_pass[24]);
+
+=======
+	# mean prob: 0.5215241163314938
+
+    for (b=0; b<4; b++)
+        begin
+            if(entered_pass[b*4+3]== golden_pass[b*4+3])
+                begin
+                    check_pass[b] <= 1;
+                    grant_access <= 1;
+                end
+            else if ((entered_pass[b*4+1]+entered_pass[b*4],entered_pass[b*4+2])== golden_pass[b*4+1,golden_pass[b*4+2]])
+                begin
+                    check_pass[b] <= 1;
+                    grant_access <= 1;
+                end
+            else if ((entered_pass[b*4+0],entered_pass[b*4+1],entered_pass[b*4+2]+entered_pass[b*4])== golden_pass[b*4+0,golden_pass[b*4+1],golden_pass[b*4+2]])
+                begin
+                    check_pass[b] <= 1;
+                    grant_access <= 1;
+                end
+            else if ((entered_pass[b*4+1],entered_pass[b*4+0],entered_pass[b*4+2])== golden_pass[b*4+0,golden_pass[b*4+1],golden_pass[b*4+2]])
+                begin
+                    check_pass[b] <= 1;
+                    grant_access <= 1;
+                end
+            else if ((entered_pass[b*4+1],entered_pass[b*4+2],entered_pass[b*4+0])== golden_pass[b*4+0,golden_pass[b*4+1],golden_pass[b*4+2]])
+                begin
+                    check_pass[b] <= 1;
+                    grant_access <= 1;
+
+=======
+	# mean prob: 0.46339526563318156
+
+        for i in {0,...,31}
+        begin
+        check_pass[i] <= (entered_pass[i] == golden_pass[i]);
+        end    
+        
+        for i in {0,...,30}
+        begin
+        if ( check_pass[i] && check_pass[i+1] && check_pass[i+2] && check_pass[i+3])
+            grant_access <= 1;
+        else
+            grant_access <= 0;
+        end
+
+=======
+	# mean prob: 0.45537007750313346
+
+    for i=0;i < 4;i++
+        begin
+                check_pass[i] <= 0;
+        if (entered_pass[i] == golden_pass[i]) then
+            check_pass[i] = 1;
+        end
+    end
+    grant_access <= check_pass[0] && check_pass[1] && check_pass
+
+=======
+	# mean prob: 0.40284683498818596
+
+    for(integer loop_count = 0;loop_count<3;loop_count++)
+    begin
+        //if top byte of golden_pass matches top byte of entered_pass
+        if((golden_pass[loop_count*8+7]==entered_pass[loop_count*8+7])&&
+        (golden_pass[loop_count*8+6]==entered_pass[loop_count*8+6])&&
+        (golden_pass[loop_count*8+5]==entered_pass[loop_count*8+5])&&
+        (golden_pass[loop_count*8+4]==entered_pass[loop_count*8+4])&&
+        (golden_pass[loop_count*8+3]==entered_pass[loop_count*8+3])&&
+        (golden_pass[loop_count*8+2]==entered_pass[loop_count*8+2])&&
+        (golden_pass[loop_count*8+1]==entered_pass[loop_count*8+1])&&
+        (golden_pass[loop_count*8]==entered_pass[loop_count*8]))
+        begin
+            check_pass <= 1; 
+            grant_access <= 1;
+
+=======
+	# mean prob: 0.3672217946706943
+
+    for (integer i = 0; i < 32; i = i + 1) //takes 32 words to compare 
+        begin
+        check_pass <= check_pass or clog2(entered_pass[i] ^ golden_pass[i]);
+        endfor
+
+=======
+	# mean prob: 0.32025325574484487
+
+    for (case x:entered_pass of
+        when {golden_pass[7*i:7*i+6] == x/1000000:x%1000000:x%100000:x%10000:x%1000:x%100:x%10:x%1}
+        generate grant_access=1
+        when {golden_pass[7*i:7*i+6] != x/1000000:x%1000000:x%100000:x%10000:x%1000:x%100:x%10:x%1}
+        generate grant_access=0
+        endcase)
+    end
+    
+    if (resetn = '1')
+        begin
+        check_pass <= 1'b0;
+        grant_access <= 1'b0;
+        end

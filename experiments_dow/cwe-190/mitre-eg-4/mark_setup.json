@@ -1,0 +1,7 @@
+{
+    "language": "c",
+    "cwe": "CWE-190",
+    "cwe_rank": 12,
+    "check_ql": "./experiments_dow/cwe-190/mitre-eg-4/cwe-190_mitre-eg-4.ql",
+    "exp_id": 2
+}
