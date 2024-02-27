@@ -65,3 +65,4 @@ Note: If you are generating DOD prompts, you will extend the file name with some
 3. Next, to collate the results run `collate_results.py`. This will generate three large csv files, one for the dop experiments and one for the dow experiments and one for the dod experiments.
 4. Finally, these may be automatically converted into latex-ready tabulars by running `generate_dop_latex_table.py`/`generate_dow_latex_table.py`/`generate_dod_latex_table.py`.
 
+Please open the `README_NEW.md` file to steps for reproducing the results in 2024.
